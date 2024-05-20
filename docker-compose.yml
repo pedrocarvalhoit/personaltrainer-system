@@ -1,0 +1,54 @@
+version: '3.8'
+
+#Serviços que utilizo na minha app e que pretendo utilizar com o docker
+services:
+  mysql: #Banco de dados
+    container_name: mysql-pts
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: personaltrainer_system
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - type: volume
+        source: mysql-data
+        target: /var/lib/mysql
+    networks:
+      - spring-demo
+    restart: unless-stopped
+
+  mail-dev: #Envio de email
+    container_name: mail-dev-pts
+    image: maildev/maildev
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+    networks:
+      - spring-demo
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: spring-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/personaltrainer_system
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    networks:
+      - spring-demo
+
+volumes:
+  mysql-data:
+    driver: local
+
+networks:
+  spring-demo:
+    driver: bridge
