@@ -1,12 +1,10 @@
 package com.personaltrainer.user;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity()
 @Getter
@@ -15,7 +13,7 @@ public class PeronalData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer Id;
+    private Integer id;
 
     @Column(name = "first_name", length = 45, nullable = false)
     private String firstName;
