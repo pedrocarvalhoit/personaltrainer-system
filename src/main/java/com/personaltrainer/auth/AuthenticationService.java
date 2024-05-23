@@ -43,7 +43,7 @@ public class AuthenticationService {
     public void register(RegistrationRequest request) throws MessagingException {
         var userRole = roleRepository.findByName("USER")
                 // todo - better exception handling
-                .orElseThrow(() -> new IllegalStateException("ROLE USER was not initiated"));
+                .orElseThrow(() -> new IllegalStateException("Role USER was not initiated"));
         var user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())

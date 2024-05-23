@@ -17,17 +17,17 @@ public class RegistrationRequest {
     @NotBlank(message = "First name is mandatory")
     private String firstName;
 
-    @NotEmpty(message = "First name is mandatory")
-    @NotBlank(message = "First name is mandatory")
+    @NotEmpty(message = "Last name is mandatory")
+    @NotBlank(message = "Last name is mandatory")
     private String lastName;
 
     @Email(message = "Format example: phdc@mail.com")
-    @NotEmpty(message = "First name is mandatory")
-    @NotBlank(message = "First name is mandatory")
+    @NotEmpty(message = "Email is mandatory")
+    @NotBlank(message = "Email is mandatory")
     private String email;
 
-    @NotEmpty(message = "First name is mandatory")
-    @NotBlank(message = "First name is mandatory")
+    @NotEmpty(message = "Password is mandatory")
+    @NotBlank(message = "Password is mandatory")
     @Size(min = 8, message = "Min 8 caracters")
     private String password;
 }
