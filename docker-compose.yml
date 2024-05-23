@@ -8,10 +8,10 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: personaltrainer_system
-      MYSQL_USER: root
+      MYSQL_USER: regularUser
       MYSQL_PASSWORD: root
     ports:
-      - "3306:3306"
+      - "3305:3306"
     volumes:
       - type: volume
         source: mysql-data

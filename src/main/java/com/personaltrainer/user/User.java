@@ -11,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
@@ -26,15 +27,31 @@ import java.util.stream.Collectors;
 public class User implements UserDetails, Principal {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.SEQUENCE)
+    @GeneratedValue
     private Integer id;
 
     private String password;
-    private boolean accountLocked;
 
-    @OneToOne
-    @JoinColumn(name = "personal_data_id")
-    private PeronalData personalData;
+    @Column(name = "first_name", length = 45, nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", length = 45, nullable = false)
+    private String lastName;
+
+    @Column(length = 128, nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = true)
+    private LocalDate dateOfBirth;
+
+    @Column(length = 30, nullable = true, unique = true)
+    private String mobile;
+
+    @Column(nullable = true)
+    private String gender;
+
+    private boolean enabled;
+    private boolean accountLocked;
 
     @CreatedDate
     @Column(nullable = false, updatable = false) //Don´t modify on updates
@@ -62,7 +79,7 @@ public class User implements UserDetails, Principal {
 
     @Override
     public String getUsername() {
-        return personalData.getEmail();
+        return email;
     }
 
     @Override
@@ -82,11 +99,15 @@ public class User implements UserDetails, Principal {
 
     @Override
     public boolean isEnabled() {
-        return personalData.isEnabled();
+        return enabled;
     }
 
     @Override
     public String getName() {
-        return personalData.getEmail();
+        return email;
+    }
+
+    public String getFullName(){
+        return firstName + " " + lastName;
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)//Needs @enableJPAAuditing on app class
@@ -20,7 +21,7 @@ import java.time.LocalDateTime;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue
     private Integer id;
 
     @Column(unique = true)
@@ -28,7 +29,7 @@ public class Role {
 
     @ManyToMany(mappedBy = "roles")
     @JsonIgnore
-    private User user;
+    private List<User> user;
 
     @CreatedDate
     @Column(nullable = false, updatable = false) //Don´t modify on updates
@@ -38,5 +39,7 @@ public class Role {
     @Column(insertable = false)//Don´t want to modify on create
     private LocalDateTime lastModifiedDate;
 
-
+    public Role(String name) {
+        this.name = name;
+    }
 }
