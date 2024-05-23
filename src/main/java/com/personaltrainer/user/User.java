@@ -1,5 +1,6 @@
 package com.personaltrainer.user;
 
+import com.personaltrainer.client.Client;
 import com.personaltrainer.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements UserDetails, Principal {
+public class User implements UserDetails, Principal{
 
     @Id
     @GeneratedValue
@@ -40,6 +41,9 @@ public class User implements UserDetails, Principal {
 
     @Column(length = 128, nullable = false, unique = true)
     private String email;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = false)
+    private List<Client> clients;
 
     @Column(nullable = true)
     private LocalDate dateOfBirth;
