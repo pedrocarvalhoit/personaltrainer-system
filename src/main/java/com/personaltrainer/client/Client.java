@@ -1,7 +1,10 @@
 package com.personaltrainer.client;
 
 import com.personaltrainer.common.BaseEntity;
+import com.personaltrainer.personaldata.PersonalData;
 import com.personaltrainer.user.User;
+import com.personaltrainer.workout.WorkoutProgram;
+import com.personaltrainer.workout.WorkoutSession;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +24,10 @@ public class Client extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private User personalTrainer;
+
+    @Embedded
+    private PersonalData personalData;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<WorkoutProgram> workoutProgram;
@@ -29,5 +35,6 @@ public class Client extends BaseEntity{
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<WorkoutSession> workoutSession;
 
+    private boolean enabled;
 
 }

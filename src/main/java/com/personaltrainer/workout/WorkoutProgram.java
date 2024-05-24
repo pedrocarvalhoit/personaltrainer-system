@@ -1,5 +1,6 @@
-package com.personaltrainer.client;
+package com.personaltrainer.workout;
 
+import com.personaltrainer.client.Client;
 import jakarta.persistence.*;
 import lombok.*;
 

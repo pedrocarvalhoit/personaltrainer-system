@@ -1,5 +1,6 @@
-package com.personaltrainer.client;
+package com.personaltrainer.workout;
 
+import com.personaltrainer.client.Client;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,8 +22,8 @@ public class WorkoutSession {
     private Client client;
 
     private String workoutProgramName;
-
     private LocalDate sessionDate;
     private Integer clientSubjectEffort;
     private Integer pTQualityEffortIndicative;
+    private boolean executed = false;
 }
