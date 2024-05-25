@@ -1,8 +1,12 @@
-package com.personaltrainer.workout;
+package com.personaltrainer.workoutsession;
 
 import com.personaltrainer.client.Client;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 
@@ -11,7 +15,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 public class WorkoutSession {
 
     @Id

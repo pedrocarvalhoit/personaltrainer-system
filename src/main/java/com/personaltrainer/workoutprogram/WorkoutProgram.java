@@ -1,4 +1,4 @@
-package com.personaltrainer.workout;
+package com.personaltrainer.workoutprogram;
 
 import com.personaltrainer.client.Client;
 import jakarta.persistence.*;
@@ -25,7 +25,9 @@ public class WorkoutProgram {
     private LocalDate inicialDate;
     private LocalDate endDate;
 
-    private String trainingSession;
+    private String title;
+
+    private String trainingSessionContent;
 
     private List<String> notes;
 

@@ -2,9 +2,10 @@ package com.personaltrainer.client;
 
 import com.personaltrainer.common.BaseEntity;
 import com.personaltrainer.personaldata.PersonalData;
+import com.personaltrainer.scenario.Scenario;
 import com.personaltrainer.user.User;
-import com.personaltrainer.workout.WorkoutProgram;
-import com.personaltrainer.workout.WorkoutSession;
+import com.personaltrainer.workoutprogram.WorkoutProgram;
+import com.personaltrainer.workoutsession.WorkoutSession;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,5 +37,8 @@ public class Client extends BaseEntity{
     private List<WorkoutSession> workoutSession;
 
     private boolean enabled;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Scenario> scenario;
 
 }
