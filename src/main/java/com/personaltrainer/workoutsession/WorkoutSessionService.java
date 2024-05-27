@@ -15,7 +15,7 @@ public class WorkoutSessionService {
 
     private final WorkoutSessionMapper mapper;
 
-    public Integer save(CreateWorkoutSessionRequest createWSRequest, Integer clientId) {
+    public Integer save(WorkoutSessionCreateRequest createWSRequest, Integer clientId) {
         Client client = clientRepository.findById(clientId).orElseThrow(()-> new RuntimeException("Client not found"));
         WorkoutSession workoutSession = mapper.toWorkoutSession(createWSRequest);
         workoutSession.setClient(client);

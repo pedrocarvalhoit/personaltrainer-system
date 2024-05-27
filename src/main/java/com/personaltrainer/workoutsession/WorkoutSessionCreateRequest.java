@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 
 import java.time.LocalDate;
 
-public record CreateWorkoutSessionRequest(
+public record WorkoutSessionCreateRequest(
 
         @Valid
         String workoutProgramName,

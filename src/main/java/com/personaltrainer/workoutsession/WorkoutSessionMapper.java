@@ -1,12 +1,11 @@
 package com.personaltrainer.workoutsession;
 
-import com.personaltrainer.client.ClientRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class WorkoutSessionMapper {
 
-    public WorkoutSession toWorkoutSession(CreateWorkoutSessionRequest request) {
+    public WorkoutSession toWorkoutSession(WorkoutSessionCreateRequest request) {
 
         return WorkoutSession.builder()
                 .workoutProgramName(request.workoutProgramName())

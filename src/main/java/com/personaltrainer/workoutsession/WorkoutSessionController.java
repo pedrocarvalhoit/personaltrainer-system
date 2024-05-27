@@ -15,7 +15,7 @@ public class WorkoutSessionController {
     private final WorkoutSessionService service;
 
     @PostMapping("create/{clientId}")
-    public ResponseEntity<Integer> createSession(@RequestBody @Valid CreateWorkoutSessionRequest createWSRequest,
+    public ResponseEntity<Integer> createSession(@RequestBody @Valid WorkoutSessionCreateRequest createWSRequest,
                                                  @PathVariable Integer clientId){
 
         return ResponseEntity.ok(service.save(createWSRequest, clientId));
