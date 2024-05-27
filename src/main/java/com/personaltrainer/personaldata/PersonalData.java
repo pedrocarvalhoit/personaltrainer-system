@@ -42,4 +42,8 @@ public class PersonalData {
         this.dateOfBirth = personalDataSaveRequest.dateOfBirth();
         this.photo = personalDataSaveRequest.photo();
     }
+
+    public String getFullName(){
+        return this.firstName + " " + this.lastName;
+    }
 }

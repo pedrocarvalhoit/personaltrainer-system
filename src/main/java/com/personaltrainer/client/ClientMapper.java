@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClientMapper {
 
-    public Client toClient(SaveClientRequest request){
+    public Client toClient(ClientSaveRequest request){
         PersonalDataSaveRequest personalDataSaveRequest = request.personalData();
         PersonalData personalData = new PersonalData(personalDataSaveRequest);
 
@@ -16,4 +16,14 @@ public class ClientMapper {
                 .build();
     }
 
+    public ClientReponse toClientResponse(Client client) {
+        return ClientReponse.builder()
+                .id(client.getId())
+                .fullName(client.getPersonalData().getFullName())
+                .email(client.getPersonalData().getEmail())
+                .mobile(client.getPersonalData().getMobile())
+                //.photo(client.getPersonalData().getPhoto())
+                .enabled(client.isEnabled())
+                .build();
+    }
 }

@@ -41,4 +41,6 @@ public class Client extends BaseEntity{
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Scenario> scenario;
 
+
+
 }

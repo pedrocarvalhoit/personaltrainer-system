@@ -3,7 +3,7 @@ package com.personaltrainer.client;
 import com.personaltrainer.personaldata.PersonalDataSaveRequest;
 import jakarta.validation.Valid;
 
-public record SaveClientRequest(
+public record ClientSaveRequest(
 
         @Valid
         PersonalDataSaveRequest personalData

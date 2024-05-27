@@ -5,13 +5,17 @@ import com.personaltrainer.role.RoleRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
 @EnableJpaAuditing
 @EnableAsync
+@EntityScan({"com.personaltrainer.user", "com.personaltrainer.client", "com.personaltrainer.role", "com.personaltrainer.workoutprogram",
+		"com.personaltrainer.workoutsession","com.personaltrainer.role", "com.personaltrainer.common", "com.personaltrainer.scenario"})
 public class PersonaltrainerSystemApiApplication {
 
 	public static void main(String[] args) {
