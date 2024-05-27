@@ -2,17 +2,20 @@ package com.personaltrainer.workoutprogram;
 
 import com.personaltrainer.client.Client;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity(name = "workout_program")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 public class WorkoutProgram {
 
     @Id
@@ -22,14 +25,13 @@ public class WorkoutProgram {
     @ManyToOne
     private Client client;
 
+    private String title;
+
     private LocalDate inicialDate;
     private LocalDate endDate;
 
-    private String title;
-
     private String trainingSessionContent;
 
-    private List<String> notes;
-
+    private String note;
 
 }
