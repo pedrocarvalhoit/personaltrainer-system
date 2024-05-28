@@ -3,6 +3,7 @@ package com.personaltrainer.workoutsession;
 import com.personaltrainer.client.Client;
 import com.personaltrainer.client.ClientRepository;
 import com.personaltrainer.common.PageResponse;
+import com.personaltrainer.user.User;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -10,9 +11,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -45,12 +48,18 @@ public class WorkoutSessionService {
                 workoutSessions.isLast());
     }
 
-    public Integer execute(Integer sessionId) {
+    public Integer execute(Integer sessionId, Authentication authenticatedUser) {
+        User user = (User) authenticatedUser.getPrincipal();
         WorkoutSession workoutSession = workoutSessionRepository.findById(sessionId)
                 .orElseThrow(()->new EntityNotFoundException("Workout session not found"));
-        workoutSession.markAsExecuted();
 
-        return workoutSessionRepository.save(workoutSession).getId();
+        if (!Objects.equals(workoutSession.getClient().getPersonalTrainer().getId(), user.getId())) {
+            throw new RuntimeException("This session don´t belong to your client");
+        }else {
+            workoutSession.markAsExecuted();
+            return workoutSessionRepository.save(workoutSession).getId();
+        }
+
     }
 
 

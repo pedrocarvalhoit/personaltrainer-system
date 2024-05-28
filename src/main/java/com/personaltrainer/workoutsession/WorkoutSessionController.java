@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -32,8 +33,8 @@ public class WorkoutSessionController {
     }
 
     @PatchMapping("/execute/{sessionId}")
-    public ResponseEntity<Integer> executeSession(@PathVariable @Valid Integer sessionId){
-        return ResponseEntity.ok(service.execute(sessionId));
+    public ResponseEntity<Integer> executeSession(@PathVariable @Valid Integer sessionId, Authentication authentication){
+        return ResponseEntity.ok(service.execute(sessionId, authentication));
     }
 
 }
