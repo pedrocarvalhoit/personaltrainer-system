@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 
@@ -16,6 +18,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
+@EntityListeners(AuditingEntityListener.class)
 public class WorkoutSession {
 
     @Id
@@ -24,6 +27,10 @@ public class WorkoutSession {
 
     @ManyToOne
     private Client client;
+
+    @CreatedBy
+    @Column(nullable = false, updatable = false)
+    private Integer createdBy;
 
     private String workoutProgramName;
     private LocalDate sessionDate;

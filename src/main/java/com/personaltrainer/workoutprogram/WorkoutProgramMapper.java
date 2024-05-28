@@ -15,4 +15,14 @@ public class WorkoutProgramMapper {
                 .build();
     }
 
+    public WorkoutProgramResponse toWorkoutResponse(WorkoutProgram workoutProgram) {
+        return WorkoutProgramResponse.builder()
+                .id(workoutProgram.getId())
+                .title(workoutProgram.getTitle())
+                .inicialDate(workoutProgram.getInicialDate())
+                .endDate(workoutProgram.getEndDate())
+                .trainingSessionContent(workoutProgram.getTrainingSessionContent())
+                .note(workoutProgram.getNote())
+                .build();
+    }
 }
