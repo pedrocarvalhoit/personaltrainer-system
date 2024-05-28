@@ -15,7 +15,7 @@ public class WorkoutProgramMapper {
                 .build();
     }
 
-    public WorkoutProgramResponse toWorkoutResponse(WorkoutProgram workoutProgram) {
+    public WorkoutProgramResponse toWorkoutProgramResponse(WorkoutProgram workoutProgram) {
         return WorkoutProgramResponse.builder()
                 .id(workoutProgram.getId())
                 .title(workoutProgram.getTitle())

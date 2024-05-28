@@ -34,7 +34,7 @@ public class WorkoutProgramService {
         Pageable pageable = PageRequest.of(page, size, Sort.by("title").ascending());
         Page<WorkoutProgram> workoutPrograms = workoutProgramRepository.findAllByClientId(pageable, clientId);
         List<WorkoutProgramResponse> workoutProgramResponse = workoutPrograms.stream()
-                .map(mapper::toWorkoutResponse)
+                .map(mapper::toWorkoutProgramResponse)
                 .toList();
 
         return new PageResponse(workoutProgramResponse, workoutPrograms.getNumber(), workoutPrograms.getSize(),
