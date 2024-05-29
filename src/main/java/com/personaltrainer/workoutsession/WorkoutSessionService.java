@@ -3,6 +3,7 @@ package com.personaltrainer.workoutsession;
 import com.personaltrainer.client.Client;
 import com.personaltrainer.client.ClientRepository;
 import com.personaltrainer.common.PageResponse;
+import com.personaltrainer.exception.OperationNotPermitedException;
 import com.personaltrainer.user.User;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +35,7 @@ public class WorkoutSessionService {
         return workoutSessionRepository.save(workoutSession).getId();
     }
 
-    public PageResponse listAllByClient(int page, int size, Integer clientId) {
+    public PageResponse<WorkoutSessionResponse> listAllByClient(int page, int size, Integer clientId) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("sessionDate").ascending());
         Page<WorkoutSession> workoutSessions = workoutSessionRepository.findAllByClientId(pageable, clientId);
         List<WorkoutSessionResponse> workoutSessionsResponse = workoutSessions
@@ -43,7 +43,7 @@ public class WorkoutSessionService {
                 .map(mapper::toWorkoutSessionResponse)
                 .toList();
 
-        return new PageResponse(workoutSessionsResponse, workoutSessions.getNumber(), workoutSessions.getSize(),
+        return new PageResponse<>(workoutSessionsResponse, workoutSessions.getNumber(), workoutSessions.getSize(),
                 workoutSessions.getTotalElements(), workoutSessions.getTotalPages(), workoutSessions.isFirst(),
                 workoutSessions.isLast());
     }
@@ -54,12 +54,11 @@ public class WorkoutSessionService {
                 .orElseThrow(()->new EntityNotFoundException("Workout session not found"));
 
         if (!Objects.equals(workoutSession.getClient().getPersonalTrainer().getId(), user.getId())) {
-            throw new RuntimeException("This session don´t belong to your client");
-        }else {
-            workoutSession.markAsExecuted();
-            return workoutSessionRepository.save(workoutSession).getId();
+            throw new OperationNotPermitedException("This session don´t belong to your client");
         }
 
+        workoutSession.markAsExecuted();
+        return workoutSessionRepository.save(workoutSession).getId();
     }
 
 

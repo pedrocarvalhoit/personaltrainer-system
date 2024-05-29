@@ -1,6 +1,7 @@
 package com.personaltrainer.client;
 
 import com.personaltrainer.common.PageResponse;
+import com.personaltrainer.exception.OperationNotPermitedException;
 import com.personaltrainer.user.User;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -37,7 +39,7 @@ public class ClientService {
                 .orElseThrow(()-> new EntityNotFoundException("No entity found whit id:" + clientId));
     }
 
-    public PageResponse findAllClients(int page, int size, Authentication connectedUser) {
+    public PageResponse<ClientReponse> findAllClients(int page, int size, Authentication connectedUser) {
         User user = (User) connectedUser.getPrincipal();
         Pageable pageable = PageRequest.of(page, size, Sort.by("personalData.firstName").ascending());
         Page<Client> clients = clientRepository.findAllByEnabledIsTrueAndPersonalTrainerId(pageable, user.getId());
@@ -45,14 +47,19 @@ public class ClientService {
                 .map(clientMapper::toClientResponse)
                 .toList();
 
-        return new PageResponse(clientReponse, clients.getNumber(), clients.getSize(),
+        return new PageResponse<>(clientReponse, clients.getNumber(), clients.getSize(),
                 clients.getTotalElements(), clients.getTotalPages(), clients.isFirst(), clients.isLast());
     }
 
-    public Integer enabled(Integer clientId) {
+    public Integer updateStatus(Integer clientId, Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
         Client client = clientRepository.findById(clientId).orElseThrow(()-> new EntityNotFoundException("Entity not found"));
-        client.setEnabled(true);
 
+        if(!Objects.equals(user.getId(), client.getPersonalTrainer().getId())){
+            throw new OperationNotPermitedException("This client is not on your list of clients");
+        }
+
+        client.setEnabled(!client.isEnabled());
         return clientRepository.save(client).getId();
     }
 }

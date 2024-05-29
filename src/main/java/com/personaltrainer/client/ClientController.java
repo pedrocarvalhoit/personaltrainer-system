@@ -39,12 +39,11 @@ public class ClientController {
     }
 
     //enableClient
-    @PatchMapping("enable/{clientId}")
-    public ResponseEntity<Integer> enableClient(@PathVariable Integer clientId){
-        return ResponseEntity.ok(clientService.enabled(clientId));
+    @PatchMapping("update-status/{clientId}")
+    public ResponseEntity<Integer> enableClient(@PathVariable Integer clientId, Authentication authenticatedUser){
+        return ResponseEntity.ok(clientService.updateStatus(clientId, authenticatedUser));
     }
 
-    //disableClient
 
     //deleteCLient
 

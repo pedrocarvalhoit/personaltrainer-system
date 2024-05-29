@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,13 +18,14 @@ public class WorkoutProgramController {
 
     @RequestMapping("/create/{clientId}")
     public ResponseEntity<Integer> createWorkoutProgramForClient(@RequestBody @Valid WorkoutProgramCreateRequest requestWorkoutProgram,
-                                                                 @PathVariable Integer clientId){
+                                                                 @PathVariable Integer clientId,
+                                                                 Authentication authenticatedUser){
 
-        return ResponseEntity.ok(service.save(requestWorkoutProgram, clientId));
+        return ResponseEntity.ok(service.save(requestWorkoutProgram, clientId, authenticatedUser));
     }
 
     @GetMapping("/all/{clientId}")
-    public ResponseEntity<PageResponse<WorkoutProgram>> listAll(
+    public ResponseEntity<PageResponse<WorkoutProgramResponse>> listAll(
         @RequestParam(name = "page", defaultValue = "0", required = false) int page,
         @RequestParam(name = "size",defaultValue = "10", required = false) int size,
         @PathVariable @Valid Integer clientId

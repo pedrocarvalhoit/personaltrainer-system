@@ -36,8 +36,6 @@ public class Client extends BaseEntity{
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<WorkoutSession> workoutSession;
 
-    private boolean enabled;
-
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Scenario> scenario;
 
