@@ -1,5 +1,6 @@
 package com.personaltrainer.client;
 
+import com.personaltrainer.personaldata.PersonalDataUpdateRequest;
 import com.personaltrainer.personaldata.PersonalData;
 import com.personaltrainer.personaldata.PersonalDataSaveRequest;
 import org.springframework.stereotype.Service;
@@ -26,4 +27,16 @@ public class ClientMapper {
                 .enabled(client.isEnabled())
                 .build();
     }
+
+    public void toUpdateClient(ClientUpdateRequest request, Client client) {
+        PersonalDataUpdateRequest personalDataUpdateRequest = request.personalData();
+
+        if (personalDataUpdateRequest.email() != null && !personalDataUpdateRequest.email().trim().isEmpty()){
+            client.getPersonalData().setEmail(personalDataUpdateRequest.email());
+        }
+        if (personalDataUpdateRequest.mobile() != null && !personalDataUpdateRequest.mobile().trim().isEmpty()) {
+            client.getPersonalData().setMobile(personalDataUpdateRequest.mobile());
+        }
+    }
+
 }

@@ -2,7 +2,6 @@ package com.personaltrainer.client;
 
 import com.personaltrainer.common.BaseEntity;
 import com.personaltrainer.personaldata.PersonalData;
-import com.personaltrainer.scenario.Scenario;
 import com.personaltrainer.user.User;
 import com.personaltrainer.workoutprogram.WorkoutProgram;
 import com.personaltrainer.workoutsession.WorkoutSession;
@@ -36,8 +35,6 @@ public class Client extends BaseEntity{
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<WorkoutSession> workoutSession;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private List<Scenario> scenario;
 
 
 

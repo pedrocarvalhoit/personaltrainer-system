@@ -22,6 +22,20 @@ public class ClientController {
         return ResponseEntity.ok(clientService.save(request, connectedUser));
     }
 
+    //deleteClient
+    @DeleteMapping("/delete/{clientId}")
+    public ResponseEntity<Integer> deleteClient(@PathVariable Integer clientId, Authentication connectedUser){
+        return ResponseEntity.ok(clientService.delete(clientId, connectedUser));
+    }
+
+    //update PersonalData (Email and Mobile)
+    @PatchMapping("/update-personal-data/{clientId}")
+    public ResponseEntity<Integer> updatePersonalData(@PathVariable Integer clientId,
+                                                      Authentication authentication,
+                                                      @Valid @RequestBody ClientUpdateRequest request){
+        return ResponseEntity.ok(clientService.updatePersonalData(clientId, authentication, request));
+    }
+
     //findById
     @GetMapping("{clientId}")
     public ResponseEntity<ClientReponse> findById(@PathVariable Integer clientId){
@@ -38,17 +52,10 @@ public class ClientController {
         return ResponseEntity.ok(clientService.findAllClients(page, size, connectedUser));
     }
 
-    //enableClient
+    //updateStatus
     @PatchMapping("update-status/{clientId}")
     public ResponseEntity<Integer> enableClient(@PathVariable Integer clientId, Authentication authenticatedUser){
         return ResponseEntity.ok(clientService.updateStatus(clientId, authenticatedUser));
     }
-
-
-    //deleteCLient
-
-
-
-
 
 }

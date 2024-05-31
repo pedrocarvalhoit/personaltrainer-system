@@ -15,7 +15,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableJpaAuditing
 @EnableAsync
 @EntityScan({"com.personaltrainer.user", "com.personaltrainer.client", "com.personaltrainer.role", "com.personaltrainer.workoutprogram",
-		"com.personaltrainer.workoutsession","com.personaltrainer.role", "com.personaltrainer.common", "com.personaltrainer.scenario"})
+		"com.personaltrainer.workoutsession","com.personaltrainer.role", "com.personaltrainer.common"})
 public class PersonaltrainerSystemApiApplication {
 
 	public static void main(String[] args) {

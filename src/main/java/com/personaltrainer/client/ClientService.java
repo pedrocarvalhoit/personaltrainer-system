@@ -1,7 +1,9 @@
 package com.personaltrainer.client;
 
 import com.personaltrainer.common.PageResponse;
+import com.personaltrainer.common.UserPermitionOverClientCheck;
 import com.personaltrainer.exception.OperationNotPermitedException;
+import com.personaltrainer.personaldata.PersonalDataUpdateRequest;
 import com.personaltrainer.user.User;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +24,9 @@ import java.util.Objects;
 public class ClientService {
 
     private final ClientRepository clientRepository;
-
     private final ClientMapper clientMapper;
+    private final UserPermitionOverClientCheck permition;
+
 
     public Integer save(ClientSaveRequest request, Authentication connectedUser) {
         User user = ((User) connectedUser.getPrincipal());
@@ -61,5 +64,25 @@ public class ClientService {
 
         client.setEnabled(!client.isEnabled());
         return clientRepository.save(client).getId();
+    }
+
+    public Integer updatePersonalData(Integer clientId,
+                                      Authentication authentication,
+                                      ClientUpdateRequest request) {
+        Client client = clientRepository.findById(clientId).orElseThrow(()-> new EntityNotFoundException("Entity not found"));
+        permition.checkPermition(client, authentication);
+
+        clientMapper.toUpdateClient(request, client);
+        clientRepository.save(client);
+
+        return clientId;
+    }
+
+    public Integer delete(Integer clientId, Authentication authentication) {
+        Client client = clientRepository.findById(clientId).orElseThrow(()-> new EntityNotFoundException("Entity not found"));
+        permition.checkPermition(client, authentication);
+
+        clientRepository.deleteById(clientId);
+        return clientId;
     }
 }

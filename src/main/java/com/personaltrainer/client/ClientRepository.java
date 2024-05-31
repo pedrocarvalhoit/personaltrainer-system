@@ -12,4 +12,5 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
 
 //  @Query("SELECT c FROM Client c WHERE c.enabled = true AND c.personalTrainer.id = :userId")
     Page<Client> findAllByEnabledIsTrueAndPersonalTrainerId(Pageable pageable, Integer userId);
+
 }
