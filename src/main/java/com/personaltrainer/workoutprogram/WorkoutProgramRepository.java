@@ -8,5 +8,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WorkoutProgramRepository extends JpaRepository<WorkoutProgram, Integer> {
 
-    Page<WorkoutProgram> findAllByClientId(Pageable pageable, Integer clientId);
+    Page<WorkoutProgram> findAllByClientIdAndEnabledIsTrue(Pageable pageable, Integer clientId);
+
+    Page<WorkoutProgram> findAllByClientIdAndEnabledIsFalse(Pageable pageable, Integer clientId);
+
+
 }

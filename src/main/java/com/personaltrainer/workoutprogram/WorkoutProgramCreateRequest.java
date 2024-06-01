@@ -11,6 +11,8 @@ public record WorkoutProgramCreateRequest(
 
         String trainingSessionContent,
 
-        String note
+        String note,
+
+        boolean enabled
 ) {
 }

@@ -16,6 +16,7 @@ public class WorkoutSessionController {
 
     private final WorkoutSessionService service;
 
+    //create fo client
     @PostMapping("/create/{clientId}")
     public ResponseEntity<Integer> createSession(@RequestBody @Valid WorkoutSessionCreateRequest createWSRequest,
                                                  @PathVariable Integer clientId){
@@ -23,6 +24,7 @@ public class WorkoutSessionController {
         return ResponseEntity.ok(service.save(createWSRequest, clientId));
     }
 
+    //list by client
     @GetMapping("/all/{clientId}")
     public ResponseEntity<PageResponse<WorkoutSessionResponse>> listAllByClient(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
@@ -32,6 +34,7 @@ public class WorkoutSessionController {
         return ResponseEntity.ok(service.listAllByClient(page, size, clientId));
     }
 
+    //execute session
     @PatchMapping("/execute/{sessionId}")
     public ResponseEntity<Integer> executeSession(@PathVariable @Valid Integer sessionId, Authentication authentication){
         return ResponseEntity.ok(service.execute(sessionId, authentication));

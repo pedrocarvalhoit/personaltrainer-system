@@ -34,4 +34,6 @@ public class WorkoutProgram {
 
     private String note;
 
+    private boolean enabled;
+
 }

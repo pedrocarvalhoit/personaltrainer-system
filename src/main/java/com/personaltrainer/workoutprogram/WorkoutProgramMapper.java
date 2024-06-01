@@ -12,6 +12,7 @@ public class WorkoutProgramMapper {
                 .endDate(request.endDate())
                 .trainingSessionContent(request.trainingSessionContent())
                 .note(request.note())
+                .enabled(request.enabled())
                 .build();
     }
 
@@ -23,6 +24,7 @@ public class WorkoutProgramMapper {
                 .endDate(workoutProgram.getEndDate())
                 .trainingSessionContent(workoutProgram.getTrainingSessionContent())
                 .note(workoutProgram.getNote())
+                .enabled(workoutProgram.isEnabled())
                 .build();
     }
 }

@@ -16,6 +16,7 @@ public class WorkoutProgramController {
 
     private final WorkoutProgramService service;
 
+    //create program for client
     @RequestMapping("/create/{clientId}")
     public ResponseEntity<Integer> createWorkoutProgramForClient(@RequestBody @Valid WorkoutProgramCreateRequest requestWorkoutProgram,
                                                                  @PathVariable Integer clientId,
@@ -24,20 +25,31 @@ public class WorkoutProgramController {
         return ResponseEntity.ok(service.save(requestWorkoutProgram, clientId, authenticatedUser));
     }
 
-    @GetMapping("/all/{clientId}")
-    public ResponseEntity<PageResponse<WorkoutProgramResponse>> listAll(
+    //list enable programs by client
+    @GetMapping("/enabled/{clientId}")
+    public ResponseEntity<PageResponse<WorkoutProgramResponse>> listAllEnabled(
         @RequestParam(name = "page", defaultValue = "0", required = false) int page,
         @RequestParam(name = "size",defaultValue = "10", required = false) int size,
         @PathVariable @Valid Integer clientId
     ){
-        return ResponseEntity.ok(service.listAllByClient(page, size, clientId));
+        return ResponseEntity.ok(service.listAllEnabledByClient(page, size, clientId));
     }
 
-    @RequestMapping("/create")
-    public ResponseEntity<Integer> createGenericWorkoutProgram(@RequestBody @Valid WorkoutProgramCreateRequest requestWorkoutProgram){
+    //update program date
 
-        return ResponseEntity.ok(service.save(requestWorkoutProgram));
+    //list disabled programs by client
+    @GetMapping("/disabled/{clientId}")
+    public ResponseEntity<PageResponse<WorkoutProgramResponse>> listAllDisabled(
+            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
+            @RequestParam(name = "size",defaultValue = "10", required = false) int size,
+            @PathVariable @Valid Integer clientId
+    ){
+        return ResponseEntity.ok(service.listAllDisabledByClient(page, size, clientId));
     }
+
+    //disable by end date
+
+    //disable by manual
 
 
 

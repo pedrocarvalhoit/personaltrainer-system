@@ -40,9 +40,21 @@ public class WorkoutProgramService {
         return workoutProgramRepository.save(workoutProgram).getId();
     }
 
-    public PageResponse<WorkoutProgramResponse> listAllByClient(int page, int size, Integer clientId) {
+    public PageResponse<WorkoutProgramResponse> listAllEnabledByClient(int page, int size, Integer clientId) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("title").ascending());
-        Page<WorkoutProgram> workoutPrograms = workoutProgramRepository.findAllByClientId(pageable, clientId);
+        Page<WorkoutProgram> workoutPrograms = workoutProgramRepository.findAllByClientIdAndEnabledIsTrue(pageable, clientId);
+        List<WorkoutProgramResponse> workoutProgramResponse = workoutPrograms.stream()
+                .map(mapper::toWorkoutProgramResponse)
+                .toList();
+
+        return new PageResponse<>(workoutProgramResponse, workoutPrograms.getNumber(), workoutPrograms.getSize(),
+                workoutPrograms.getTotalElements(), workoutPrograms.getTotalPages(), workoutPrograms.isFirst(),
+                workoutPrograms.isLast());
+    }
+
+    public PageResponse<WorkoutProgramResponse> listAllDisabledByClient(int page, int size, Integer clientId) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("title").ascending());
+        Page<WorkoutProgram> workoutPrograms = workoutProgramRepository.findAllByClientIdAndEnabledIsFalse(pageable, clientId);
         List<WorkoutProgramResponse> workoutProgramResponse = workoutPrograms.stream()
                 .map(mapper::toWorkoutProgramResponse)
                 .toList();

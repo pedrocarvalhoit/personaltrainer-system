@@ -22,4 +22,6 @@ public class WorkoutProgramResponse {
 
     private String note;
 
+    private boolean enabled;
+
 }
