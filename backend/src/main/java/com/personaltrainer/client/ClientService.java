@@ -3,6 +3,7 @@ package com.personaltrainer.client;
 import com.personaltrainer.common.PageResponse;
 import com.personaltrainer.common.UserPermissionOverClientCheck;
 import com.personaltrainer.exception.OperationNotPermitedException;
+import com.personaltrainer.file.FileStorageService;
 import com.personaltrainer.user.User;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Objects;
@@ -25,6 +27,7 @@ public class ClientService {
     private final ClientRepository clientRepository;
     private final ClientMapper clientMapper;
     private final UserPermissionOverClientCheck permition;
+    private final FileStorageService fileStorageService;
 
 
     public Integer save(ClientSaveRequest request, Authentication connectedUser) {
@@ -79,5 +82,14 @@ public class ClientService {
 
         clientRepository.deleteById(clientId);
         return clientId;
+    }
+
+    public void uploadProfilePicture(MultipartFile file, Authentication connectedUser, Integer clientId) {
+        Client client = clientRepository.findById(clientId).orElseThrow(()-> new EntityNotFoundException("Entity not found"));
+        User user = (User) connectedUser.getPrincipal();
+
+        var clientPhoto = fileStorageService.saveFile(file, user.getId());
+        client.getPersonalData().setPhoto(clientPhoto);
+        clientRepository.save(client);
     }
 }

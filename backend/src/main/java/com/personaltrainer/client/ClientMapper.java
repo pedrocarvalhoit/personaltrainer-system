@@ -1,8 +1,9 @@
 package com.personaltrainer.client;
 
-import com.personaltrainer.personaldata.PersonalDataUpdateRequest;
+import com.personaltrainer.file.FileUtils;
 import com.personaltrainer.personaldata.PersonalData;
 import com.personaltrainer.personaldata.PersonalDataSaveRequest;
+import com.personaltrainer.personaldata.PersonalDataUpdateRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,7 +24,7 @@ public class ClientMapper {
                 .fullName(client.getPersonalData().getFullName())
                 .email(client.getPersonalData().getEmail())
                 .mobile(client.getPersonalData().getMobile())
-                //.photo(client.getPersonalData().getPhoto())
+                .photo(FileUtils.readFileFromLocation(client.getPersonalData().getPhoto()))
                 .enabled(client.isEnabled())
                 .build();
     }

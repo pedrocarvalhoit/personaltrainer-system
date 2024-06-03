@@ -40,7 +40,6 @@ public class PersonalData {
         this.mobile = personalDataSaveRequest.mobile();
         this.gender = personalDataSaveRequest.gender();
         this.dateOfBirth = personalDataSaveRequest.dateOfBirth();
-        this.photo = personalDataSaveRequest.photo();
     }
 
     public String getFullName(){

@@ -28,9 +28,7 @@ public record PersonalDataSaveRequest(
         String gender,
 
         @NotNull(message = "106")
-        LocalDate dateOfBirth,
-
-        String photo
+        LocalDate dateOfBirth
 )
 {
 }
