@@ -3,8 +3,10 @@ package com.personaltrainer.workoutprogram;
 import com.personaltrainer.client.Client;
 import com.personaltrainer.client.ClientRepository;
 import com.personaltrainer.common.PageResponse;
+import com.personaltrainer.common.UserPermissionOverClientCheck;
 import com.personaltrainer.exception.OperationNotPermitedException;
 import com.personaltrainer.user.User;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,10 +24,9 @@ import java.util.Objects;
 public class WorkoutProgramService {
 
     private final WorkoutProgramRepository workoutProgramRepository;
-
     private final ClientRepository clientRepository;
-
     private final WorkoutProgramMapper mapper;
+    private final UserPermissionOverClientCheck permission;
 
     public Integer save(WorkoutProgramCreateRequest requestWorkoutProgram, Integer clientId, Authentication authentication) {
         User user = (User) authentication.getPrincipal();
@@ -71,4 +73,29 @@ public class WorkoutProgramService {
         return workoutProgramRepository.save(workoutProgram).getId();
     }
 
+    public void save(WorkoutProgram program){
+        workoutProgramRepository.save(program);
+    }
+
+    public Integer updateDate(Integer programId, UpdateProgramDateRequest request) {
+        WorkoutProgram workoutProgram = workoutProgramRepository.findById(programId)
+                .orElseThrow(()-> new EntityNotFoundException("Program not found"));
+
+        mapper.toUpdateProgram(workoutProgram, request);
+        workoutProgramRepository.save(workoutProgram);
+
+        return programId;
+    }
+
+    public Integer updateStatus(Integer programId) {
+        WorkoutProgram workoutProgram = workoutProgramRepository.findById(programId)
+                .orElseThrow(() -> new EntityNotFoundException("Program not found"));
+        workoutProgram.setEnabled(!workoutProgram.isEnabled());
+
+        return workoutProgramRepository.save(workoutProgram).getId();
+    }
+
+    public List<WorkoutProgram> findProgramByEndDateBefor(LocalDate date) {
+        return workoutProgramRepository.findAllByEndDateBeforeAndEnabledTrue(date);
+    }
 }

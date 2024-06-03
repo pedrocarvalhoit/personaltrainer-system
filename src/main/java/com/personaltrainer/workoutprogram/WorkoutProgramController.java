@@ -17,7 +17,7 @@ public class WorkoutProgramController {
     private final WorkoutProgramService service;
 
     //create program for client
-    @RequestMapping("/create/{clientId}")
+    @PostMapping("/create/{clientId}")
     public ResponseEntity<Integer> createWorkoutProgramForClient(@RequestBody @Valid WorkoutProgramCreateRequest requestWorkoutProgram,
                                                                  @PathVariable Integer clientId,
                                                                  Authentication authenticatedUser){
@@ -35,8 +35,6 @@ public class WorkoutProgramController {
         return ResponseEntity.ok(service.listAllEnabledByClient(page, size, clientId));
     }
 
-    //update program date
-
     //list disabled programs by client
     @GetMapping("/disabled/{clientId}")
     public ResponseEntity<PageResponse<WorkoutProgramResponse>> listAllDisabled(
@@ -47,10 +45,21 @@ public class WorkoutProgramController {
         return ResponseEntity.ok(service.listAllDisabledByClient(page, size, clientId));
     }
 
-    //disable by end date
+    //update program date
+    @PatchMapping("/update-date/{programId}")
+    public ResponseEntity<Integer> updateProgramDate(@PathVariable Integer programId,
+                                                     @RequestBody @Valid UpdateProgramDateRequest request){
+
+        return ResponseEntity.ok(service.updateDate(programId, request));
+    }
 
     //disable by manual
+    @PatchMapping("/update-status/{programId}")
+    public ResponseEntity<Integer> updateStatus(@PathVariable Integer programId){
+        return ResponseEntity.ok(service.updateStatus(programId));
+    }
 
-
+    //disable by end date
+    //Sheduler class
 
 }

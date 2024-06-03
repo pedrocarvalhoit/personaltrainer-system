@@ -12,7 +12,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class UserPermitionOverClientCheck {
+public class UserPermissionOverClientCheck {
 
     private final ClientRepository repository;
 

@@ -53,7 +53,7 @@ public class ClientController {
     }
 
     //updateStatus
-    @PatchMapping("update-status/{clientId}")
+    @PatchMapping("/update-status/{clientId}")
     public ResponseEntity<Integer> enableClient(@PathVariable Integer clientId, Authentication authenticatedUser){
         return ResponseEntity.ok(clientService.updateStatus(clientId, authenticatedUser));
     }

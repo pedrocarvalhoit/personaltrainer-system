@@ -27,7 +27,7 @@ public class WorkoutProgram {
 
     private String title;
 
-    private LocalDate inicialDate;
+    private LocalDate startDate;
     private LocalDate endDate;
 
     private String trainingSessionContent;
