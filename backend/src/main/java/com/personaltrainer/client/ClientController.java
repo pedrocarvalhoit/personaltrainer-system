@@ -58,4 +58,7 @@ public class ClientController {
         return ResponseEntity.ok(clientService.updateStatus(clientId, authenticatedUser));
     }
 
+    //photoUpload
+    @PostMapping
+
 }
