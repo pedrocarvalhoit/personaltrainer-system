@@ -35,9 +35,8 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
 
-    @Value("$mailing.frontend.activation-url")
+    @Value("${mailing.frontend.activation-url}")
     private String activationUrl;
-
 
     public void register(RegistrationRequest request) throws MessagingException {
         var userRole = roleRepository.findByName("USER")
