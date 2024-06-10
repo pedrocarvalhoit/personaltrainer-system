@@ -1,0 +1,98 @@
+.navbar {
+  background: linear-gradient(135deg, #4485ff 0%, #7aabff 25%, #81dfff 50%, #d2ffdf 75%, #d8ffe4 100%);
+  padding: 1rem;
+
+  .navbar-brand {
+    color: #000000; /* Dark purple color for the brand */
+    font-weight: bold;
+  }
+
+  .navbar-brand img{
+    height: 35px;
+    width: auto;
+  }
+
+  .active-link {
+    color: #d8ffe4!important;
+    border-radius: 5px;
+  }
+
+  .navbar-brand {
+    font-size: 1rem; /* Tamanho da fonte da logo */
+    font-variant: small-caps; /* Use small-caps para estilizar letras pequenas */
+    letter-spacing: 0.1em; /* Espaçamento entre letras para melhor legibilidade */
+    text-transform: capitalize; /* Garante que a primeira letra de cada palavra seja maiúscula */
+  }
+
+  .navbar-brand::first-letter {
+    font-size: 1.2em; /* Aumenta o tamanho da primeira letra de cada palavra */
+  }
+
+  .navbar-brand {
+    display: inline-flex;
+  }
+
+  .navbar-brand span {
+    font-size: 0.5em; /* Diminui o tamanho das letras após a primeira */
+    text-transform: none; /* Reseta o transform */
+  }
+
+
+  .navbar-nav .nav-link {
+    color: #170957; /* Dark purple color for the nav links */
+    font-size: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    i {
+      margin-right: 0.5rem;
+    }
+
+    &:hover {
+      color: #3498db; /* Blue color on hover */
+    }
+  }
+
+  .form-control {
+    border: 1px solid #bdc3c7; /* Light grey border */
+    border-radius: 5px;
+    color: #170957; /* Dark purple text color */
+    background-color: #e4e4e4; /* Light grey background color */
+  }
+
+  .form-control::placeholder {
+    color: #7f5e83; /* Light purple placeholder text color */
+  }
+
+  .btn-outline-success {
+    color: #3498db; /* Blue color for the search button */
+    border-color: #3498db;
+
+    &:hover {
+      background-color: #3498db; /* Blue background on hover */
+      color: white;
+    }
+  }
+
+  .btn-link {
+    color: #1abc9c; /* Green color for the link button */
+    text-decoration: none;
+
+    &:hover {
+      color: #16a085; /* Darker green on hover */
+    }
+  }
+
+  .d-flex span {
+    color: #170957; /* Dark purple color for the text */
+    margin-left: 0.5rem;
+  }
+
+  .text-capitalize {
+    text-transform: capitalize;
+  }
+
+  .fw-bold {
+    font-weight: bold;
+  }
+}
