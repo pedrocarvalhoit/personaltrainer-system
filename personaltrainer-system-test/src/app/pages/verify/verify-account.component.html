@@ -1,0 +1,11 @@
+<div class="container">
+
+  <form class="verification-form" (ngSubmit)="onSubmit()">
+    <div class="input-wrapper">
+      <label for="verificationCode">Verification Code:</label>
+      <input type="text" id="verificationCode" [(ngModel)]="verificationCode" name="verificationCode" required>
+    </div>
+    <button class="btn btn-primary" type="submit">Verify</button>
+  </form>
+
+</div>

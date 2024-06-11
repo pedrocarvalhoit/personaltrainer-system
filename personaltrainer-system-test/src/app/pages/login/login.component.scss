@@ -1,0 +1,55 @@
+/* styles.css */
+
+body {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 25%, #3b6978 50%, #6a9c78 75%, #a1e3b5 100%);
+  font-family: 'Arial', sans-serif;
+}
+
+.login-container {
+  background: #faf8f8; /* White background for the card */
+  border-radius: 50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+}
+
+.login-container h3 {
+  color: #2c3e50; /* Dark grey-blue for headings */
+}
+
+.form-label {
+  color: #34495e; /* Darker grey-blue for labels */
+}
+
+.form-control {
+  border-radius: 5px;
+  border: 1px solid #bdc3c7; /* Light grey borders */
+}
+
+.btn-primary {
+  background: #3498db; /* Blue button */
+  border-color: #3498db;
+  border-radius: 5px;
+}
+
+.btn-primary:hover {
+  background: #2980b9; /* Darker blue on hover */
+}
+
+.btn-link {
+  color: #1abc9c; /* Green for the link button */
+  text-decoration: none;
+}
+
+.btn-link:hover {
+  color: #16a085; /* Darker green on hover */
+}
+
+.alert-danger {
+  background: #e74c3c; /* Red for alerts */
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+}
