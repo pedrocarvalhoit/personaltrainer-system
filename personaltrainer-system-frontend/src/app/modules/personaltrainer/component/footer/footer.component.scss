@@ -1,0 +1,38 @@
+.footer {
+  background: linear-gradient(135deg, #4485ff 0%, #7aabff 25%, #81dfff 50%, #d2ffdf 75%, #d8ffe4 100%);
+  padding: 2rem 0;
+  color: #ffffff;
+}
+
+.footer h5 {
+  color: #000000; /* Dark purple color for headings */
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.footer p,
+.footer a {
+  color: #ffffff; /* White color for text and links */
+  color: #030846; /* Dark purple color for headings */
+  font-size: 0.8rem;
+}
+
+.footer a {
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer a:hover {
+  color: #3498db; /* Blue color on hover */
+}
+
+.footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-text {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: #170957; /* Dark purple color for the footer text */
+}

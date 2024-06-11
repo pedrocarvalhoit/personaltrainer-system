@@ -19,6 +19,9 @@ const routes: Routes = [
   {path: "personaltrainer", loadChildren: () => import("./modules/personaltrainer/personaltrainer.module").then(m => m.PersonaltrainerModule),
     canActivate:[AuthGuard]
   },
+  {path: "customer", loadChildren: () => import("./modules/customer/customer.module").then(m => m.CustomerModule),
+    canActivate:[AuthGuard]
+  },
   { path: '', redirectTo: '/register', pathMatch: 'full' },
 ];
 
