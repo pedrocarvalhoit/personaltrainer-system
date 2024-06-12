@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @Builder
@@ -30,4 +32,14 @@ public class RegistrationRequest {
     @NotBlank(message = "Password is mandatory")
     @Size(min = 8, message = "Min 8 caracters")
     private String password;
+
+    private LocalDate dateOfBirth;
+
+    @NotEmpty(message = "Mobile is mandatory")
+    @NotBlank(message = "Mobile is mandatory")
+    private String mobile;
+
+    @NotEmpty(message = "Gender is mandatory")
+    @NotBlank(message = "Gender is mandatory")
+    private String gender;
 }

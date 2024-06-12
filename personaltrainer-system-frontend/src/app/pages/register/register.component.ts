@@ -14,6 +14,9 @@ export class RegisterComponent {
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
+  dateOfBirth: string = '';
+  mobile: string = '';
+  gender: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -22,7 +25,9 @@ export class RegisterComponent {
       alert("Password and Confirm Password should match.");
       return;
     }
-    this.authService.register(this.firstName, this.lastName, this.email, this.password).subscribe(response => {
+
+    this.authService.register(this.firstName, this.lastName, this.email, this.password,this.dateOfBirth,
+       this.mobile, this.gender).subscribe(response => {
       this.router.navigate(['verify']);
     }, error => {
       console.error('Registration failed', error);

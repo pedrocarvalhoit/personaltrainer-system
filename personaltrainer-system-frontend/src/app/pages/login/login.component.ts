@@ -17,7 +17,7 @@ export class LoginComponent {
   onSubmit() {
     this.authService.login(this.email, this.password).subscribe(response => {
       this.authService.setToken(response.token);
-      this.router.navigate(['personaltrainer/dashboard']);
+      this.router.navigate(['personaltrainer/dashboard']);//ToDo: add routing if user is client (customer/dashboar)
     }, error => {
       console.error('Login failed', error);
       this.errorMessage = 'Failed to login. Please check your credentials and try again.';

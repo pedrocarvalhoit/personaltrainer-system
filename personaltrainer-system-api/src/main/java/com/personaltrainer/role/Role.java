@@ -11,7 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
+@Entity(name = "roles")
 @EntityListeners(AuditingEntityListener.class)//Needs @enableJPAAuditing on app class
 @Getter
 @Setter
@@ -30,14 +30,6 @@ public class Role {
     @ManyToMany(mappedBy = "roles")
     @JsonIgnore
     private List<User> user;
-
-    @CreatedDate
-    @Column(nullable = false, updatable = false) //Don´t modify on updates
-    private LocalDateTime createdDate;
-
-    @LastModifiedDate
-    @Column(insertable = false)//Don´t want to modify on create
-    private LocalDateTime lastModifiedDate;
 
     public Role(String name) {
         this.name = name;

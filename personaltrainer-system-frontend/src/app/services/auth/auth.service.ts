@@ -23,8 +23,11 @@ export class AuthService {
     return this.http.post<any>('http://localhost:8088/api/v1/auth/authenticate', {email, password});
   }
 
-  register(firstName: string, lastName: string, email: string, password: string){
-    return this.http.post<any>('http://localhost:8088/api/v1/auth/register', {firstName, lastName, email, password});
+  register(firstName: string, lastName: string, email: string,
+    password: string, dateOfBirth: string, mobile: string, gender: string){
+    return this.http.post<any>('http://localhost:8088/api/v1/auth/register', {firstName, lastName, email, password,
+      dateOfBirth, mobile, gender
+    });
   }
 
   verify(token: string): Observable<any> {
