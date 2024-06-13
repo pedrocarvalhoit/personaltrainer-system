@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './../../../../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
+import { UserService } from '../../../../services/user/user.service';
 
 @Component({
   selector: 'app-menu',
@@ -12,7 +13,9 @@ export class MenuComponent implements OnInit {
 
   firstName: string = '';
 
-  constructor(private authService: AuthService, private router: Router){}
+  showEditOption: boolean = false;
+
+  constructor(private authService: AuthService, private userService: UserService, private router: Router){}
 
   ngOnInit(): void {
     const token = this.authService.getToken(); // Obtém o token JWT do serviço AuthService
@@ -23,7 +26,7 @@ export class MenuComponent implements OnInit {
         'Authorization': `Bearer ${token}`
       });
       // Fazer a requisição passando os cabeçalhos como parte das opções
-      this.authService.getUserName(headers).subscribe(
+      this.userService.getUserName(headers).subscribe(
         user => {
           console.log('User fetched:', user);
           this.firstName = user.firstName;
@@ -35,6 +38,10 @@ export class MenuComponent implements OnInit {
     } else {
       console.error('Token not found');
     }
+  }
+
+  editData(){
+    this.router.navigate(['/personaltrainer/edit'])
   }
 
   logout() {

@@ -6,10 +6,6 @@ import { Observable, catchError } from 'rxjs';
 
 export const TOKEN_NAME: string = 'jwt_token';
 
-interface UserNameResponse {
-  firstName: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -33,10 +29,6 @@ export class AuthService {
   verify(token: string): Observable<any> {
     const url = `http://localhost:8088/api/v1/auth/activate-account?token=${token}`;
     return this.http.get<any>(url);
-  }
-
-  getUserName(headers: HttpHeaders): Observable<UserNameResponse> {
-    return this.http.get<UserNameResponse>('http://localhost:8088/api/v1/users/get-user-name', { headers });
   }
 
   public isAuthenticated(): boolean {

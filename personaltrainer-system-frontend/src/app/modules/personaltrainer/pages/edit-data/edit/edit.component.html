@@ -1,0 +1,124 @@
+<app-menu></app-menu>
+
+<div class="container-fluid card login-container">
+  <h3 class="text-center">Edit my account</h3>
+  <hr />
+  <form (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First Name</label>
+      <input
+        [(ngModel)]="firstName"
+        type="text"
+        class="form-control"
+        name="firstName"
+        id="firstname"
+        placeholder="Ex: Pedro"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Last Name</label>
+      <input
+        [(ngModel)]="lastName"
+        type="text"
+        class="form-control"
+        name="lastName"
+        id="lastname"
+        placeholder="Ex: Carvalho"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="login" class="form-label">Email address</label>
+      <input
+        [(ngModel)]="email"
+        type="email"
+        class="form-control"
+        name="login"
+        id="login"
+        placeholder="name@example"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        [(ngModel)]="password"
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        placeholder="min 8 car. (********)"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="confirmPassword" class="form-label">Confirm Password</label>
+      <input
+        [(ngModel)]="confirmPassword"
+        type="password"
+        class="form-control"
+        id="confirmPassword"
+        name="confirmPassword"
+        placeholder="Confirm your password"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="login" class="form-label">Date of Birth</label>
+      <input
+        [(ngModel)]="dateOfBirth"
+        type="date"
+        class="form-control"
+        name="dateOfBirth"
+        id="dateOfBirth"
+        placeholder="yyyy/mm/dd"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="login" class="form-label">Mobile</label>
+      <input
+        [(ngModel)]="mobile"
+        type="text"
+        class="form-control"
+        name="mobile"
+        id="mobile"
+        placeholder="+xx xxxxxxx"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="login" class="form-label">Gender</label>
+      <input
+        [(ngModel)]="gender"
+        type="text"
+        class="form-control"
+        name="gender"
+        id="gender"
+        placeholder="MALE or FEMALE"
+        required
+      />
+    </div>
+
+    <div class="d-flex justify-content-between mb-3">
+      <button type="submit" class="btn btn-primary">
+        <em class="fa-solid fa-user-check">&nbsp;Save</em>
+      </button>
+      <div>
+        <button (click)="cancel()" type="button" class="btn btn-link">
+          <em class="fas">&nbsp;Cancel</em>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<app-footer></app-footer>
