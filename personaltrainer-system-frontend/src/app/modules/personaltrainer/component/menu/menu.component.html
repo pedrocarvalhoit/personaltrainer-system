@@ -37,7 +37,7 @@
 
         <div class="name-container" (mouseenter)="showEditOption = true" (mouseleave)="showEditOption = false">
           <span class="text-capitalize fw-bold">{{ firstName }}</span>
-          <button class="btn btn-primary btn-sm edit-button" *ngIf="showEditOption" (click)="editData()">Edit Personal Data</button>
+          <button class="btn btn-primary btn-sm edit-button" *ngIf="showEditOption" (click)="editData()">Edit Data</button>
        </div>
 
         <button class="btn btn-link" type="submit" (click)="logout()"><i class="fas fa-door-open"></i></button>

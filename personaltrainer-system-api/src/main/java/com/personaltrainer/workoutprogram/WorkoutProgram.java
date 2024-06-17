@@ -10,7 +10,8 @@ import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 
-@Entity(name = "workout_program")
+@Entity
+@Table(name = "workout_program")
 @Getter
 @Setter
 @AllArgsConstructor

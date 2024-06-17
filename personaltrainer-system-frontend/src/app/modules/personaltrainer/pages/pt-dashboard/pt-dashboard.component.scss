@@ -1,0 +1,117 @@
+body {
+  background-color: #ffffff; /* Background branco */
+  font-family: 'Arial', sans-serif;
+}
+
+.dashboard-container {
+  margin-top: 20px;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border: 1.5px solid #bdc3c7; /* Borda mais grossa */
+}
+
+.card h4 {
+  color: #2c3e50;
+  font-size: 1.2rem; /* Tamanho de fonte reduzido */
+}
+
+.card p {
+  color: #34495e;
+  font-size: 1.2rem; /* Tamanho de fonte reduzido */
+}
+
+.podium {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  margin-top: 20px;
+}
+
+.podium {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  margin-top: 20px;
+}
+
+.podium-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
+  background: #ecf0f1;
+  border-radius: 10px;
+  width: 100px; /* Aumenta a largura */
+  height: 130px;
+  position: relative;
+}
+
+.podium-step i {
+  font-size: 1.5rem; /* Ícones menores */
+  position: absolute;
+  top: 10px; /* Move ícones mais para cima */
+}
+
+.podium-step p {
+  font-size: 1rem; /* Texto menor */
+  margin-top: auto; /* Empurra o texto para baixo */
+}
+
+.podium-first {
+  background: #f1c40f;
+}
+
+.podium-second {
+  background: #bdc3c7;
+  height: 110px;
+}
+
+.podium-third {
+  background: #cd7f32;
+  height: 90px;
+}
+
+
+.btn {
+  font-size: 1rem; /* Tamanho de fonte reduzido */
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin: 0 10px;
+}
+
+.btn-primary {
+  background-color: #3498db;
+  border-color: #3498db;
+}
+
+.btn-primary:hover {
+  background-color: #2980b9;
+}
+
+.btn-success {
+  background-color: #2ecc71;
+  border-color: #2ecc71;
+}
+
+.btn-success:hover {
+  background-color: #27ae60;
+}
+
+.btn-info {
+  background-color: #1abc9c;
+  border-color: #1abc9c;
+}
+
+.btn-info:hover {
+  background-color: #16a085;
+}
+
+.row.mb-5 {
+  margin-bottom: 5rem; /* Espaçamento adicional para o footer */
+}

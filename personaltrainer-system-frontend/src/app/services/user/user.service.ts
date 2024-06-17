@@ -21,6 +21,9 @@ interface UserDataResponse {
   providedIn: 'root'
 })
 export class UserService {
+  getWorkoutSessions(headers: HttpHeaders) {
+    throw new Error('Method not implemented.');
+  }
 
   errorMessage: string = '';
 

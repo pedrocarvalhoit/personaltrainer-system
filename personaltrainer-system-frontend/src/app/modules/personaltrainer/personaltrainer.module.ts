@@ -6,7 +6,9 @@ import { PtDashboardComponent } from './pages/pt-dashboard/pt-dashboard.componen
 import { MenuComponent } from './component/menu/menu.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { EditComponent } from './pages/edit-data/edit/edit.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreateClientComponent } from './pages/create-client/create-client.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -14,12 +16,14 @@ import { FormsModule } from '@angular/forms';
     PtDashboardComponent,
     MenuComponent,
     FooterComponent,
-    EditComponent
+    EditComponent,
+    CreateClientComponent
   ],
   imports: [
     CommonModule,
     PersonaltrainerRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class PersonaltrainerModule { }

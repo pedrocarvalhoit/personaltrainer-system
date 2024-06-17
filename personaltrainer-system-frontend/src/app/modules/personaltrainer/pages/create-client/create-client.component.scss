@@ -1,0 +1,74 @@
+/* Background e fonte */
+body {
+  background: white;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Container do formulário */
+.form-container {
+  background: #faf8f8; /* Fundo branco para o cartão */
+  border-radius: 50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+}
+
+.form-container h3 {
+  color: #2c3e50; /* Cinza-azulado escuro para títulos */
+}
+
+/* Labels */
+.form-label {
+  color: #34495e; /* Cinza-azulado mais escuro para labels */
+  margin-bottom: 0.5em;
+  display: block;
+}
+
+/* Inputs */
+.form-control {
+  width: 100%;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  border: 1px solid #bdc3c7; /* Bordas cinza claras */
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+/* Botão de envio */
+.btn-primary {
+  width: 100%;
+  padding: 0.7em;
+  border: none;
+  border-radius: 5px;
+  background: #3498db; /* Botão azul */
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-primary:disabled {
+  background: #ccc; /* Fundo cinza para botão desabilitado */
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #2980b9; /* Azul mais escuro ao passar o mouse */
+}
+
+/* Mensagem de erro */
+.error-message {
+  color: #e74c3c; /* Vermelho para mensagens de erro */
+  font-size: 0.875em;
+  margin-bottom: 1em;
+}
+
+/* Mensagem de sucesso */
+#success-message {
+  display: none;
+  color: green;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 1em;
+}

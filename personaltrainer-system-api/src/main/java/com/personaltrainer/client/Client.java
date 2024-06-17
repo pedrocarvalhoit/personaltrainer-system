@@ -14,7 +14,8 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
-@Entity(name = "clients")
+@Entity
+@Table(name = "clients")
 @Getter
 @Setter
 @AllArgsConstructor

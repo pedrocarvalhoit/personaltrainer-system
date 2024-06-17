@@ -1,0 +1,78 @@
+<app-menu></app-menu>
+<div class="form-container">
+  <h3>Customer Registration</h3>
+  <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+    <label for="firstName" class="form-label">Name:</label>
+    <input id="firstName" formControlName="firstName" class="form-control" placeholder="Ex: Pedro" />
+    <div
+      *ngIf="
+        clientForm.get('firstName')?.invalid &&
+        clientForm.get('firstName')?.touched
+      "
+      class="error-message"
+    >
+      Name can´t be empty
+    </div>
+
+    <label for="lastName" class="form-label">Lastname:</label>
+    <input id="lastName" formControlName="lastName" class="form-control" placeholder="Ex: Carvalho"/>
+    <div
+      *ngIf="
+        clientForm.get('lastName')?.invalid &&
+        clientForm.get('lastName')?.touched
+      "
+      class="error-message"
+    >
+      Lastname can´t be empty
+    </div>
+
+    <label for="email" class="form-label">Email:</label>
+    <input id="email" formControlName="email" class="form-control" placeholder="name@example.com"/>
+    <div
+      *ngIf="
+        clientForm.get('email')?.invalid && clientForm.get('email')?.touched
+      "
+      class="error-message"
+    >
+      Email can´t be empty
+    </div>
+
+    <label for="mobile" class="form-label">Mobile:</label>
+    <input id="mobile" formControlName="mobile" class="form-control" placeholder="+xx xxxxxxx"/>
+    <div
+      *ngIf="
+        clientForm.get('mobile')?.invalid && clientForm.get('mobile')?.touched
+      "
+      class="error-message"
+    >
+      Mobile can´t be empty
+    </div>
+
+    <label for="gender" class="form-label">Gender:</label>
+    <input id="gender" formControlName="gender" class="form-control" placeholder="Type: MALE or FEMALE"/>
+
+    <label for="dateOfBirth" class="form-label">Date of Birthday:</label>
+    <input
+      id="dateOfBirth"
+      formControlName="dateOfBirth"
+      type="date"
+      class="form-control"
+    />
+    <div
+      *ngIf="
+        clientForm.get('dateOfBirth')?.invalid &&
+        clientForm.get('dateOfBirth')?.touched
+      "
+      class="error-message"
+    >
+      Date of Birthday can´t be empty
+    </div>
+
+    <button type="submit" [disabled]="clientForm.invalid" class="btn-primary">
+      Create
+    </button>
+  </form>
+  <div id="success-message">Client created successfully</div>
+</div>
+
+<app-footer></app-footer>

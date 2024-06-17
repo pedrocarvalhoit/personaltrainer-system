@@ -11,7 +11,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 
-@Entity(name = "workout_session")
+@Entity
+@Table(name = "workout_session")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -25,6 +26,7 @@ public class WorkoutSession {
     private Integer id;
 
     @ManyToOne
+    @JoinColumn(name = "client_id")
     private Client client;
 
     private String workoutProgramName;

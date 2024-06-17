@@ -40,4 +40,10 @@ public class WorkoutSessionController {
         return ResponseEntity.ok(service.execute(sessionId, authentication));
     }
 
+    //get total sessions and best 3 clients by session
+    @GetMapping("/get-workout-summary")
+    public ResponseEntity<WorkoutSessionTotalSummaryResponse> getWorkoutSumary(Authentication authentication){
+        return ResponseEntity.ok(service.getToalSesssionsSummary(authentication));
+    }
+
 }

@@ -14,8 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -61,5 +61,34 @@ public class WorkoutSessionService {
         return workoutSessionRepository.save(workoutSession).getId();
     }
 
+    public WorkoutSessionTotalSummaryResponse getToalSesssionsSummary(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        //totalsessions
+        Integer totalSessions = workoutSessionRepository.findSessionsByUserId(user.getId()).size();
 
+        //get all clients for the logged user
+        List<Client> clients = clientRepository.findAllByPersonalTrainerId(user.getId());
+        HashMap<String, Integer> sessionsRank = new HashMap<>();
+        clients.forEach(client -> {
+            sessionsRank.put(client.getPersonalData().getFullName(),
+                    workoutSessionRepository.countSessionsInCurrentMonthByClientId(client.getId()));
+        });
+        //get this clients sessions in actual month
+        // Ordena o mapa por número de sessões em ordem decrescente
+        List<Map.Entry<String, Integer>> sortedEntries = sessionsRank.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .limit(3)
+                .collect(Collectors.toList());
+
+        // Extrai os top 3 clientes com mais sessões
+        List<String> topThreeClients = sortedEntries.stream()
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+
+        // Retorna o objeto de resposta com o resumo das sessões
+        return WorkoutSessionTotalSummaryResponse.builder()
+                .totalSessionsPerMonth(totalSessions)
+                .bestThreeClients(topThreeClients)
+                .build();
+    }
 }

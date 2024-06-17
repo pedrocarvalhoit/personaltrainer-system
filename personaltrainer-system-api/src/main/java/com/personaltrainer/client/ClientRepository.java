@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ClientRepository extends JpaRepository<Client, Integer> {
@@ -13,4 +14,5 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
 //  @Query("SELECT c FROM Client c WHERE c.enabled = true AND c.personalTrainer.id = :userId")
     Page<Client> findAllByEnabledIsTrueAndPersonalTrainerId(Pageable pageable, Integer userId);
 
+    List<Client> findAllByPersonalTrainerId(Integer id);
 }
