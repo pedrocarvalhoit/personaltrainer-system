@@ -15,7 +15,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -64,31 +63,26 @@ public class WorkoutSessionService {
     public WorkoutSessionTotalSummaryResponse getToalSesssionsSummary(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         //totalsessions
-        Integer totalSessions = workoutSessionRepository.findSessionsByUserId(user.getId()).size();
+        List<WorkoutSession> monthSessionsList= workoutSessionRepository.findSessionsByUserId(user.getId());
+        Integer monthTotalSessions = monthSessionsList.size();
 
-        //get all clients for the logged user
-        List<Client> clients = clientRepository.findAllByPersonalTrainerId(user.getId());
-        HashMap<String, Integer> sessionsRank = new HashMap<>();
-        clients.forEach(client -> {
-            sessionsRank.put(client.getPersonalData().getFullName(),
-                    workoutSessionRepository.countSessionsInCurrentMonthByClientId(client.getId()));
-        });
-        //get this clients sessions in actual month
-        // Ordena o mapa por número de sessões em ordem decrescente
-        List<Map.Entry<String, Integer>> sortedEntries = sessionsRank.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .limit(3)
-                .collect(Collectors.toList());
+        //get top clients names by workoutsessions
+        Pageable pageable = PageRequest.of(0, 3);
+        List<String> clientsNames = clientRepository.findTop3ClientsNamesWithMostSessions(user.getId(), pageable);
 
-        // Extrai os top 3 clientes com mais sessões
-        List<String> topThreeClients = sortedEntries.stream()
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+        //get top clients sessions quantity
+        List<Integer> clientsSessionsQuantity = clientRepository.findTop3SessionsQuantityPerTop3Clients(user.getId(), pageable);
 
         // Retorna o objeto de resposta com o resumo das sessões
         return WorkoutSessionTotalSummaryResponse.builder()
-                .totalSessionsPerMonth(totalSessions)
-                .bestThreeClients(topThreeClients)
+                .totalSessionsPerMonth(monthTotalSessions)
+                .bestThreeClients(clientsNames)
+                .bestThreeClientsNumOfSessions(clientsSessionsQuantity)
                 .build();
+    }
+
+    public Integer delete(Integer id) {
+        workoutSessionRepository.deleteById(id);
+        return id;
     }
 }

@@ -12,4 +12,5 @@ import java.util.List;
 public class WorkoutSessionTotalSummaryResponse {
     private Integer totalSessionsPerMonth;
     private List<String> bestThreeClients;
+    private List<Integer> bestThreeClientsNumOfSessions;
 }

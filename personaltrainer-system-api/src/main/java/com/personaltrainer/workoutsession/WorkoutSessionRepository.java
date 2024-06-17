@@ -19,10 +19,6 @@ public interface WorkoutSessionRepository extends JpaRepository<WorkoutSession, 
             "AND YEAR(ws.sessionDate) = YEAR(CURRENT_DATE())")
     List<WorkoutSession> findSessionsByUserId(@Param("userId") Integer userId);
 
-    @Query("SELECT COUNT(ws) FROM WorkoutSession ws " +
-            "WHERE ws.client.id = :clientId " +
-            "AND MONTH(ws.sessionDate) = MONTH(CURRENT_DATE()) " +
-            "AND YEAR(ws.sessionDate) = YEAR(CURRENT_DATE())")
-    Integer countSessionsInCurrentMonthByClientId(@Param("clientId") Integer clientId);
+
 
 }

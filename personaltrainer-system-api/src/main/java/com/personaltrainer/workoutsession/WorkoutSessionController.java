@@ -16,7 +16,7 @@ public class WorkoutSessionController {
 
     private final WorkoutSessionService service;
 
-    //create fo client
+    //create to client
     @PostMapping("/create/{clientId}")
     public ResponseEntity<Integer> createSession(@RequestBody @Valid WorkoutSessionCreateRequest createWSRequest,
                                                  @PathVariable Integer clientId){
@@ -44,6 +44,12 @@ public class WorkoutSessionController {
     @GetMapping("/get-workout-summary")
     public ResponseEntity<WorkoutSessionTotalSummaryResponse> getWorkoutSumary(Authentication authentication){
         return ResponseEntity.ok(service.getToalSesssionsSummary(authentication));
+    }
+
+    //delete Workout Session
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Integer> deleteSession(@PathVariable Integer id){
+        return ResponseEntity.ok(service.delete(id));
     }
 
 }

@@ -33,7 +33,7 @@ public class Client extends BaseEntity{
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<WorkoutProgram> workoutProgram;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<WorkoutSession> workoutSession;
 
 

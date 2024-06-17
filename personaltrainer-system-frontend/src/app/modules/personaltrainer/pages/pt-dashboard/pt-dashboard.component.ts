@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../../services/auth/auth.service';
-import { UserService } from '../../../../services/user/user.service';
 import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
 import { WorkoutsessionService } from '../../../../services/workoutsession.service';
@@ -12,12 +11,14 @@ import { WorkoutsessionService } from '../../../../services/workoutsession.servi
 })
 export class PtDashboardComponent implements OnInit {
 
- /* calendarPlugins = [dayGridPlugin, interactionPlugin];
-  calendarEvents = [];*/
   workoutSessionsCount: number = 0;
   firstPlaceClient: string = 'Client 1';
   secondPlaceClient: string = 'Client 2';
   thirdPlaceClient: string = 'Client 3';
+
+  firstPlaceSessions: number = 1;
+  secondPlaceSessions: number = 2;
+  thirdPlaceSessions: number = 3;
 
   constructor(private authService: AuthService, private workoutSessionService: WorkoutsessionService, private router: Router) {}
 
@@ -27,24 +28,18 @@ export class PtDashboardComponent implements OnInit {
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`
       });
-
-      // Fetch calendar events
-    /*  this.workoutSessionService.getWorkoutSessions(headers).subscribe(
-        events => {
-          this.calendarEvents = events;
-        },
-        error => {
-          console.error('Failed to fetch calendar events', error);
-        }
-      );*/
-
       // Fetch workout sessions count and top clients
       this.workoutSessionService.getTotalMonthlyWorkoutSessions(headers).subscribe(
         summary => {
-          this.workoutSessionsCount = summary.totalSessions;
-          this.firstPlaceClient = summary.topClients[0]?.name || 'N/A';
-          this.secondPlaceClient = summary.topClients[1]?.name || 'N/A';
-          this.thirdPlaceClient = summary.topClients[2]?.name || 'N/A';
+          console.log('Data fecthed', summary)
+          this.workoutSessionsCount = summary.totalSessionsPerMonth;
+          this.firstPlaceClient = summary.bestThreeClients[0] || 'N/A';
+          this.secondPlaceClient = summary.bestThreeClients[1] || 'N/A';
+          this.thirdPlaceClient = summary.bestThreeClients[2] || 'N/A';
+
+          this.firstPlaceSessions = summary.bestThreeClientsNumOfSessions[0];
+          this.secondPlaceSessions = summary.bestThreeClientsNumOfSessions[1];
+          this.thirdPlaceSessions = summary.bestThreeClientsNumOfSessions[2];
         },
         error => {
           console.error('Failed to fetch workout summary', error);

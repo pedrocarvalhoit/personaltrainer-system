@@ -5,12 +5,6 @@
     <div class="col-md-6 mb-4">
       <div class="card shadow-sm p-3 h-100">
         <h4 class="text-center mb-3">Weekly Workout Sessions</h4>
-   <!--     <full-calendar
-          defaultView="dayGridWeek"
-          [plugins]="calendarPlugins"
-          [weekends]="false"
-          [events]="calendarEvents">
-        </full-calendar>-->
       </div>
     </div>
     <div class="col-md-6 mb-4">
@@ -18,20 +12,20 @@
         <h4 class="text-center mb-3">Monthly Workout Summary</h4>
         <p class="text-center display-4">
           <i class="fas fa-dumbbell"></i>
-          <span id="workoutSessionsCount">0</span> Sessions
+          <span id="workoutSessionsCount">&nbsp;{{workoutSessionsCount}}</span> Sessions
         </p>
         <div class="podium">
           <div class="podium-step podium-first">
             <i class="fas fa-trophy"></i>
-            <p id="firstPlaceClient">Client 1</p>
+            <p id="firstPlaceClient">{{firstPlaceClient}}<br>({{firstPlaceSessions}} s)</p>
           </div>
           <div class="podium-step podium-second">
             <i class="fas fa-medal"></i>
-            <p id="secondPlaceClient">Client 2</p>
+            <p id="secondPlaceClient">{{secondPlaceClient}}<br>({{secondPlaceSessions}} s)</p>
           </div>
           <div class="podium-step podium-third">
             <i class="fas fa-award"></i>
-            <p id="thirdPlaceClient">Client 3</p>
+            <p id="thirdPlaceClient">{{thirdPlaceClient}}<br>({{thirdPlaceSessions}} s)</p>
           </div>
         </div>
       </div>
@@ -43,13 +37,13 @@
       <div class="card shadow-sm p-3">
         <h4 class="text-center mb-4">Actions</h4>
         <div class="d-flex justify-content-around">
-          <button class="btn btn-primary" (click)="createClient()" >
+          <button class="btn btn-primary" (click)="createClient()">
             <i class="fas fa-user-plus"></i> Register Client
           </button>
-          <button class="btn btn-success" >
+          <button class="btn btn-primary">
             <i class="fas fa-calendar-plus"></i> Create Workout Session
           </button>
-          <button class="btn btn-info" >
+          <button class="btn btn-primary">
             <i class="fas fa-clipboard-list"></i> Create Workout Plan
           </button>
         </div>

@@ -9,9 +9,10 @@ interface WorkoutSessionForCalender {
   sessionDate: string;
 }
 
-interface WorkoutTotalSummary {
-  totalSessions: number;
-  topClients: { name: string, sessions: number }[];
+interface WorkoutSessionTotalSummaryResponse {
+  totalSessionsPerMonth: number;
+  bestThreeClients: string[];
+  bestThreeClientsNumOfSessions: number[];
 }
 
 @Injectable({
@@ -27,7 +28,7 @@ export class WorkoutsessionService {
     return this.http.get<WorkoutSessionForCalender[]>('http://localhost:8088/api/v1/users/get-workout-sessions', { headers });
   }
 
-  getTotalMonthlyWorkoutSessions(headers: HttpHeaders): Observable<WorkoutTotalSummary> {
-    return this.http.get<WorkoutTotalSummary>('http://localhost:8088/api/v1/workout-sessions/get-workout-summary', { headers });
+  getTotalMonthlyWorkoutSessions(headers: HttpHeaders): Observable<WorkoutSessionTotalSummaryResponse> {
+    return this.http.get<WorkoutSessionTotalSummaryResponse>('http://localhost:8088/api/v1/workout-sessions/get-workout-summary', { headers });
   }
 }
