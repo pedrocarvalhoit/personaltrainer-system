@@ -69,15 +69,11 @@ public class WorkoutSessionService {
         Integer totalSessionPerMonth = totalSessionPerMonthList.size();
 
         //totalExecutedSessions
-        List<WorkoutSession> monthExecutedSessionsList= totalSessionPerMonthList.stream()
-                .filter(WorkoutSession::isExecuted)
-                .toList();
+        List<WorkoutSession> monthExecutedSessionsList= workoutSessionRepository.findTotalMonthlyExecutedSessionsByUserId(user.getId());
         Integer monthTotalExecutedSessions = monthExecutedSessionsList.size();
 
         //totalNotExecutedSessions
-        List<WorkoutSession> monthNotExecutedSessionsList= totalSessionPerMonthList.stream()
-                .filter((ws) -> !ws.isExecuted())
-                .toList();
+        List<WorkoutSession> monthNotExecutedSessionsList= workoutSessionRepository.findTotalMonthlyNotExecutedSessionsByUserId(user.getId());
         Integer monthTotalNotExecutedSessions = monthNotExecutedSessionsList.size();
 
         //get top clients names by workoutsessions
