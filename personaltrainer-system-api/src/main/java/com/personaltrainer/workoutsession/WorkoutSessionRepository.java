@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -16,9 +17,23 @@ public interface WorkoutSessionRepository extends JpaRepository<WorkoutSession, 
 
     @Query("SELECT ws FROM WorkoutSession ws JOIN ws.client c WHERE c.personalTrainer.id = :userId " +
             "AND MONTH(ws.sessionDate) = MONTH(CURRENT_DATE()) " +
-            "AND YEAR(ws.sessionDate) = YEAR(CURRENT_DATE())")
-    List<WorkoutSession> findSessionsByUserId(@Param("userId") Integer userId);
+            "AND YEAR(ws.sessionDate) = YEAR(CURRENT_DATE()) ")
+    List<WorkoutSession> findTotalMonthlySessionsByUserId(@Param("userId") Integer userId);
 
+    @Query("SELECT ws FROM WorkoutSession ws JOIN ws.client c WHERE c.personalTrainer.id = :userId " +
+            "AND MONTH(ws.sessionDate) = MONTH(CURRENT_DATE()) " +
+            "AND YEAR(ws.sessionDate) = YEAR(CURRENT_DATE()) " +
+            "AND ws.executed = true")
+    List<WorkoutSession> findTotalMonthlyExecutedSessionsByUserId(@Param("userId") Integer userId);
 
+    @Query("SELECT ws FROM WorkoutSession ws JOIN ws.client c WHERE c.personalTrainer.id = :userId " +
+            "AND MONTH(ws.sessionDate) = MONTH(CURRENT_DATE()) " +
+            "AND YEAR(ws.sessionDate) = YEAR(CURRENT_DATE()) " +
+            "AND ws.executed = false")
+    List<WorkoutSession> findTotalMonthlyNotExecutedSessionsByUserId(@Param("userId") Integer userId);
 
+    @Query("SELECT ws FROM WorkoutSession ws JOIN ws.client c WHERE c.personalTrainer.id = :userId " +
+            "AND ws.sessionDate BETWEEN :startDate AND :endDate")
+    List<WorkoutSession> findSessionsForNextWeek(@Param("startDate")LocalDate startDate,
+                                                 @Param("endDate") LocalDate endDate, @Param("userId") Integer userId);
 }

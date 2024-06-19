@@ -3,6 +3,7 @@ package com.personaltrainer.workoutsession;
 import jakarta.validation.Valid;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public record WorkoutSessionCreateRequest(
 
@@ -11,6 +12,9 @@ public record WorkoutSessionCreateRequest(
 
         @Valid
         LocalDate sessionDate,
+
+        @Valid
+        LocalTime sessionTime,
 
         @Valid
         Integer clientSubjectEffort,

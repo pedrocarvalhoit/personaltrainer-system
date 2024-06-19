@@ -9,6 +9,7 @@ public class WorkoutSessionMapper {
         return WorkoutSession.builder()
                 .workoutProgramName(request.workoutProgramName())
                 .sessionDate(request.sessionDate())
+                .sessionTime(request.sessionTime())
                 .clientSubjectEffort(request.clientSubjectEffort())
                 .pTQualityEffortIndicative(request.pTQualityEffortIndicative())
                 .build();
@@ -19,9 +20,18 @@ public class WorkoutSessionMapper {
         return WorkoutSessionResponse.builder()
                 .workoutProgramName(workoutSession.getWorkoutProgramName())
                 .sessionDate(workoutSession.getSessionDate())
+                .sessionTime(workoutSession.getSessionTime())
                 .clientSubjectEffort(workoutSession.getClientSubjectEffort())
                 .pTQualityEffortIndicative(workoutSession.getPTQualityEffortIndicative())
                 .executed(workoutSession.isExecuted())
+                .build();
+    }
+
+    public WorkoutSessionResponseForCalendar toWorkoutSessionCalendarResponse(WorkoutSession workoutSession) {
+        return WorkoutSessionResponseForCalendar.builder()
+                .clientName(workoutSession.getClient().getPersonalData().getFullName())
+                .sessionDate(workoutSession.getSessionDate())
+                .sessionTime(workoutSession.getSessionTime())
                 .build();
     }
 }

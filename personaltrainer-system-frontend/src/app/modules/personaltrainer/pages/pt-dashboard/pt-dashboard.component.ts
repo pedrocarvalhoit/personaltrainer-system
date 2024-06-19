@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
-import { WorkoutsessionService } from '../../../../services/workoutsession.service';
+import { WorkoutSessionResponseForCalendar, WorkoutsessionService } from '../../../../services/workoutsession.service';
 
 @Component({
   selector: 'app-pt-dashboard',
@@ -11,7 +11,9 @@ import { WorkoutsessionService } from '../../../../services/workoutsession.servi
 })
 export class PtDashboardComponent implements OnInit {
 
-  workoutSessionsCount: number = 0;
+  totalSessionsPerMonth: number = 0;
+  totalExecutedSessionsPerMonth: number = 0;
+  totalNotExecutedSessionsPerMonth: number = 0;
   firstPlaceClient: string = 'Client 1';
   secondPlaceClient: string = 'Client 2';
   thirdPlaceClient: string = 'Client 3';
@@ -19,6 +21,8 @@ export class PtDashboardComponent implements OnInit {
   firstPlaceSessions: number = 1;
   secondPlaceSessions: number = 2;
   thirdPlaceSessions: number = 3;
+
+  upcomingSessions: WorkoutSessionResponseForCalendar[] = [];
 
   constructor(private authService: AuthService, private workoutSessionService: WorkoutsessionService, private router: Router) {}
 
@@ -29,10 +33,20 @@ export class PtDashboardComponent implements OnInit {
         'Authorization': `Bearer ${token}`
       });
       // Fetch workout sessions count and top clients
+      this.workoutSessionService.getUpcomingSessions(headers).subscribe(
+        (data: WorkoutSessionResponseForCalendar[]) => {
+          this.upcomingSessions = data;
+        },
+        (error) => {
+          console.error('Failed to load upcoming sessions:', error);
+        }
+      );
       this.workoutSessionService.getTotalMonthlyWorkoutSessions(headers).subscribe(
         summary => {
           console.log('Data fecthed', summary)
-          this.workoutSessionsCount = summary.totalSessionsPerMonth;
+          this.totalSessionsPerMonth = summary.totalSessionsPerMonth;
+          this.totalExecutedSessionsPerMonth = summary.totalExecutedSessionsPerMonth;
+          this.totalNotExecutedSessionsPerMonth = summary.totalNotExecutedSessionsPerMonth;
           this.firstPlaceClient = summary.bestThreeClients[0] || 'N/A';
           this.secondPlaceClient = summary.bestThreeClients[1] || 'N/A';
           this.thirdPlaceClient = summary.bestThreeClients[2] || 'N/A';

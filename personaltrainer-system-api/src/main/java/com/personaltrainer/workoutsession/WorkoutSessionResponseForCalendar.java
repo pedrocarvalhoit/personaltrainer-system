@@ -10,13 +10,10 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class WorkoutSessionResponse {
+public class WorkoutSessionResponseForCalendar {
 
-    private String workoutProgramName;
     private LocalDate sessionDate;
     private LocalTime sessionTime;
-    private Integer clientSubjectEffort;
-    private Integer pTQualityEffortIndicative;
-    private boolean executed;
+    private String clientName;
 
 }

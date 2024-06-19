@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("workout-sessions")
@@ -44,6 +46,12 @@ public class WorkoutSessionController {
     @GetMapping("/get-workout-summary")
     public ResponseEntity<WorkoutSessionTotalSummaryResponse> getWorkoutSumary(Authentication authentication){
         return ResponseEntity.ok(service.getToalSesssionsSummary(authentication));
+    }
+
+    //get weckly next sessions
+    @GetMapping("get-upcoming-sessions")
+    public ResponseEntity<List<WorkoutSessionResponseForCalendar>> getSessionsForNextWeek(Authentication authentication){
+        return ResponseEntity.ok(service.getSessionsForNextWeek(authentication));
     }
 
     //delete Workout Session

@@ -10,6 +10,7 @@ import lombok.experimental.SuperBuilder;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "workout_session")
@@ -30,7 +31,10 @@ public class WorkoutSession {
     private Client client;
 
     private String workoutProgramName;
+
     private LocalDate sessionDate;
+    private LocalTime sessionTime;
+
     private Integer clientSubjectEffort;
     private Integer pTQualityEffortIndicative;
     private boolean executed;

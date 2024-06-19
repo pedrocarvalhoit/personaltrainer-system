@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -62,9 +63,18 @@ public class WorkoutSessionService {
 
     public WorkoutSessionTotalSummaryResponse getToalSesssionsSummary(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
-        //totalsessions
-        List<WorkoutSession> monthSessionsList= workoutSessionRepository.findSessionsByUserId(user.getId());
-        Integer monthTotalSessions = monthSessionsList.size();
+
+        //totalSession
+        List<WorkoutSession> totalSessionPerMonthList = workoutSessionRepository.findTotalMonthlySessionsByUserId(user.getId());
+        Integer totalSessionPerMonth = totalSessionPerMonthList.size();
+
+        //totalExecutedSessions
+        List<WorkoutSession> monthExecutedSessionsList= workoutSessionRepository.findTotalMonthlyExecutedSessionsByUserId(user.getId());
+        Integer monthTotalExecutedSessions = monthExecutedSessionsList.size();
+
+        //totalNotExecutedSessions
+        List<WorkoutSession> monthNotExecutedSessionsList= workoutSessionRepository.findTotalMonthlyNotExecutedSessionsByUserId(user.getId());
+        Integer monthTotalNotExecutedSessions = monthNotExecutedSessionsList.size();
 
         //get top clients names by workoutsessions
         Pageable pageable = PageRequest.of(0, 3);
@@ -75,7 +85,9 @@ public class WorkoutSessionService {
 
         // Retorna o objeto de resposta com o resumo das sessões
         return WorkoutSessionTotalSummaryResponse.builder()
-                .totalSessionsPerMonth(monthTotalSessions)
+                .totalSessionsPerMonth(totalSessionPerMonth)
+                .totalExecutedSessionsPerMonth(monthTotalExecutedSessions)
+                .totalNotExecutedSessionsPerMonth(monthTotalNotExecutedSessions)
                 .bestThreeClients(clientsNames)
                 .bestThreeClientsNumOfSessions(clientsSessionsQuantity)
                 .build();
@@ -84,5 +96,16 @@ public class WorkoutSessionService {
     public Integer delete(Integer id) {
         workoutSessionRepository.deleteById(id);
         return id;
+    }
+
+    public List<WorkoutSessionResponseForCalendar> getSessionsForNextWeek(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        LocalDate startDate = LocalDate.now();
+        LocalDate endDate = startDate.plusDays(5);
+        List<WorkoutSession> workoutSessions = workoutSessionRepository.findSessionsForNextWeek(startDate, endDate, user.getId());
+
+        return workoutSessions.stream()
+                .map(mapper :: toWorkoutSessionCalendarResponse)
+                .toList();
     }
 }
