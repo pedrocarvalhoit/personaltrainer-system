@@ -27,7 +27,7 @@ registerLocaleData(en);
     LoginComponent,
     RegisterComponent,
     VerifyAccountComponent,
-    ProtectedComponent,
+    ProtectedComponent
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,6 @@ package com.personaltrainer.client;
 
 import com.personaltrainer.common.PageResponse;
 import com.personaltrainer.common.UserPermissionOverClientCheck;
-import com.personaltrainer.exception.OperationNotPermitedException;
 import com.personaltrainer.file.FileStorageService;
 import com.personaltrainer.user.User;
 import jakarta.persistence.EntityNotFoundException;
@@ -17,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -44,7 +42,7 @@ public class ClientService {
                 .orElseThrow(()-> new EntityNotFoundException("No entity found whit id:" + clientId));
     }
 
-    public PageResponse<ClientReponse> findAllClients(int page, int size, Authentication connectedUser) {
+    public PageResponse<ClientReponse> findAllEnabledClients(int page, int size, Authentication connectedUser) {
         User user = (User) connectedUser.getPrincipal();
         Pageable pageable = PageRequest.of(page, size, Sort.by("personalData.firstName").ascending());
         Page<Client> clients = clientRepository.findAllByEnabledIsTrueAndPersonalTrainerId(pageable, user.getId());

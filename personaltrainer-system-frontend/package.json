@@ -1,6 +1,10 @@
 {
   "name": "personaltrainer-system-test",
   "version": "0.0.0",
+  "styles": [
+  "node_modules/bootstrap/dist/css/bootstrap.min.css",
+  "src/styles.css"
+],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -24,10 +28,7 @@
     "@auth0/angular-jwt": "^5.2.0",
     "@fortawesome/fontawesome-free": "^6.5.2",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
-    "@fullcalendar/angular": "^6.1.14",
-    "@fullcalendar/core": "^6.1.14",
-    "@fullcalendar/daygrid": "^6.1.14",
-    "@fullcalendar/interaction": "^6.1.14",
+    "@popperjs/core": "^2.11.8",
     "angular-code-input": "^2.0.0",
     "bootstrap": "^5.3.3",
     "express": "^4.18.2",

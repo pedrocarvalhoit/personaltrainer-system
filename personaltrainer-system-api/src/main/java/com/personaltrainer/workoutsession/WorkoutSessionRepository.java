@@ -32,8 +32,11 @@ public interface WorkoutSessionRepository extends JpaRepository<WorkoutSession, 
             "AND ws.executed = false")
     List<WorkoutSession> findTotalMonthlyNotExecutedSessionsByUserId(@Param("userId") Integer userId);
 
-    @Query("SELECT ws FROM WorkoutSession ws JOIN ws.client c WHERE c.personalTrainer.id = :userId " +
-            "AND ws.sessionDate BETWEEN :startDate AND :endDate")
-    List<WorkoutSession> findSessionsForNextWeek(@Param("startDate")LocalDate startDate,
-                                                 @Param("endDate") LocalDate endDate, @Param("userId") Integer userId);
+    @Query("SELECT ws FROM WorkoutSession ws JOIN ws.client c " +
+            "WHERE c.personalTrainer.id = :userId " +
+            "AND ws.sessionDate BETWEEN :startDate AND :endDate " +
+            "ORDER BY ws.sessionDate ASC, ws.sessionTime ASC") // Ascending sessionDate
+    List<WorkoutSession> findSessionsForNextWeek(@Param("startDate") LocalDate startDate,
+                                                 @Param("endDate") LocalDate endDate,
+                                                 @Param("userId") Integer userId);
 }

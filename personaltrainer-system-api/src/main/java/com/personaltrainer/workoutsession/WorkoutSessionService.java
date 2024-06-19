@@ -100,6 +100,7 @@ public class WorkoutSessionService {
 
     public List<WorkoutSessionResponseForCalendar> getSessionsForNextWeek(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
+
         LocalDate startDate = LocalDate.now();
         LocalDate endDate = startDate.plusDays(5);
         List<WorkoutSession> workoutSessions = workoutSessionRepository.findSessionsForNextWeek(startDate, endDate, user.getId());

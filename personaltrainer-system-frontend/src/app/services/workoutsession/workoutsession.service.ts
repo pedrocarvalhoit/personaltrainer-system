@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { ErrorHandlerService } from './errohandler/error-handler.service';
+import { ErrorHandlerService } from '../errohandler/error-handler.service';
 import { Observable } from 'rxjs';
 
 export interface WorkoutSessionResponseForCalendar {

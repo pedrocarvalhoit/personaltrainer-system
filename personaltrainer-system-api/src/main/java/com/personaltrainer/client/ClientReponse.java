@@ -14,6 +14,7 @@ public class ClientReponse {
     private String email;
     private String mobile;
     private byte[] photo;
+    private Integer age;
     private boolean enabled;
 
 }

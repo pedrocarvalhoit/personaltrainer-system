@@ -8,7 +8,7 @@ import { FooterComponent } from './component/footer/footer.component';
 import { EditComponent } from './pages/edit-data/edit/edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateClientComponent } from './pages/create-client/create-client.component';
-import { HttpClientModule } from '@angular/common/http';
+import { ClientsComponent } from './pages/clients/clients.component';
 
 
 @NgModule({
@@ -17,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     MenuComponent,
     FooterComponent,
     EditComponent,
-    CreateClientComponent
+    CreateClientComponent,
+    ClientsComponent
   ],
   imports: [
     CommonModule,

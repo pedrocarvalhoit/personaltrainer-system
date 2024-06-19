@@ -25,6 +25,7 @@ public class ClientMapper {
                 .email(client.getPersonalData().getEmail())
                 .mobile(client.getPersonalData().getMobile())
                 .photo(FileUtils.readFileFromLocation(client.getPersonalData().getPhoto()))
+                .age(client.getPersonalData().getAge())
                 .enabled(client.isEnabled())
                 .build();
     }

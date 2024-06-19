@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 @Embeddable
 @Getter
@@ -44,5 +45,9 @@ public class PersonalData {
 
     public String getFullName(){
         return this.firstName + " " + this.lastName;
+    }
+
+    public Integer getAge(){
+        return Period.between(this.dateOfBirth, LocalDate.now()).getYears();
     }
 }

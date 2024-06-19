@@ -46,12 +46,12 @@ public class ClientController {
     }
 
     //findAll
-    @GetMapping("/all")
+    @GetMapping("/all-enabled")
     public ResponseEntity<PageResponse<ClientReponse>> findAllClients(
             @RequestParam(name = "page", defaultValue = "0", required = false)int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size, Authentication connectedUser){
 
-        return ResponseEntity.ok(clientService.findAllClients(page, size, connectedUser));
+        return ResponseEntity.ok(clientService.findAllEnabledClients(page, size, connectedUser));
     }
 
     //updateStatus

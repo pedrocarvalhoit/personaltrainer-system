@@ -37,6 +37,4 @@ public class Client extends BaseEntity{
     private List<WorkoutSession> workoutSession;
 
 
-
-
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
-import { WorkoutSessionResponseForCalendar, WorkoutsessionService } from '../../../../services/workoutsession.service';
+import { WorkoutSessionResponseForCalendar, WorkoutsessionService } from '../../../../services/workoutsession/workoutsession.service';
 
 @Component({
   selector: 'app-pt-dashboard',
@@ -71,4 +71,5 @@ export class PtDashboardComponent implements OnInit {
   createClient() {
     this.router.navigate(['personaltrainer/create-client']);
   }
+
 }

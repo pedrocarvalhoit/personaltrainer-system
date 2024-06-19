@@ -24,6 +24,7 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
             "WHERE c.personalTrainer.id = :trainerId " +
             "AND FUNCTION('MONTH', ws.sessionDate) = FUNCTION('MONTH', CURRENT_DATE) " +
             "AND FUNCTION('YEAR', ws.sessionDate) = FUNCTION('YEAR', CURRENT_DATE) " +
+            "AND ws.executed = true " +
             "GROUP BY c.id " +
             "ORDER BY COUNT(ws) DESC")
     List<String> findTop3ClientsNamesWithMostSessions(@Param("trainerId") Integer trainerId, Pageable pageable);
@@ -34,6 +35,7 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
             "WHERE c.personalTrainer.id = :tainerId " +
             "AND MONTH(ws.sessionDate) = MONTH(CURRENT_DATE()) " +
             "AND YEAR(ws.sessionDate) = YEAR(CURRENT_DATE()) " +
+            "AND ws.executed = true " +
             "GROUP BY c.personalData.firstName " +
             "ORDER BY COUNT(ws) DESC")
     List<Integer> findTop3SessionsQuantityPerTop3Clients(@Param("tainerId") Integer id, Pageable pageable);

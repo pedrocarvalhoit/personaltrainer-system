@@ -19,12 +19,13 @@ body {
 
 .card h4 {
   color: #2c3e50;
-  font-size: 1.1rem; /* Tamanho de fonte reduzido */
+  font-size: 1rem; /* Tamanho de fonte reduzido */
+  font-weight: bold;
 }
 
 .card p {
   color: #34495e;
-  font-size: 1.1rem; /* Tamanho de fonte reduzido */
+  font-size: 0.9rem; /* Tamanho de fonte reduzido */
 }
 
 .upcoming-sessions {
@@ -136,4 +137,9 @@ body {
 
 .row.mb-5 {
   margin-bottom: 5rem; /* Espaçamento adicional para o footer */
+}
+
+.session-list {
+  max-height: 300px; /* Defina a altura máxima desejada */
+  overflow-y: auto; /* Adiciona uma barra de rolagem vertical quando necessário */
 }
