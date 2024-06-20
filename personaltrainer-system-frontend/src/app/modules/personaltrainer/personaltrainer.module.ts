@@ -5,10 +5,11 @@ import { PersonaltrainerRoutingModule } from './personaltrainer-routing.module';
 import { PtDashboardComponent } from './pages/pt-dashboard/pt-dashboard.component';
 import { MenuComponent } from './component/menu/menu.component';
 import { FooterComponent } from './component/footer/footer.component';
-import { EditComponent } from './pages/edit-data/edit/edit.component';
+import { EditComponent } from './pages/edit-data/edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateClientComponent } from './pages/create-client/create-client.component';
 import { ClientsComponent } from './pages/clients/clients.component';
+import { EditClientComponent } from './pages/edit-client/edit-client.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ClientsComponent } from './pages/clients/clients.component';
     FooterComponent,
     EditComponent,
     CreateClientComponent,
-    ClientsComponent
+    ClientsComponent,
+    EditClientComponent
   ],
   imports: [
     CommonModule,

@@ -16,6 +16,8 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
 //  @Query("SELECT c FROM Client c WHERE c.enabled = true AND c.personalTrainer.id = :userId")
     Page<Client> findAllByEnabledIsTrueAndPersonalTrainerId(Pageable pageable, Integer userId);
 
+    Page<Client> findAllByEnabledIsFalseAndPersonalTrainerId(Pageable pageable, Integer userId);
+
     List<Client> findAllByPersonalTrainerId(Integer id);
 
     @Query("SELECT c.personalData.firstName " +
@@ -39,4 +41,6 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
             "GROUP BY c.personalData.firstName " +
             "ORDER BY COUNT(ws) DESC")
     List<Integer> findTop3SessionsQuantityPerTop3Clients(@Param("tainerId") Integer id, Pageable pageable);
+
+
 }

@@ -6,10 +6,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export interface Client {
   id: number;
   photo: string | null;
+  firstName: string;
+  lastName: string;
   fullName: string;
   email: string;
   mobile: string;
+  dateOfBirth: string;
   age: string;
+  gender: string;
   enabled: boolean;
 }
 
@@ -27,7 +31,12 @@ export interface PageResponse<T> {
   providedIn: 'root',
 })
 export class ClientService {
+
   constructor(private http: HttpClient) {}
+
+  getClientById(headers: HttpHeaders, clientId: number): Observable<Client> {
+    return this.http.get<Client>(`http://localhost:8088/api/v1/clients/${clientId}`, { headers });
+  }
 
   saveClient(headers: HttpHeaders, clientData: any): Observable<number> {
     return this.http.post<number>(
@@ -47,4 +56,31 @@ export class ClientService {
       { headers, params: { page: page.toString(), size: size.toString() } }
     );
   }
+
+  getAllDisabledClients(
+    headers: HttpHeaders,
+    page: number = 0,
+    size: number = 50
+  ): Observable<PageResponse<Client>> {
+    return this.http.get<PageResponse<Client>>(
+      'http://localhost:8088/api/v1/clients/all-disabled',
+      { headers, params: { page: page.toString(), size: size.toString() } }
+    );
+  }
+
+  editData(headers: HttpHeaders, clientId: number, firstName: string, lastName: string, email: string,
+    dateOfBirth: string, mobile: string, gender: string){
+    const body = {
+      personalData:{
+      firstName,
+      lastName,
+      email,
+      dateOfBirth,
+      mobile,
+      gender
+      }
+    };
+    return this.http.patch<any>(`http://localhost:8088/api/v1/clients/update/${clientId}`, body, { headers });
+  }
+
 }

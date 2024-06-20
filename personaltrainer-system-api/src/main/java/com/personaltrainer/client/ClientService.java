@@ -54,6 +54,18 @@ public class ClientService {
                 clients.getTotalElements(), clients.getTotalPages(), clients.isFirst(), clients.isLast());
     }
 
+    public PageResponse<ClientReponse> findAllDisabledClients(int page, int size, Authentication connectedUser) {
+        User user = (User) connectedUser.getPrincipal();
+        Pageable pageable = PageRequest.of(page, size, Sort.by("personalData.firstName").ascending());
+        Page<Client> clients = clientRepository.findAllByEnabledIsFalseAndPersonalTrainerId(pageable, user.getId());
+        List<ClientReponse> clientReponse = clients.stream()
+                .map(clientMapper::toClientResponse)
+                .toList();
+
+        return new PageResponse<>(clientReponse, clients.getNumber(), clients.getSize(),
+                clients.getTotalElements(), clients.getTotalPages(), clients.isFirst(), clients.isLast());
+    }
+
     public Integer updateStatus(Integer clientId, Authentication authentication) {
         Client client = clientRepository.findById(clientId).orElseThrow(()-> new EntityNotFoundException("Entity not found"));
         permition.checkPermition(client, authentication);

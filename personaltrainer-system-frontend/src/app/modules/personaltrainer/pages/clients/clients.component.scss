@@ -3,27 +3,33 @@ body {
   font-family: 'Arial', sans-serif;
 }
 
-.btn-blue {
+.btn-primary {
   background-color: #3498db;
   border-color: #3498db;
 }
 
-.btn-ligth-green{
-  background-color: #9bffb9;
-  border-color: #d8ffe4;
-  color: black;
+.btn-primary:hover {
+  background-color: #2980b9;
 }
 
-
+.btn-blue {
+  background-color: #3498db;
+  border-color: #3498db;
+}
 
 .btn-green {
   background-color: #5aa266;
   border-color: #5aa266;
 }
 
-.clients-container {
-  margin-top: 20px; /* Espaçamento superior */
-  margin-bottom: 20px; /* Espaçamento inferior */
+.btn-green:hover{
+  background-color: #41884d;
+  border-color: #41884d;
+}
+
+.container-fluid {
+  padding-left: 100px;
+  padding-right: 100px;
 }
 
 .card {
@@ -32,19 +38,22 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   border: 1.5px solid #bdc3c7; /* Borda mais grossa */
-  max-height: 800px; /* Define a altura máxima do card */
-  overflow-y: auto; /* Adiciona barra de rolagem vertical */
 }
 
-.card h4 {
+.clients {
+  margin-top: 20px;
+}
+
+.clients h4 {
   color: #2c3e50;
-  font-size: 1rem; /* Tamanho de fonte reduzido */
+  font-size: 1.0rem;
+  margin-bottom: 15px;
   font-weight: bold;
+  padding-left: 450px;
 }
 
-.session-list {
-  max-height: 800px; /* Define a altura máxima da lista de clientes */
-  overflow-y: auto; /* Adiciona barra de rolagem vertical */
+.clients h6 {
+  font-size: 1.0rem;
 }
 
 .client-photo img {
@@ -52,27 +61,51 @@ body {
   border-radius: 30%; /* Faz a imagem ficar circular */
 }
 
-.client-details {
-  flex-grow: 1; /* Permite que a seção de detalhes ocupe o espaço restante */
-  margin-left: 20px; /* Espaçamento adicional entre a foto e os detalhes */
-}
-
-.client-actions {
-  margin-left: 20px; /* Espaçamento adicional entre os dados e os botões */
-}
-
-.vertical-line {
-  border-left: 1px solid #bdc3c7;
-  height: 100%;
-  margin-right: 20px; /* Espaçamento à direita da linha divisória */
+.client-actions-1 {
+  display: flex;
+  flex-direction: column;
+  padding-right: 20px;
 }
 
 .enabled-true {
-  color: #5aa266; /* Verde para habilitado */
+  color: #5aa266 !important; /* Verde para habilitado */
   font-weight: bold;
 }
 
 .enabled-false {
-  color: #e74c3c; /* Vermelho para desabilitado */
+  color: #e74c3c !important; /* Vermelho para desabilitado */
   font-weight: bold;
+}
+
+.list-group-item {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.list-group-item h6 {
+  color: #34495e;
+  margin-bottom: 5px;
+}
+
+.list-group-item p {
+  color: #7f8c8d;
+  margin-bottom: 5px;
+}
+
+.session-list {
+  max-height: 1200px; /* Define a altura máxima desejada */
+  overflow-y: auto; /* Adiciona uma barra de rolagem vertical quando necessário */
+}
+
+.client-photo img {
+  max-width: 100px; /* Define a largura máxima da imagem */
+  border-radius: 20%; /* Faz a imagem ficar circular */
+}
+
+.client-details {
+  flex-grow: 1; /* Permite que a seção de detalhes ocupe o espaço restante */
+  margin-left: 20px; /* Espaçamento adicional entre a foto e os detalhes */
 }

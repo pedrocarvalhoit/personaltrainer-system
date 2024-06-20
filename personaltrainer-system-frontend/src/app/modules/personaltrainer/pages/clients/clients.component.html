@@ -1,98 +1,41 @@
 <app-menu></app-menu>
 
-<div class="container-fluid clients-container mt-4 mb-4">
-  <div class="row">
-    <div class="col-12">
-      <div class="card shadow-sm p-3 h-100">
-        <div class="upcoming-sessions">
-          <h4 class="text-center mb-3">Personal Trainer Clients</h4>
-          <ul class="list-group session-list">
-            <li class="list-group-item" *ngFor="let client of clients">
-              <div class="d-flex align-items-start justify-content-between">
-                <div class="d-flex align-items-start">
-                  <div class="client-photo">
-                    <img
-                      [src]="
-                        client.photo ? client.photo : 'assets/images/logo2.png'
-                      "
-                      alt="clientPhoto"
-                    />
-                  </div>
-                  <div class="client-details ms-4">
-                    <!-- Aumentei a margem esquerda para afastar os dados da foto -->
-                    <h6>
-                      <strong>{{ client.fullName }}</strong> / Id:<strong>
-                        {{ client.id }}</strong
-                      >
-                    </h6>
-                    <p>
-                      Email: <strong>{{ client.email }}</strong>
-                    </p>
-                    <p>
-                      Mobile: <strong>{{ client.mobile }}</strong>
-                    </p>
-                    <p>
-                      Age: <strong>{{ client.age }}</strong>
-                    </p>
-                    <p
-                      [ngClass]="{
-                        'enabled-true': client.enabled,
-                        'enabled-false': !client.enabled
-                      }"
-                    >
-                      <strong>{{
-                        client.enabled ? "Enabled" : "Disabled"
-                      }}</strong>
-                    </p>
-                  </div>
-                  <div class="vertical-line mx-4"></div>
-                  <!-- Linha divisória vertical -->
-                </div>
-
-                <div class="client-actions ms-4">
-                  <div class="d-flex flex-column ms-4">
-                    <button class="btn btn-primary btn-blue btn-sm mb-2">
-                      <i class="fas fa-user-edit"></i> Edit
-                    </button>
-                    <button class="btn btn-primary btn-blue btn-sm mb-2">
-                      <i class="fas fa-user-edit"></i> Change Status
-                    </button>
-                    <button class="btn btn-success btn-sm btn-green mb-2">
-                      <i class="fas fa-dumbbell"></i> Add Session
-                    </button>
-                    <button class="btn btn-success btn-sm btn-green mb-2">
-                      <i class="fas fa-tablet-screen-button"></i> Add Program
-                    </button>
-                  </div>
-                </div>
-
-                <div class="vertical-line mx-4"></div>
-                <!-- Linha divisória vertical -->
-
-                <div class="client-details ms-4">
-                  <!-- Aumentei a margem esquerda para afastar os dados da foto -->
-                  <p>Status Unresolveds: <strong>xxx</strong></p>
-                  <p>Status Resolveds: <strong>xxx</strong></p>
-                </div>
-
-                <div class="client-actions ms-4">
-                  <div class="d-flex flex-column ms-4">
-                    <button class="btn btn-success btn-sm btn-ligth-green mb-2">
-                      View Scenarios
-                    </button>
-                    <button class="btn btn-success btn-sm btn-ligth-green mb-2 ">
-                      Create Physical Test
-                    </button>
-                    <button class="btn btn-success btn-sm btn-ligth-green mb-2">
-                      Create Body Evaluation
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
+<div class="container-fluid mt-4 mb-4">
+  <div class="card shadow-sm p-3 h-100">
+    <div class="clients">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-0">{{ showDisabledClients ? 'Deactivated Clients' : 'Active Clients' }}</h4>
+        <button class="btn btn-primary btn-sm" (click)="toggleClientList()">
+          {{ showDisabledClients ? 'Show Active Clients' : 'Show Deactivated Clients' }}
+        </button>
       </div>
+      <ul class="list-group session-list">
+        <li class="list-group-item" *ngFor="let client of clients">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-start">
+              <div class="client-photo">
+                <img [src]="client.photo ? client.photo : 'assets/images/logo2.png'" alt="clientPhoto">
+              </div>
+              <div class="client-details ms-4">
+                <h6>Name: <strong>{{client.fullName}}</strong> / Id: {{client.id}}</h6>
+                <p>Mobile: {{client.mobile}}</p>
+                <p [class.enabled-true]="client.enabled" [class.enabled-false]="!client.enabled">
+                  {{ client.enabled ? "Enabled" : "Disabled" }}
+                </p>
+              </div>
+            </div>
+
+            <div class="client-actions-1">
+              <button class="btn btn-primary btn-blue btn-sm mb-2" (click)="editClient(client.id)">
+                <i class="fas fa-user-edit"></i> Edit
+              </button>
+              <button class="btn btn-success btn-sm btn-green mb-2">
+                <i class="fas fa-dumbbell"></i> Add Session
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

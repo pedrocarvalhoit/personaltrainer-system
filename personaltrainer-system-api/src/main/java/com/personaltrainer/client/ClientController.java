@@ -31,7 +31,7 @@ public class ClientController {
     }
 
     //update PersonalData (Email and Mobile)
-    @PatchMapping("/update-personal-data/{clientId}")
+    @PatchMapping("/update/{clientId}")
     public ResponseEntity<Integer> updatePersonalData(@PathVariable Integer clientId,
                                                       Authentication authentication,
                                                       @Valid @RequestBody ClientUpdateRequest request){
@@ -45,13 +45,22 @@ public class ClientController {
         return ResponseEntity.ok(clientService.findById(clientId));
     }
 
-    //findAll
+    //findAllEnabled
     @GetMapping("/all-enabled")
     public ResponseEntity<PageResponse<ClientReponse>> findAllClients(
             @RequestParam(name = "page", defaultValue = "0", required = false)int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size, Authentication connectedUser){
 
         return ResponseEntity.ok(clientService.findAllEnabledClients(page, size, connectedUser));
+    }
+
+    //findAllDisabled
+    @GetMapping("/all-disabled")
+    public ResponseEntity<PageResponse<ClientReponse>> findAllDisabledClients(
+            @RequestParam(name = "page", defaultValue = "0", required = false)int page,
+            @RequestParam(name = "size", defaultValue = "10", required = false) int size, Authentication connectedUser){
+
+        return ResponseEntity.ok(clientService.findAllDisabledClients(page, size, connectedUser));
     }
 
     //updateStatus
