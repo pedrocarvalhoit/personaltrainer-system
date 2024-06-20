@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PtDashboardComponent } from './pages/pt-dashboard/pt-dashboard.component';
-import { EditComponent } from './pages/edit-data/edit.component';
+import { PtDashboardComponent } from './pages/ptdashboard/pt-dashboard.component';
+import { EditComponent } from './pages/editdata/edit.component';
 import { AuthGuard } from '../../services/auth/auth.guard';
-import { CreateClientComponent } from './pages/create-client/create-client.component';
+import { CreateClientComponent } from './pages/createclient/create-client.component';
 import { ClientsComponent } from './pages/clients/clients.component';
-import { EditClientComponent } from './pages/edit-client/edit-client.component';
+import { EditClientComponent } from './pages/editclient/edit-client.component';
+import { WorkoutSessionComponent } from './pages/workoutsession/workout-session.component';
 
 const routes: Routes = [
   { path: '', component: PtDashboardComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'create-client', component: CreateClientComponent, canActivate: [AuthGuard] },
   { path: 'clients', component: ClientsComponent, canActivate: [AuthGuard] },
   { path: 'edit-client/:id', component: EditClientComponent, canActivate: [AuthGuard] },
+  { path: 'workout-sessions', component: WorkoutSessionComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

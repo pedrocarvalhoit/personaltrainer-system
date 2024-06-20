@@ -4,6 +4,17 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { ErrorHandlerService } from '../errohandler/error-handler.service';
 import { Observable } from 'rxjs';
 
+export interface WorkoutSessionResponse {
+  id: number;
+  clientName: string;
+  sessionDate: string;
+  sessionTime: string;
+  clientSubjectEffort: number;
+  ptqualityEffortIndicative: number;
+  executed: boolean;
+}
+
+
 export interface WorkoutSessionResponseForCalendar {
   clientName: string;
   sessionDate: string;
@@ -23,7 +34,6 @@ interface WorkoutSessionTotalSummaryResponse {
 })
 export class WorkoutsessionService {
 
-
   errorMessage: string = '';
 
   constructor(private http: HttpClient, public jwtHelper: JwtHelperService, private errorHandlerService: ErrorHandlerService) { }
@@ -35,4 +45,13 @@ export class WorkoutsessionService {
   getTotalMonthlyWorkoutSessions(headers: HttpHeaders): Observable<WorkoutSessionTotalSummaryResponse> {
     return this.http.get<WorkoutSessionTotalSummaryResponse>('http://localhost:8088/api/v1/workout-sessions/get-workout-summary', { headers });
   }
+
+  getSessions(headers: HttpHeaders): Observable<WorkoutSessionResponse[]> {
+    return this.http.get<WorkoutSessionResponse[]>('http://localhost:8088/api/v1/workout-sessions/get-workout-calendar', { headers });
+  }
+
+  executeSession(sessionId: number, headers: HttpHeaders) {
+    return this.http.patch<any>(`http://localhost:8088/api/v1/workout-sessions/execute/${sessionId}`,{}, { headers });
+  }
+
 }

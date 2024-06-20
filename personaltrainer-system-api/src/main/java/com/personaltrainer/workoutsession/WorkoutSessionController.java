@@ -54,6 +54,12 @@ public class WorkoutSessionController {
         return ResponseEntity.ok(service.getSessionsForNextWeek(authentication));
     }
 
+    //get all sessions for calendar
+    @GetMapping("get-workout-calendar")
+    public ResponseEntity<List<WorkoutSessionResponseForCalendar>> getSessionsForCalendar(Authentication authentication){
+        return ResponseEntity.ok(service.getAllSessionsForCalendar(authentication));
+    }
+
     //delete Workout Session
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Integer> deleteSession(@PathVariable Integer id){

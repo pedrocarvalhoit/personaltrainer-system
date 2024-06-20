@@ -1,5 +1,6 @@
+import { CalendarModule } from 'primeng/calendar';
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,10 +18,7 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { RouterLink } from '@angular/router';
-import { CreateClientComponent } from './modules/personaltrainer/pages/create-client/create-client.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
 
 registerLocaleData(en);
 
@@ -41,8 +39,6 @@ registerLocaleData(en);
     HttpClientModule,
     RouterLink,
     BrowserAnimationsModule,
-    MatDialogModule,
-    MatButtonModule,
     JwtModule.forRoot({ // Config JwtModule
       config: {
         tokenGetter: () => localStorage.getItem('jwt_token'),

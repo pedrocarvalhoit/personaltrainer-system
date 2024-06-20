@@ -1,0 +1,124 @@
+/* Estilo para o formulário de criação de cliente */
+
+body {
+  background-color: #ffffff;
+  /* Background branco */
+  font-family: 'Arial', sans-serif;
+}
+
+.dashboard-container {
+  margin-top: 20px;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border: 1.5px solid #bdc3c7;
+  /* Borda mais grossa */
+}
+
+.card h4 {
+  color: #2c3e50;
+  font-size: 1rem;
+  /* Tamanho de fonte reduzido */
+  font-weight: bold;
+}
+
+.card h6 {
+  font-size: 1.0rem;
+}
+
+.card p {
+  color: #34495e;
+  font-size: 0.9rem;
+  /* Tamanho de fonte reduzido */
+}
+
+.session-actions {
+  display: flex;
+  flex-direction: column;
+  padding-right: 20px;
+}
+
+.session-actions button {
+  font-size: 14px;
+  padding: 5px 10px;
+  margin: 5px;
+  min-width: 50px;
+}
+
+.upcoming-sessions h5 {
+  color: #2c3e50;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+.list-group-item {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.list-group-item h6 {
+  color: #34495e;
+  margin-bottom: 5px;
+}
+
+.list-group-item p {
+  color: #7f8c8d;
+  margin-bottom: 5px;
+}
+
+.list-group-item .btn {
+  background-color: #3498db;
+  border-color: #3498db;
+}
+
+.list-group-item .btn:hover {
+  background-color: #2980b9;
+}
+
+.btn {
+  font-size: 1rem;
+  /* Tamanho de fonte reduzido */
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin: 0 10px;
+}
+
+.btn-primary {
+  background-color: #3498db;
+  border-color: #3498db;
+}
+
+.btn-primary:hover {
+  background-color: #2980b9;
+}
+
+.row.mb-5 {
+  margin-bottom: 5rem;
+  /* Espaçamento adicional para o footer */
+}
+
+.session-list {
+  max-height: 500px;
+  /* Defina a altura máxima desejada */
+  overflow-y: auto;
+  /* Adiciona uma barra de rolagem vertical quando necessário */
+}
+
+.activated-true {
+  color: #5aa266 !important;
+  /* Verde para habilitado */
+  font-weight: bold;
+}
+
+.activated-false {
+  color: #e74c3c !important;
+  /* Vermelho para desabilitado */
+  font-weight: bold;
+}

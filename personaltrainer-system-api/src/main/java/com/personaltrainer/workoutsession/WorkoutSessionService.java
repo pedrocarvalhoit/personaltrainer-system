@@ -109,4 +109,14 @@ public class WorkoutSessionService {
                 .map(mapper :: toWorkoutSessionCalendarResponse)
                 .toList();
     }
+
+    public List<WorkoutSessionResponseForCalendar> getAllSessionsForCalendar(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+
+        List<WorkoutSession> workoutSessions = workoutSessionRepository.findSessionsByDate(user.getId());
+
+        return workoutSessions.stream()
+                .map(mapper :: toWorkoutSessionCalendarResponse)
+                .toList();
+    }
 }

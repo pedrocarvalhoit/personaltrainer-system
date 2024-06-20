@@ -12,8 +12,12 @@ import java.time.LocalTime;
 @Builder
 public class WorkoutSessionResponseForCalendar {
 
+    private Integer id;
+    private String clientName;
     private LocalDate sessionDate;
     private LocalTime sessionTime;
-    private String clientName;
+    private Integer clientSubjectEffort;
+    private Integer pTQualityEffortIndicative;
+    private boolean executed;
 
 }

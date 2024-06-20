@@ -30,8 +30,12 @@ public class WorkoutSessionMapper {
     public WorkoutSessionResponseForCalendar toWorkoutSessionCalendarResponse(WorkoutSession workoutSession) {
         return WorkoutSessionResponseForCalendar.builder()
                 .clientName(workoutSession.getClient().getPersonalData().getFullName())
+                .id(workoutSession.getId())
                 .sessionDate(workoutSession.getSessionDate())
                 .sessionTime(workoutSession.getSessionTime())
+                .clientSubjectEffort(workoutSession.getClientSubjectEffort())
+                .pTQualityEffortIndicative(workoutSession.getPTQualityEffortIndicative())
+                .executed(workoutSession.isExecuted())
                 .build();
     }
 }

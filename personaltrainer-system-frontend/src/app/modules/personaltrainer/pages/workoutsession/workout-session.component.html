@@ -1,0 +1,46 @@
+<app-menu></app-menu>
+<div class="container-fluid dashboard-container">
+  <div class="row mt-4">
+    <!-- First Card -->
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm p-3 h-100">
+        <h4 class="text-center mb-3">Select Date</h4>
+        <div class="form-group">
+          <label for="sessionDate">Session Date:</label>
+          <input type="date" id="sessionDate" class="form-control" [(ngModel)]="selectedDate">
+        </div>
+        <button class="btn btn-primary mt-3" (click)="filterSessions()">Search</button>
+      </div>
+    </div>
+
+    <!-- Second Card -->
+    <div class="col-md-8 mb-4">
+      <div class="card shadow-sm p-3 h-100">
+        <h4 class="text-center mb-3">Workout Sessions</h4>
+        <ul class="list-group session-list">
+          <li class="list-group-item" *ngIf="filteredSessions.length === 0">
+            Nenhuma sessão encontrada para a data selecionada.
+          </li>
+          <li class="list-group-item" *ngFor="let session of filteredSessions">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h6>Date: {{ session.sessionDate }} / Time: {{ session.sessionTime }}</h6>
+                <p>Client: {{ session.clientName }}</p>
+                <p>Client Subjective Effort: {{ session.clientSubjectEffort }}</p>
+                <p>PT Session Quality: {{ session.ptqualityEffortIndicative }}</p>
+              </div>
+              <p [class.activated-true]="session.executed" [class.activated-false]="!session.executed">
+                {{ session.executed ? "Executed" : "Not executed" }}
+              </p>
+              <div class="session-actions">
+                <button class="btn btn-primary btn-sm">Details</button>
+                <button class="btn btn-primary btn-sm" (click)="executeSession(session.id)">Execute Session</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
