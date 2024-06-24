@@ -20,6 +20,9 @@ public record WorkoutSessionCreateRequest(
         Integer clientSubjectEffort,
 
         @Valid
-        Integer pTQualityEffortIndicative
+        Integer pTQualityEffortIndicative,
+
+        @Valid
+        boolean executed
 ) {
 }

@@ -1,0 +1,101 @@
+<app-menu></app-menu>
+
+  <div class="container-fluid card login-container">
+    <h3 class="text-center">Create a Workout Session</h3>
+    <hr />
+    <form (ngSubmit)="onSubmit()">
+
+      <div class="mb-3">
+        <label for="client" class="form-label">Select Client:</label>
+        <select [(ngModel)]="selectedClient" name="client" id="client" class="form-control">
+          <option *ngFor="let client of clients" [ngValue]="client">{{ client.fullName }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="workoutProgramName" class="form-label">Workout ProgramName Name:</label>
+        <input
+          [(ngModel)]="workoutProgramName"
+          type="text"
+          class="form-control"
+          name="workoutProgramName"
+          id="workoutProgramName"
+          placeholder="Ex: Corrida "
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="sessionDate" class="form-label">Date:</label>
+        <input
+          [(ngModel)]="sessionDate"
+          type="date"
+          class="form-control"
+          name="sessionDate"
+          id="sessionDate"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="sessionTime" class="form-label">Time:</label>
+        <input
+          [(ngModel)]="sessionTime"
+          type="text"
+          class="form-control"
+          name="sessionTime"
+          id="sessionTime"
+          placeholder="15:00"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="clientSubjectEffort" class="form-label">Client Subject Effort:</label>
+        <input
+          [(ngModel)]="clientSubjectEffort"
+          type="number"
+          class="form-control"
+          id="clientSubjectEffort"
+          name="clientSubjectEffort"
+          placeholder="scale 0 to 10"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="pTQualityEffortIndicative" class="form-label">PT Quality Effort Indicative:</label>
+        <input
+          [(ngModel)]="pTQualityEffortIndicative"
+          type="number"
+          class="form-control"
+          id="pTQualityEffortIndicative"
+          name="pTQualityEffortIndicative"
+          placeholder="scale 0 to 10"
+        />
+      </div>
+
+      <div class="mb-3 form-check">
+        <input
+          [(ngModel)]="executed"
+          type="checkbox"
+          class="form-check-input"
+          name="executed"
+          id="executed"
+        />
+        <label for="executed" class="form-check-label">Executed:</label>
+      </div>
+
+      <div class="d-flex justify-content-between mb-3">
+        <button type="submit" class="btn btn-primary">
+          <em class="fa-solid">&nbsp;Create</em>
+        </button>
+        <div>
+          <button (click)="cancel()" type="button" class="btn btn-link">
+            <em class="fas">&nbsp;Cancel</em>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+<app-footer></app-footer>

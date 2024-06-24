@@ -7,6 +7,7 @@ import { CreateClientComponent } from './pages/createclient/create-client.compon
 import { ClientsComponent } from './pages/clients/clients.component';
 import { EditClientComponent } from './pages/editclient/edit-client.component';
 import { WorkoutSessionComponent } from './pages/workoutsession/workout-session.component';
+import { CreateWorkoutsessionComponent } from './pages/createworkoutsession/create-workoutsession.component';
 
 const routes: Routes = [
   { path: '', component: PtDashboardComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'clients', component: ClientsComponent, canActivate: [AuthGuard] },
   { path: 'edit-client/:id', component: EditClientComponent, canActivate: [AuthGuard] },
   { path: 'workout-sessions', component: WorkoutSessionComponent, canActivate: [AuthGuard] },
+  { path: 'workout-sessions/create', component: CreateWorkoutsessionComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

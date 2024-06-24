@@ -12,6 +12,7 @@ public class WorkoutSessionMapper {
                 .sessionTime(request.sessionTime())
                 .clientSubjectEffort(request.clientSubjectEffort())
                 .pTQualityEffortIndicative(request.pTQualityEffortIndicative())
+                .executed(request.executed())
                 .build();
     }
 

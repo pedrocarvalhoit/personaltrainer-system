@@ -11,6 +11,12 @@ import { CreateClientComponent } from './pages/createclient/create-client.compon
 import { ClientsComponent } from './pages/clients/clients.component';
 import { EditClientComponent } from './pages/editclient/edit-client.component';
 import { WorkoutSessionComponent } from './pages/workoutsession/workout-session.component';
+import { CreateWorkoutsessionComponent } from './pages/createworkoutsession/create-workoutsession.component';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -21,13 +27,19 @@ import { WorkoutSessionComponent } from './pages/workoutsession/workout-session.
     CreateClientComponent,
     ClientsComponent,
     EditClientComponent,
-    WorkoutSessionComponent
+    WorkoutSessionComponent,
+    CreateWorkoutsessionComponent
   ],
   imports: [
     CommonModule,
     PersonaltrainerRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ButtonModule,
+    DialogModule,
+    InputTextModule,
+    DropdownModule,
+    CalendarModule
   ]
 })
 export class PersonaltrainerModule { }

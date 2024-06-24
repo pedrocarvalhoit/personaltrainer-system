@@ -54,4 +54,18 @@ export class WorkoutsessionService {
     return this.http.patch<any>(`http://localhost:8088/api/v1/workout-sessions/execute/${sessionId}`,{}, { headers });
   }
 
+  save(headers: HttpHeaders, selectedClientid: number, workoutProgramName: string, sessionDate: string, sessionTime: string,
+    clientSubjectEffort: number, pTQualityEffortIndicative: number, executed: boolean) {
+      const body = {
+        selectedClientid,
+        workoutProgramName,
+        sessionDate,
+        sessionTime,
+        clientSubjectEffort,
+        pTQualityEffortIndicative,
+        executed
+      };
+    return this.http.post<any>(`http://localhost:8088/api/v1/workout-sessions/create/${selectedClientid}`, body , { headers });
+  }
+
 }

@@ -11,6 +11,7 @@ import { HttpHeaders } from '@angular/common/http';
   styleUrl: './create-client.component.scss'
 })
 export class CreateClientComponent {
+
   clientForm!: FormGroup;
 
   constructor(private router: Router, private fb: FormBuilder, private clientService: ClientService, private authService: AuthService) {}
@@ -35,7 +36,6 @@ export class CreateClientComponent {
       });
       const clientData = {
         personalData: this.clientForm.value
-        // Adicione aqui outros campos conforme necessário, por exemplo, personalTrainerId, etc.
       };
 
       this.clientService.saveClient(headers, clientData).subscribe(
@@ -43,7 +43,7 @@ export class CreateClientComponent {
           console.log('Cliente cadastrado com sucesso, ID:', response);
           this.showSuccessMessage();
           setTimeout(() => {
-            this.router.navigate(['personaltrainer/dashboard']);//TODO: Redirecionar para a página do cliente
+            this.router.navigate(['personaltrainer/clients']);
           }, 2000); // Redireciona após 2 segundos
         },
         error => {

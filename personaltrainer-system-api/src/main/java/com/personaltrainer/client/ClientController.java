@@ -49,7 +49,7 @@ public class ClientController {
     @GetMapping("/all-enabled")
     public ResponseEntity<PageResponse<ClientReponse>> findAllClients(
             @RequestParam(name = "page", defaultValue = "0", required = false)int page,
-            @RequestParam(name = "size", defaultValue = "10", required = false) int size, Authentication connectedUser){
+            @RequestParam(name = "size", defaultValue = "50", required = false) int size, Authentication connectedUser){
 
         return ResponseEntity.ok(clientService.findAllEnabledClients(page, size, connectedUser));
     }
@@ -58,7 +58,7 @@ public class ClientController {
     @GetMapping("/all-disabled")
     public ResponseEntity<PageResponse<ClientReponse>> findAllDisabledClients(
             @RequestParam(name = "page", defaultValue = "0", required = false)int page,
-            @RequestParam(name = "size", defaultValue = "10", required = false) int size, Authentication connectedUser){
+            @RequestParam(name = "size", defaultValue = "50", required = false) int size, Authentication connectedUser){
 
         return ResponseEntity.ok(clientService.findAllDisabledClients(page, size, connectedUser));
     }
