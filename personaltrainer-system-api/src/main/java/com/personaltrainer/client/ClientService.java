@@ -6,6 +6,9 @@ import com.personaltrainer.file.FileStorageService;
 import com.personaltrainer.user.User;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +23,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class ClientService {
 
     private final ClientRepository clientRepository;
@@ -32,9 +36,21 @@ public class ClientService {
         User user = ((User) connectedUser.getPrincipal());
         Client client = clientMapper.toClient(request);
         client.setPersonalTrainer(user);
-        uploadProfilePicture(file, connectedUser, client.getId());
 
-        return clientRepository.save(client).getId();
+        Client savedClient = clientRepository.save(client);
+
+        if (file != null && !file.isEmpty()) {
+            String clientPhoto = fileStorageService.saveFile(file, user.getId());
+            if (clientPhoto != null) {
+                client.getPersonalData().setPhoto(clientPhoto);
+                clientRepository.save(client);
+            } else {
+                log.error("Failed to save client photo");
+                // Pode lançar uma exceção ou lidar com o erro de outra forma
+            }
+        }
+
+        return savedClient.getId();
     }
 
     public ClientReponse findById(Integer clientId) {

@@ -45,10 +45,9 @@ public class ClientController {
 
     //saveClient
     @PostMapping(value = "/save", consumes = "multipart/form-data")
-    public ResponseEntity<Integer> saveClient(@Valid @RequestBody ClientSaveRequest request,
+    public ResponseEntity<Integer> saveClient(@RequestPart("client") ClientSaveRequest request,
                                               Authentication connectedUser,
-                                              @Parameter()
-                                              @RequestPart("file")MultipartFile file){
+                                              @RequestPart("file") MultipartFile file){
         return ResponseEntity.ok(clientService.save(request, connectedUser, file));
     }
 

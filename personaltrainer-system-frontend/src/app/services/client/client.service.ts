@@ -38,10 +38,10 @@ export class ClientService {
     return this.http.get<Client>(`http://localhost:8088/api/v1/clients/${clientId}`, { headers });
   }
 
-  saveClient(headers: HttpHeaders, clientData: any): Observable<number> {
+  saveClient(headers: HttpHeaders, formData: FormData): Observable<number> {
     return this.http.post<number>(
       'http://localhost:8088/api/v1/clients/save',
-      clientData,
+      formData,
       { headers }
     );
   }

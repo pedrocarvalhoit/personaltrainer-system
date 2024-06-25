@@ -13,7 +13,7 @@ import { HttpHeaders } from '@angular/common/http';
 export class CreateClientComponent {
 
   clientForm!: FormGroup;
-
+  selectedFile: File | null = null;
 
   constructor(private router: Router, private fb: FormBuilder, private clientService: ClientService, private authService: AuthService) {}
 
@@ -28,18 +28,37 @@ export class CreateClientComponent {
     });
   }
 
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
+
   onSubmit(): void {
     const token = this.authService.getToken();
 
     if (this.clientForm.valid && token) {
+      const formData = new FormData();
+      formData.append('file', this.selectedFile as File);
+
+      const clientData = {
+        personalData: {
+          firstName: this.clientForm.get('firstName')?.value,
+          lastName: this.clientForm.get('lastName')?.value,
+          email: this.clientForm.get('email')?.value,
+          mobile: this.clientForm.get('mobile')?.value,
+          gender: this.clientForm.get('gender')?.value,
+          dateOfBirth: this.clientForm.get('dateOfBirth')?.value,
+        }
+      };
+
+      formData.append('client', new Blob([JSON.stringify(clientData)], {
+        type: 'application/json'
+      }));
+
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`
       });
-      const clientData = {
-        personalData: this.clientForm.value
-      };
 
-      this.clientService.saveClient(headers, clientData).subscribe(
+      this.clientService.saveClient(headers, formData).subscribe(
         response => {
           console.log('Cliente cadastrado com sucesso, ID:', response);
           this.showSuccessMessage();
@@ -55,6 +74,7 @@ export class CreateClientComponent {
       console.log('Formulário inválido');
     }
   }
+
 
   showSuccessMessage(): void {
     // Exibe a mensagem de sucesso
