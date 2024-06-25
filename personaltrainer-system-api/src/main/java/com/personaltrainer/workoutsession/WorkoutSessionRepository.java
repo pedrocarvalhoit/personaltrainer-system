@@ -42,6 +42,7 @@ public interface WorkoutSessionRepository extends JpaRepository<WorkoutSession, 
 
     @Query("SELECT ws FROM WorkoutSession ws JOIN ws.client c " +
             "WHERE c.personalTrainer.id = :userId " +
+            "AND MONTH(ws.sessionDate) = MONTH(CURRENT_DATE()) " +
             "ORDER BY ws.sessionDate ASC, ws.sessionTime ASC") // Ascending sessionDate
     List<WorkoutSession> findSessionsByDate(@Param("userId") Integer userId);
 }

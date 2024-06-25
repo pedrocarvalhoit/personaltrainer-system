@@ -8,7 +8,7 @@ import { FooterComponent } from './component/footer/footer.component';
 import { EditComponent } from './pages/editdata/edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateClientComponent } from './pages/createclient/create-client.component';
-import { ClientsComponent } from './pages/clients/clients.component';
+import { ClientsComponent } from './pages/clientslist/clients.component';
 import { EditClientComponent } from './pages/editclient/edit-client.component';
 import { WorkoutSessionComponent } from './pages/workoutsession/workout-session.component';
 import { CreateWorkoutsessionComponent } from './pages/createworkoutsession/create-workoutsession.component';
@@ -17,6 +17,9 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ClientComponent } from './pages/client/client.component'; // Necessário para animações do PrimeNG
+
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { CalendarModule } from 'primeng/calendar';
     ClientsComponent,
     EditClientComponent,
     WorkoutSessionComponent,
-    CreateWorkoutsessionComponent
+    CreateWorkoutsessionComponent,
+    ClientComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +43,7 @@ import { CalendarModule } from 'primeng/calendar';
     DialogModule,
     InputTextModule,
     DropdownModule,
-    CalendarModule
+    CalendarModule,
   ]
 })
 export class PersonaltrainerModule { }

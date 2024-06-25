@@ -39,4 +39,9 @@ public class WorkoutSessionMapper {
                 .executed(workoutSession.isExecuted())
                 .build();
     }
+
+    public void toUpdateEffort(WorkoutSession workoutSession, WorkoutSessioUpdateEffortsRequest request) {
+        workoutSession.setClientSubjectEffort(request.clientSubjectEffort());
+        workoutSession.setPTQualityEffortIndicative(request.pTQualityEffortIndicative());
+    }
 }

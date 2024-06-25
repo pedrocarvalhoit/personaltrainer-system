@@ -119,4 +119,18 @@ public class WorkoutSessionService {
                 .map(mapper :: toWorkoutSessionCalendarResponse)
                 .toList();
     }
+
+    public Integer updateEfforts(Authentication authentication, Integer sessionId, WorkoutSessioUpdateEffortsRequest request) {
+        User user = (User) authentication.getPrincipal();
+        WorkoutSession workoutSession = workoutSessionRepository.findById(sessionId)
+                .orElseThrow(() -> new EntityNotFoundException("Session not found"));
+        if (!Objects.equals(workoutSession.getClient().getPersonalTrainer().getId(), user.getId())){
+            throw new OperationNotPermitedException("This session don´t belong to you client");
+        }
+
+        mapper.toUpdateEffort(workoutSession, request);
+        workoutSessionRepository.save(workoutSession);
+
+        return sessionId;
+    }
 }

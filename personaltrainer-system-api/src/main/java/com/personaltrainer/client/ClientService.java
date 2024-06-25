@@ -28,10 +28,11 @@ public class ClientService {
     private final FileStorageService fileStorageService;
 
 
-    public Integer save(ClientSaveRequest request, Authentication connectedUser) {
+    public Integer save(ClientSaveRequest request, Authentication connectedUser, MultipartFile file) {
         User user = ((User) connectedUser.getPrincipal());
         Client client = clientMapper.toClient(request);
         client.setPersonalTrainer(user);
+        uploadProfilePicture(file, connectedUser, client.getId());
 
         return clientRepository.save(client).getId();
     }
@@ -100,6 +101,5 @@ public class ClientService {
 
         var clientPhoto = fileStorageService.saveFile(file, user.getId());
         client.getPersonalData().setPhoto(clientPhoto);
-        clientRepository.save(client);
     }
 }

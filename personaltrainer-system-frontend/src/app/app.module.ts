@@ -38,7 +38,6 @@ registerLocaleData(en);
     CodeInputModule,
     HttpClientModule,
     RouterLink,
-    BrowserAnimationsModule,
     JwtModule.forRoot({ // Config JwtModule
       config: {
         tokenGetter: () => localStorage.getItem('jwt_token'),

@@ -105,3 +105,22 @@ body {
   flex-grow: 1; /* Permite que a seção de detalhes ocupe o espaço restante */
   margin-left: 20px; /* Espaçamento adicional entre a foto e os detalhes */
 }
+
+/*Confirm Dialog */
+.p-confirm-dialog .p-dialog-header {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.p-confirm-dialog .p-dialog-content {
+  font-size: 1rem;
+}
+
+.p-confirm-dialog .p-dialog-footer .p-button {
+  background-color: #3498db;
+  border-color: #3498db;
+}
+
+.p-confirm-dialog .p-dialog-footer .p-button:hover {
+  background-color: #2980b9;
+}

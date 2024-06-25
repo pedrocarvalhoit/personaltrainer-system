@@ -7,16 +7,23 @@
         <h4 class="text-center mb-3">Select Date</h4>
         <div class="form-group">
           <label for="sessionDate">Session Date:</label>
-          <input type="date" id="sessionDate" class="form-control" [(ngModel)]="selectedDate">
+          <input
+            type="date"
+            id="sessionDate"
+            class="form-control"
+            [(ngModel)]="selectedDate"
+          />
         </div>
-        <button class="btn btn-primary mt-3" (click)="filterSessions()">Search</button>
+        <button class="btn btn-primary mt-3" (click)="filterSessions()">
+          Search
+        </button>
       </div>
     </div>
 
     <!-- Second Card -->
     <div class="col-md-8 mb-4">
       <div class="card shadow-sm p-3 h-100">
-        <h4 class="text-center mb-3">Workout Sessions</h4>
+        <h4 class="text-center mb-3">Workout Sessions (Actual Monthly)</h4>
         <ul class="list-group session-list">
           <li class="list-group-item" *ngIf="filteredSessions.length === 0">
             No Wokout Session found in this date.
@@ -24,17 +31,80 @@
           <li class="list-group-item" *ngFor="let session of filteredSessions">
             <div class="d-flex justify-content-between align-items-center">
               <div>
-                <h6>Date: {{ session.sessionDate }} / Time: {{ session.sessionTime }}</h6>
+                <h6>
+                  Date: {{ session.sessionDate }} / Time:
+                  {{ session.sessionTime }}
+                </h6>
                 <p>Client: {{ session.clientName }}</p>
-                <p>Client Subjective Effort: {{ session.clientSubjectEffort }}</p>
-                <p>PT Session Quality: {{ session.ptqualityEffortIndicative }}</p>
+                <p>
+                  Client Subjective Effort: {{ session.clientSubjectEffort }}
+                </p>
+                <p>
+                  PT Session Quality: {{ session.ptqualityEffortIndicative }}
+                </p>
               </div>
-              <p [class.activated-true]="session.executed" [class.activated-false]="!session.executed">
+              <p
+                [class.activated-true]="session.executed"
+                [class.activated-false]="!session.executed"
+              >
                 {{ session.executed ? "Executed" : "Not executed" }}
               </p>
               <div class="session-actions">
-                <button class="btn btn-primary btn-sm">Details</button>
-                <button class="btn btn-primary btn-sm" (click)="executeSession(session.id)">Execute Session</button>
+
+                <button class="btn btn-primary btn-sm" (click)="showDialog(session)" >Update Efforts</button>
+                <p-dialog
+                  header="Update Efforts"
+                  [modal]="true"
+                  [(visible)]="visible"
+                  [style]="{ width: '25rem' }"
+                >
+                  <div class="flex align-items-center gap-3 mb-3">
+                    <label for="clientSubjectEffort" class="font-semibold w-6rem"
+                      >Client Subjective Effort</label
+                    >
+                    <input
+                      [(ngModel)]="clientSubjectEffort"
+                      pInputNumber
+                      id="clientSubjectEffort"
+                      class="flex-auto"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div class="flex align-items-center gap-3 mb-5">
+                    <label for="pTQualityEffortIndicative" class="font-semibold w-6rem"
+                      >PT Quality Effort Indicative</label
+                    >
+                    <input
+                      [(ngModel)]="pTQualityEffortIndicative"
+                      pInputNumber
+                      id="pTQualityEffortIndicative"
+                      class="flex-auto"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div class="flex justify-content-end gap-2">
+                    <p-button
+                      label="Cancel"
+                      severity="secondary"
+                      (click)="visible = false"
+                    />
+                    <p-button label="Save" (click)="updateEfforts(currentSession.id)" />
+                  </div>
+                </p-dialog>
+
+                <button
+                  *ngIf="!session.executed"
+                  class="btn btn-primary btn-sm"
+                  (click)="executeSession(session.id)"
+                >
+                  Execute Session
+                </button>
+                <button
+                  class="btn btn-danger btn-sm"
+                  (click)="deleteSession(session.id)"
+                >
+                  <span class="delete-button-text">Delete Session</span>
+                </button>
               </div>
             </div>
           </li>

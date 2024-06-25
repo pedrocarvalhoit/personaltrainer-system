@@ -32,8 +32,11 @@
         </li>
       </ul>
       <form class="d-flex gap-2 align-items-center ms-auto" role="search">
-        <input class="form-control" type="search" placeholder="Find a client" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
+
+        <input *ngIf="isMyClientsRoute" class="form-control" type="search" placeholder="Find a client"
+        aria-label="Search">
+        <button *ngIf="isMyClientsRoute" class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
+
         <span>Welcome</span>
 
         <div class="name-container" (mouseenter)="showEditOption = true" (mouseleave)="showEditOption = false">

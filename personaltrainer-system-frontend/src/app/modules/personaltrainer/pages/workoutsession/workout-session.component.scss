@@ -36,6 +36,10 @@ body {
   /* Tamanho de fonte reduzido */
 }
 
+.delete-button-text {
+  color: #c00808;
+}
+
 .session-actions {
   display: flex;
   flex-direction: column;
@@ -93,11 +97,12 @@ body {
 .btn-primary {
   background-color: #3498db;
   border-color: #3498db;
+
+  &:hover{
+    background-color: #2980b9;
+  }
 }
 
-.btn-primary:hover {
-  background-color: #2980b9;
-}
 
 .row.mb-5 {
   margin-bottom: 5rem;

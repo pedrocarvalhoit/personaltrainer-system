@@ -83,4 +83,8 @@ export class ClientService {
     return this.http.patch<any>(`http://localhost:8088/api/v1/clients/update/${clientId}`, body, { headers });
   }
 
+  changeStatus(headers: HttpHeaders, clientId: number): Observable<Client> {
+    return this.http.patch<Client>(`http://localhost:8088/api/v1/clients/update-status/${clientId}`,{},{ headers });
+  }
+
 }

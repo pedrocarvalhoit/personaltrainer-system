@@ -18,26 +18,6 @@ public class ClientController {
 
     private final ClientService clientService;
 
-    //saveClient
-    @PostMapping("/save")
-    public ResponseEntity<Integer> saveClient(@Valid @RequestBody ClientSaveRequest request, Authentication connectedUser){
-        return ResponseEntity.ok(clientService.save(request, connectedUser));
-    }
-
-    //deleteClient
-    @DeleteMapping("/delete/{clientId}")
-    public ResponseEntity<Integer> deleteClient(@PathVariable Integer clientId, Authentication connectedUser){
-        return ResponseEntity.ok(clientService.delete(clientId, connectedUser));
-    }
-
-    //update PersonalData (Email and Mobile)
-    @PatchMapping("/update/{clientId}")
-    public ResponseEntity<Integer> updatePersonalData(@PathVariable Integer clientId,
-                                                      Authentication authentication,
-                                                      @Valid @RequestBody ClientUpdateRequest request){
-        return ResponseEntity.ok(clientService.updatePersonalData(clientId, authentication, request));
-    }
-
     //findById
     @GetMapping("{clientId}")
     public ResponseEntity<ClientReponse> findById(@PathVariable Integer clientId){
@@ -61,6 +41,29 @@ public class ClientController {
             @RequestParam(name = "size", defaultValue = "50", required = false) int size, Authentication connectedUser){
 
         return ResponseEntity.ok(clientService.findAllDisabledClients(page, size, connectedUser));
+    }
+
+    //saveClient
+    @PostMapping(value = "/save", consumes = "multipart/form-data")
+    public ResponseEntity<Integer> saveClient(@Valid @RequestBody ClientSaveRequest request,
+                                              Authentication connectedUser,
+                                              @Parameter()
+                                              @RequestPart("file")MultipartFile file){
+        return ResponseEntity.ok(clientService.save(request, connectedUser, file));
+    }
+
+    //deleteClient
+    @DeleteMapping("/delete/{clientId}")
+    public ResponseEntity<Integer> deleteClient(@PathVariable Integer clientId, Authentication connectedUser){
+        return ResponseEntity.ok(clientService.delete(clientId, connectedUser));
+    }
+
+    //update PersonalData (Email and Mobile)
+    @PatchMapping("/update/{clientId}")
+    public ResponseEntity<Integer> updatePersonalData(@PathVariable Integer clientId,
+                                                      Authentication authentication,
+                                                      @Valid @RequestBody ClientUpdateRequest request){
+        return ResponseEntity.ok(clientService.updatePersonalData(clientId, authentication, request));
     }
 
     //updateStatus

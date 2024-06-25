@@ -15,9 +15,14 @@ export class MenuComponent implements OnInit {
 
   showEditOption: boolean = false;
 
+  isMyClientsRoute: boolean = false;
+
   constructor(private authService: AuthService, private userService: UserService, private router: Router){}
 
   ngOnInit(): void {
+    this.router.events.subscribe(() => {
+      this.isMyClientsRoute = this.router.url === '/personaltrainer/clients';
+    });
     const token = this.authService.getToken(); // Obtém o token JWT do serviço AuthService
     // Verifica se o token está presente
     if (token) {

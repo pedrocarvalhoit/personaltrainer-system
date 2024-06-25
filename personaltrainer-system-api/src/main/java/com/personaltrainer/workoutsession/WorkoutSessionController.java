@@ -36,12 +36,6 @@ public class WorkoutSessionController {
         return ResponseEntity.ok(service.listAllByClient(page, size, clientId));
     }
 
-    //execute session
-    @PatchMapping("/execute/{sessionId}")
-    public ResponseEntity<Integer> executeSession(@PathVariable @Valid Integer sessionId, Authentication authentication){
-        return ResponseEntity.ok(service.execute(sessionId, authentication));
-    }
-
     //get total sessions and best 3 clients by session
     @GetMapping("/get-workout-summary")
     public ResponseEntity<WorkoutSessionTotalSummaryResponse> getWorkoutSumary(Authentication authentication){
@@ -58,6 +52,22 @@ public class WorkoutSessionController {
     @GetMapping("get-workout-calendar")
     public ResponseEntity<List<WorkoutSessionResponseForCalendar>> getSessionsForCalendar(Authentication authentication){
         return ResponseEntity.ok(service.getAllSessionsForCalendar(authentication));
+    }
+
+    //execute session
+    @PatchMapping("/execute/{sessionId}")
+    public ResponseEntity<Integer> executeSession(@PathVariable @Valid Integer sessionId, Authentication authentication){
+        return ResponseEntity.ok(service.execute(sessionId, authentication));
+    }
+
+    //update Efforts
+    @PatchMapping("/update-efforts/{sessionId}")
+    public ResponseEntity<Integer> updateEfforts(
+            Authentication authentication,
+            @PathVariable @Valid Integer sessionId,
+            @RequestBody WorkoutSessioUpdateEffortsRequest request
+            ){
+        return ResponseEntity.ok(service.updateEfforts(authentication, sessionId, request));
     }
 
     //delete Workout Session

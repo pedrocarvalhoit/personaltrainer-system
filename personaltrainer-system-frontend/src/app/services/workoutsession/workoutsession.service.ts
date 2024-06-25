@@ -68,4 +68,17 @@ export class WorkoutsessionService {
     return this.http.post<any>(`http://localhost:8088/api/v1/workout-sessions/create/${selectedClientid}`, body , { headers });
   }
 
+  updateEfforts(headers: HttpHeaders, selectedClientid: number, clientSubjectEffort: number, pTQualityEffortIndicative: number) {
+      const body = {
+        selectedClientid,
+        clientSubjectEffort,
+        pTQualityEffortIndicative,
+      };
+    return this.http.patch<any>(`http://localhost:8088/api/v1/workout-sessions/update-efforts/${selectedClientid}`, body , { headers });
+  }
+
+  deleteSession( headers: HttpHeaders, sessionId: number) {
+    return this.http.delete<any>(`http://localhost:8088/api/v1/workout-sessions/delete/${sessionId}`, { headers });
+  }
+
 }

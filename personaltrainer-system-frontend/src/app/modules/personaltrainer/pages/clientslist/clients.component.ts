@@ -21,7 +21,7 @@ export class ClientsComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private clientService: ClientService
+    private clientService: ClientService,
   ) {}
 
   ngOnInit(): void {
@@ -62,6 +62,26 @@ export class ClientsComponent implements OnInit {
     }
   }
 
+  changeStatus(clientId: number): void {
+    const token = this.authService.getToken();
+    if (token) {
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      });
+      this.clientService.changeStatus(headers, clientId).subscribe(
+        response => {
+          console.log('Client status updated successfully:', response);
+          window.location.reload();
+        },
+        error => {
+          console.error('Failed to update client status:', error);
+        }
+      );
+    } else {
+      console.error('Token not found');
+    }
+  }
+
   toggleClientList() {
     this.showDisabledClients = !this.showDisabledClients;
     this.loadClients();
@@ -69,6 +89,10 @@ export class ClientsComponent implements OnInit {
 
   editClient(clientId: number): void {
     this.router.navigate(['personaltrainer/edit-client', clientId]);
+  }
+
+  redirectClientPage(clientId: number): void {
+    this.router.navigate(['personaltrainer/client', clientId]);
   }
 
   nextPage(): void {

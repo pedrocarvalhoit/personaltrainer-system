@@ -10,17 +10,35 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class WorkoutSessionComponent {
 
+  //Visible sessions
   sessions: any[] = [];
   selectedDate: string = '';
+
+  //filter sessions
   filteredSessions: any[] = [];
+
+  //Dialog vars
+  clientSubjectEffort: number | undefined;
+  pTQualityEffortIndicative: number | undefined;
+  currentSession: any;
+
+  visible: boolean = false;
 
   constructor(
     private workoutsessionService: WorkoutsessionService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
+    this.selectedDate = this.getCurrentDate();
     this.loadTrainingSessions();
+  }
+
+  showDialog(session: any){
+    this.currentSession = session;
+    this.clientSubjectEffort = session.clientSubjectEffort;
+    this.pTQualityEffortIndicative = session.ptqualityEffortIndicative;
+    this.visible = true;
   }
 
   loadTrainingSessions(): void {
@@ -63,13 +81,64 @@ export class WorkoutSessionComponent {
     }
   }
 
+  updateEfforts(sessionId: number){
+    const token = this.authService.getToken();
+    if (token) {
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      });
+
+      this.workoutsessionService.updateEfforts(headers, sessionId, this.clientSubjectEffort || 0, this.pTQualityEffortIndicative || 0)
+        .subscribe(response => {
+          console.log('Session update successfully', response);
+          window.location.reload();
+        }, error => {
+          console.error('Update failed', error);
+          console.log('Error details:', error); // Log detalhado do erro
+        });
+    } else {
+      console.error('Token not found');
+    }
+  }
+
+  deleteSession(sessionId: number){
+    const token = this.authService.getToken();
+    if (token) {
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      });
+
+      this.workoutsessionService.deleteSession(headers, sessionId)
+        .subscribe(response => {
+          console.log('Session deleted successfully', response);
+          window.location.reload();
+        }, error => {
+          console.error('Delete failed', error);
+          console.log('Error details:', error); // Log detalhado do erro
+        });
+    } else {
+      console.error('Token not found');
+    }
+  }
+
   filterSessions() {
     if (this.selectedDate) {
       this.filteredSessions = this.sessions.filter(session =>
         session.sessionDate === this.selectedDate
       );
     } else {
-      this.filteredSessions = this.sessions; // Se nenhum filtro aplicado, mostrar todas as sessões
+      this.filteredSessions = this.sessions.filter(session =>
+        session.sessionDate === this.getCurrentDate()
+      ); // If filter is empty, show today sessions
     }
   }
+
+  getCurrentDate(): string {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, '0');
+    const day = today.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
 }
