@@ -1,6 +1,5 @@
 package com.personaltrainer.client;
 
-import com.personaltrainer.file.FileUtils;
 import com.personaltrainer.personaldata.PersonalData;
 import com.personaltrainer.personaldata.PersonalDataSaveRequest;
 import com.personaltrainer.personaldata.PersonalDataUpdateRequest;
@@ -18,7 +17,7 @@ public class ClientMapper {
                 .build();
     }
 
-    public ClientReponse toClientResponse(Client client) {
+    public ClientReponse toClientResponse(Client client){
         return ClientReponse.builder()
                 .id(client.getId())
                 .firstName(client.getPersonalData().getFirstName())
@@ -26,7 +25,7 @@ public class ClientMapper {
                 .fullName(client.getPersonalData().getFullName())
                 .email(client.getPersonalData().getEmail())
                 .mobile(client.getPersonalData().getMobile())
-                .photo(FileUtils.readFileFromLocation(client.getPersonalData().getPhoto()))
+                .photo(client.getPhotoImagePath())
                 .dateOfBirthday(client.getPersonalData().getDateOfBirth())
                 .age(client.getPersonalData().getAge())
                 .gender(client.getPersonalData().getGender())

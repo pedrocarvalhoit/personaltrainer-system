@@ -1,5 +1,6 @@
 package com.personaltrainer.user;
 
+import com.personaltrainer.Constants;
 import com.personaltrainer.client.Client;
 import com.personaltrainer.role.Role;
 import jakarta.persistence.*;
@@ -56,6 +57,7 @@ public class User implements UserDetails, Principal{
 
     private boolean enabled;
     private boolean accountLocked;
+    private String photo;
 
     @CreatedDate
     @Column(nullable = false, updatable = false) //Don´t modify on updates
@@ -113,5 +115,10 @@ public class User implements UserDetails, Principal{
 
     public String getFullName(){
         return firstName + " " + lastName;
+    }
+
+    @Transient
+    public String getImagePath(){
+        return Constants.S3_BASE_URL + "/user-photos/" + this.getId() + "/" + this.getPhoto();
     }
 }

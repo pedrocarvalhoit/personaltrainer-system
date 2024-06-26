@@ -17,7 +17,7 @@ public class ClientReponse {
     private String fullName;
     private String email;
     private String mobile;
-    private byte[] photo;
+    private String photo;
     private LocalDate dateOfBirthday;
     private Integer age;
     private String gender;

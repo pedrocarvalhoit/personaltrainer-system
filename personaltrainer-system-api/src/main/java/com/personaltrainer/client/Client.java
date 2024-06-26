@@ -1,5 +1,6 @@
 package com.personaltrainer.client;
 
+import com.personaltrainer.Constants;
 import com.personaltrainer.common.BaseEntity;
 import com.personaltrainer.personaldata.PersonalData;
 import com.personaltrainer.user.User;
@@ -36,5 +37,9 @@ public class Client extends BaseEntity{
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<WorkoutSession> workoutSession;
 
+    @Transient
+    public String getPhotoImagePath(){
+        return Constants.S3_BASE_URL + "/client-photos/" + this.getId() + "/" + this.getPersonalData().getPhoto();
+    }
 
 }

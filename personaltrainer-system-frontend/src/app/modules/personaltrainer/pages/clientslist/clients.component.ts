@@ -34,29 +34,20 @@ export class ClientsComponent implements OnInit {
       const headers = new HttpHeaders({
         Authorization: `Bearer ${token}`,
       });
-      if (this.showDisabledClients) {
-        this.clientService.getAllDisabledClients(headers, page, this.pageSize).subscribe(
-          (response: PageResponse<Client>) => {
-            this.clients = response.content;
-            this.currentPage = response.pageNumber;
-            this.totalElements = response.totalElements;
-          },
-          (error) => {
-            console.error('Failed to load disabled clients:', error);
-          }
-        );
-      } else {
-        this.clientService.getAllEnabledClients(headers, page, this.pageSize).subscribe(
-          (response: PageResponse<Client>) => {
-            this.clients = response.content;
-            this.currentPage = response.pageNumber;
-            this.totalElements = response.totalElements;
-          },
-          (error) => {
-            console.error('Failed to load enabled clients:', error);
-          }
-        );
-      }
+      const clientObservable = this.showDisabledClients
+        ? this.clientService.getAllDisabledClients(headers, page, this.pageSize)
+        : this.clientService.getAllEnabledClients(headers, page, this.pageSize);
+
+      clientObservable.subscribe(
+        (response: PageResponse<Client>) => {
+          this.clients = response.content;
+          this.currentPage = response.pageNumber;
+          this.totalElements = response.totalElements;
+        },
+        (error) => {
+          console.error('Failed to load clients:', error);
+        }
+      );
     } else {
       console.error('Token not found');
     }
@@ -106,4 +97,6 @@ export class ClientsComponent implements OnInit {
       this.loadClients(this.currentPage - 1);
     }
   }
+
 }
+

@@ -1,74 +1,50 @@
 package com.personaltrainer.file;
 
-import com.personaltrainer.client.Client;
-import jakarta.annotation.Nonnull;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-import static java.io.File.separator;
-import static java.lang.System.currentTimeMillis;
+import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
-@Slf4j
-@RequiredArgsConstructor
 public class FileStorageService {
 
-    @Value("${application.file.uploads.photos-output-path}")
-    private String fileUploadPath;
+    private final Path fileStorageLocation;
+    private final List<String> allowedMimeTypes = Arrays.asList("image/jpeg", "image/png", "image/gif");
 
-    public String saveFile(
-            @Nonnull MultipartFile sourceFile,
-            @Nonnull Integer userId
-    ) {
-        final String fileUploadSubPath = "users" + separator + userId;
-        return uploadFile(sourceFile, fileUploadSubPath);
+    public FileStorageService(@Value("${file.upload-dir}") String uploadDir){
+        this.fileStorageLocation = Paths.get(uploadDir).toAbsolutePath().normalize();
+        try{
+            Files.createDirectories(this.fileStorageLocation);
+        }catch (Exception ex){
+            throw new RuntimeException("Could not create the directory where the uploaded files will be stored.", ex);
+        }
     }
 
-    private String uploadFile(
-            @Nonnull MultipartFile sourceFile,
-            @Nonnull String fileUploadSubPath
-    ) {
-        final String finalUploadPath = fileUploadPath + separator + fileUploadSubPath;
-        File targetFolder = new File(finalUploadPath);
-
-        if (!targetFolder.exists()) {
-            boolean folderCreated = targetFolder.mkdirs();
-            if (!folderCreated) {
-                log.warn("Failed to create the target folder: " + targetFolder);
-                return null;
+    public String storeFile(MultipartFile file, String userId, String clientId){
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        try{
+            if(!allowedMimeTypes.contains(file.getContentType())){
+                throw new RuntimeException("File type not allowed" + file.getContentType());
             }
+            Path relativePath = Paths.get("users", userId, "clients", clientId, fileName);
+            Path targetLocation = this.fileStorageLocation.resolve(relativePath);
+
+            Files.createDirectories(targetLocation.getParent());
+            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+
+            return targetLocation.toString(); // Retornar caminho absoluto
+        }catch (IOException ex){
+            throw new RuntimeException("Could not store file, please try againd", ex);
         }
-        final String fileExtension = getFileExtension(sourceFile.getOriginalFilename());
-        String targetFilePath = finalUploadPath + separator + currentTimeMillis() + "." + fileExtension;
-        Path targetPath = Paths.get(targetFilePath);
-        try {
-            Files.write(targetPath, sourceFile.getBytes());
-            log.info("File saved to: " + targetFilePath);
-            return targetFilePath;
-        } catch (IOException e) {
-            log.error("File was not saved", e);
-        }
-        return null;
     }
 
-    private String getFileExtension(String fileName) {
-        if (fileName == null || fileName.isEmpty()) {
-            return "";
-        }
-        int lastDotIndex = fileName.lastIndexOf(".");
-        if (lastDotIndex == -1) {
-            return "";
-        }
-        return fileName.substring(lastDotIndex + 1).toLowerCase();
-    }
 }

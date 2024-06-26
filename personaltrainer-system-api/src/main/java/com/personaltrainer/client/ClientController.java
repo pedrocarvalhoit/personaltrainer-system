@@ -10,6 +10,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("clients")
 @RequiredArgsConstructor
@@ -17,6 +19,14 @@ import org.springframework.web.multipart.MultipartFile;
 public class ClientController {
 
     private final ClientService clientService;
+    
+    //saveClient
+    @PostMapping(value = "/save", consumes = "multipart/form-data")
+    public ResponseEntity<Integer> saveClient(@RequestPart("client") ClientSaveRequest request,
+                                              Authentication connectedUser,
+                                              @RequestPart("file") MultipartFile file) throws IOException {
+        return ResponseEntity.ok(clientService.save(request, connectedUser, file));
+    }
 
     //findById
     @GetMapping("{clientId}")
@@ -43,18 +53,10 @@ public class ClientController {
         return ResponseEntity.ok(clientService.findAllDisabledClients(page, size, connectedUser));
     }
 
-    //saveClient
-    @PostMapping(value = "/save", consumes = "multipart/form-data")
-    public ResponseEntity<Integer> saveClient(@RequestPart("client") ClientSaveRequest request,
-                                              Authentication connectedUser,
-                                              @RequestPart("file") MultipartFile file){
-        return ResponseEntity.ok(clientService.save(request, connectedUser, file));
-    }
-
     //deleteClient
     @DeleteMapping("/delete/{clientId}")
     public ResponseEntity<Integer> deleteClient(@PathVariable Integer clientId, Authentication connectedUser){
-        return ResponseEntity.ok(clientService.delete(clientId, connectedUser));
+        return ResponseEntity.ok(clientService.deleteClientAndSessions(clientId, connectedUser));
     }
 
     //update PersonalData (Email and Mobile)

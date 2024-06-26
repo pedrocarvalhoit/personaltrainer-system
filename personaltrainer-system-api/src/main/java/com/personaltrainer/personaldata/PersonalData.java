@@ -1,6 +1,7 @@
 package com.personaltrainer.personaldata;
 
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,10 +44,12 @@ public class PersonalData {
         this.dateOfBirth = personalDataSaveRequest.dateOfBirth();
     }
 
+    @Transient
     public String getFullName(){
         return this.firstName + " " + this.lastName;
     }
 
+    @Transient
     public Integer getAge(){
         return Period.between(this.dateOfBirth, LocalDate.now()).getYears();
     }

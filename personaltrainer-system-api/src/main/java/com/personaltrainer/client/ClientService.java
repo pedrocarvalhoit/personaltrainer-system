@@ -1,14 +1,15 @@
 package com.personaltrainer.client;
 
+import com.personaltrainer.AmazonS3Util;
 import com.personaltrainer.common.PageResponse;
 import com.personaltrainer.common.UserPermissionOverClientCheck;
 import com.personaltrainer.file.FileStorageService;
 import com.personaltrainer.user.User;
+import com.personaltrainer.workoutsession.WorkoutSession;
+import com.personaltrainer.workoutsession.WorkoutSessionRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,8 +17,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -27,28 +30,23 @@ import java.util.List;
 public class ClientService {
 
     private final ClientRepository clientRepository;
+    private final WorkoutSessionRepository workoutSessionRepository;
     private final ClientMapper clientMapper;
     private final UserPermissionOverClientCheck permition;
     private final FileStorageService fileStorageService;
 
 
-    public Integer save(ClientSaveRequest request, Authentication connectedUser, MultipartFile file) {
+    public Integer save(ClientSaveRequest request, Authentication connectedUser, MultipartFile file) throws IOException {
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
         User user = ((User) connectedUser.getPrincipal());
         Client client = clientMapper.toClient(request);
         client.setPersonalTrainer(user);
-
+        client.getPersonalData().setPhoto(fileName);
         Client savedClient = clientRepository.save(client);
 
-        if (file != null && !file.isEmpty()) {
-            String clientPhoto = fileStorageService.saveFile(file, user.getId());
-            if (clientPhoto != null) {
-                client.getPersonalData().setPhoto(clientPhoto);
-                clientRepository.save(client);
-            } else {
-                log.error("Failed to save client photo");
-                // Pode lançar uma exceção ou lidar com o erro de outra forma
-            }
-        }
+        String uploadDir = "client-photos/" + savedClient.getId();
+        AmazonS3Util.uploadFile(uploadDir, fileName, file.getInputStream());
 
         return savedClient.getId();
     }
@@ -103,10 +101,14 @@ public class ClientService {
         return clientId;
     }
 
-    public Integer delete(Integer clientId, Authentication authentication) {
+    public Integer deleteClientAndSessions(Integer clientId, Authentication authentication) {
         Client client = clientRepository.findById(clientId).orElseThrow(()-> new EntityNotFoundException("Entity not found"));
         permition.checkPermition(client, authentication);
 
+        String uploadDir = "client-photos/" + clientId;
+        AmazonS3Util.removeFolder(uploadDir);
+
+        workoutSessionRepository.deleteAllByClientId(clientId);
         clientRepository.deleteById(clientId);
         return clientId;
     }
@@ -115,7 +117,13 @@ public class ClientService {
         Client client = clientRepository.findById(clientId).orElseThrow(()-> new EntityNotFoundException("Entity not found"));
         User user = (User) connectedUser.getPrincipal();
 
-        var clientPhoto = fileStorageService.saveFile(file, user.getId());
+        var clientPhoto = fileStorageService.storeFile(file, user.getId().toString(), client.getId().toString());
         client.getPersonalData().setPhoto(clientPhoto);
+        clientRepository.save(client);
+    }
+
+    public String getClientPhotoUrl(Integer clientId) {
+        Client client = clientRepository.findById(clientId).orElseThrow(() -> new EntityNotFoundException("Client not found"));
+        return client.getPersonalData().getPhoto();
     }
 }
