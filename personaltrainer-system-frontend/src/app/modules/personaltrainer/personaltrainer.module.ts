@@ -18,7 +18,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ClientComponent } from './pages/client/client.component'; // Necessário para animações do PrimeNG
+import { ClientComponent } from './pages/client/client.component';
+import { WorkoutProgramsComponent } from './pages/workout-programs/workout-programs.component'; // Necessário para animações do PrimeNG
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ClientComponent } from './pages/client/client.component'; // Necessári
     EditClientComponent,
     WorkoutSessionComponent,
     CreateWorkoutsessionComponent,
-    ClientComponent
+    ClientComponent,
+    WorkoutProgramsComponent
   ],
   imports: [
     CommonModule,

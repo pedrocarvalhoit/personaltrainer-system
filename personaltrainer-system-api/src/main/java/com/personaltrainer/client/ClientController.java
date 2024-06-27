@@ -28,6 +28,14 @@ public class ClientController {
         return ResponseEntity.ok(clientService.save(request, connectedUser, file));
     }
 
+    //update Photo
+    @PatchMapping("/update-photo/{clientId}")
+    public ResponseEntity<Integer> updatePhoto(Authentication authentication,
+                                               @RequestPart ("file") MultipartFile file,
+                                               @PathVariable Integer clientId) throws IOException {
+        return ResponseEntity.ok(clientService.updatePhoto(authentication, clientId, file));
+    }
+
     //findById
     @GetMapping("{clientId}")
     public ResponseEntity<ClientReponse> findById(@PathVariable Integer clientId){
@@ -71,16 +79,6 @@ public class ClientController {
     @PatchMapping("/update-status/{clientId}")
     public ResponseEntity<Integer> enableClient(@PathVariable Integer clientId, Authentication authenticatedUser){
         return ResponseEntity.ok(clientService.updateStatus(clientId, authenticatedUser));
-    }
-
-    //photoUpload
-    @PostMapping(value = "/photo/{clientId}", consumes = "multipart/form-data")
-    public ResponseEntity<?> uploadProfilePicture(@PathVariable Integer clientId,
-                                                  @Parameter()
-                                                  @RequestPart("file")MultipartFile file,
-                                                  Authentication connectedUser){
-        clientService.uploadProfilePicture(file, connectedUser, clientId);
-        return ResponseEntity.ok().build();
     }
 
 

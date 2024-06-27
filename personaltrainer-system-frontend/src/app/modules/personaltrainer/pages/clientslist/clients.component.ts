@@ -18,6 +18,13 @@ export class ClientsComponent implements OnInit {
 
   showDisabledClients = false;
 
+  //Dialog vars
+  visible: boolean = false;
+  currentClient: any;
+  clientPhoto: string = '';
+
+  selectedFile: File | null = null;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -26,6 +33,49 @@ export class ClientsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadClients();
+  }
+
+  showDialog(client: any){
+    this.currentClient = client;
+    this.clientPhoto = client.photo;
+    this.visible = true;
+  }
+
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
+
+  updatePhoto(clientId: number){
+    const token = this.authService.getToken();
+
+    if (this.clientPhoto && token) {
+      const formData = new FormData();
+      formData.append('file', this.selectedFile as File);
+
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+
+      this.clientService.updatePhoto(headers, formData, clientId).subscribe(
+        response => {
+          console.log('Client update successfuly:', response);
+          window.location.reload();
+        },
+        error => {
+          console.error('Error on update client photo:', error);
+        }
+      );
+    } else {
+      console.log('Invalid form');
+    }
+  }
+
+  showSuccessMessage(): void {
+    // Exibe a mensagem de sucesso
+    const successMessageElement = document.getElementById('success-message');
+    if (successMessageElement) {
+      successMessageElement.style.display = 'block';
+    }
   }
 
   loadClients(page: number = 0): void {

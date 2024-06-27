@@ -9,6 +9,7 @@ import { EditClientComponent } from './pages/editclient/edit-client.component';
 import { WorkoutSessionComponent } from './pages/workoutsession/workout-session.component';
 import { CreateWorkoutsessionComponent } from './pages/createworkoutsession/create-workoutsession.component';
 import { ClientComponent } from './pages/client/client.component';
+import { WorkoutProgramsComponent } from './pages/workout-programs/workout-programs.component';
 
 const routes: Routes = [
   { path: '', component: PtDashboardComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'edit-client/:id', component: EditClientComponent, canActivate: [AuthGuard] },
   { path: 'workout-sessions', component: WorkoutSessionComponent, canActivate: [AuthGuard] },
   { path: 'workout-sessions/create', component: CreateWorkoutsessionComponent, canActivate: [AuthGuard] },
+  { path: 'workout-programs', component: WorkoutProgramsComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

@@ -27,6 +27,29 @@ body {
   border-color: #41884d;
 }
 
+.image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.edit-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 5px;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.image-wrapper:hover .edit-icon {
+  display: inline;
+}
+
 .container-fluid {
   padding-left: 100px;
   padding-right: 100px;
