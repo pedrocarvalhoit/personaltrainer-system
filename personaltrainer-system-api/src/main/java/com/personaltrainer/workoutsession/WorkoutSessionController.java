@@ -54,6 +54,13 @@ public class WorkoutSessionController {
         return ResponseEntity.ok(service.getAllSessionsForCalendar(authentication));
     }
 
+    //get client session stats
+    @GetMapping("get-workout-stats-actual-month/{clientId}")
+    public ResponseEntity<WorkoutSessionClientMonthlySummaryResponse> getSessionsForStat(Authentication authentication,
+                                                                                         @PathVariable Integer clientId){
+        return ResponseEntity.ok(service.getSessionStats(authentication, clientId));
+    }
+
     //execute session
     @PatchMapping("/execute/{sessionId}")
     public ResponseEntity<Integer> executeSession(@PathVariable @Valid Integer sessionId, Authentication authentication){

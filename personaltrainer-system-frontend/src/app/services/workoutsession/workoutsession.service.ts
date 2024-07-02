@@ -29,6 +29,12 @@ interface WorkoutSessionTotalSummaryResponse {
   bestThreeClientsNumOfSessions: number[];
 }
 
+export interface WorkoutSessionClientMonthlySummaryResponse {
+  totalSessionsActualMonth: number;
+  totalExecutedSessionsActualMonth: number;
+  totalNotExecutedSessionsActualMonth: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -79,6 +85,12 @@ export class WorkoutsessionService {
 
   deleteSession( headers: HttpHeaders, sessionId: number) {
     return this.http.delete<any>(`http://localhost:8088/api/v1/workout-sessions/delete/${sessionId}`, { headers });
+  }
+
+  //Client dashboard
+  getTotalMonthlySummary(headers: HttpHeaders, sessionId: number): Observable<WorkoutSessionClientMonthlySummaryResponse> {
+    return this.http.get<WorkoutSessionClientMonthlySummaryResponse>
+    (`http://localhost:8088/api/v1/workout-sessions/get-workout-stats-actual-month/${sessionId}`, { headers });
   }
 
 }

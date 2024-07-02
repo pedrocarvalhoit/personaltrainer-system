@@ -1,1 +1,62 @@
-<p>client works!</p>
+<app-menu></app-menu>
+
+<div class="container-fluid dashboard-container">
+  <div class="row mt-4">
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm p-3 h-100">
+        <h4 class="text-center mb-3">Training Session Stats For This Month</h4>
+        <div class="session-stats">
+          <div class="stat-item yellow">
+            <h6>{{totalSessionsActualMonth}}</h6>
+            <p>Total Sessions</p>
+          </div>
+          <div class="stat-item green">
+            <h6>{{totalExecutedSessionsActualMonth}}</h6>
+            <p>Executed Sessions</p>
+          </div>
+          <div class="stat-item red">
+            <h6>{{totalNotExecutedSessionsActualMonth}}</h6>
+            <p>Missed Sessions</p>
+          </div>
+        </div>
+
+        <h4 class="text-center mb-3">All Months Avarage</h4>
+        <div class="session-stats">
+          <div class="stat-item yellow">
+            <h6>{{totalSessionsActualMonth}}</h6>
+            <p>Total Sessions</p>
+          </div>
+          <div class="stat-item green">
+            <h6>{{totalExecutedSessionsActualMonth}}</h6>
+            <p>Executed Sessions</p>
+          </div>
+          <div class="stat-item red">
+            <h6>{{totalNotExecutedSessionsActualMonth}}</h6>
+            <p>Missed Sessions</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm p-3 h-100">
+        <h4 class="text-center mb-3">Training Stats Analysis</h4>
+        <!-- Conteúdo da análise de estatísticas de treinamento -->
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm p-3 h-100">
+        <h4 class="text-center mb-3">Workout Programs</h4>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let program of ''">
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<app-footer></app-footer>

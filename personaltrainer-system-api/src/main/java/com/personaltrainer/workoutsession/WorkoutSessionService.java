@@ -15,6 +15,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Service
@@ -61,6 +63,8 @@ public class WorkoutSessionService {
         return workoutSessionRepository.save(workoutSession).getId();
     }
 
+    /*This is the method used
+    on the monthly workout summary */
     public WorkoutSessionTotalSummaryResponse getToalSesssionsSummary(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
 
@@ -93,11 +97,47 @@ public class WorkoutSessionService {
                 .build();
     }
 
+    /*This is the method used on Actual Month
+     Client page for ws stats on client-dashboard*/
+    public WorkoutSessionClientMonthlySummaryResponse getSessionStats(Authentication authentication,
+                                                                      Integer clientId){
+        User user = (User) authentication.getPrincipal();
+
+        //Actual month session data
+        List<WorkoutSession> sessionsActualMonth = workoutSessionRepository.findTotalMonthlySessionsByUserId(user.getId())
+                .stream()
+                .filter(workoutSession -> workoutSession.getClient().getId().equals(clientId))
+                .toList();
+
+        List<WorkoutSession> executedSessionActualMonth = workoutSessionRepository.findTotalMonthlyExecutedSessionsByUserId(user.getId())
+                .stream()
+                .filter(workoutSession -> workoutSession.getClient().getId().equals(clientId))
+                .toList();
+
+        List<WorkoutSession> notExecutedSessionActualMonth = workoutSessionRepository.findTotalMonthlyNotExecutedSessionsByUserId(user.getId())
+                .stream()
+                .filter(ws -> ws.getClient().getId().equals(clientId))
+                .toList();
+
+        long percentualExecuted
+
+        return WorkoutSessionClientMonthlySummaryResponse.builder()
+                .totalSessionsActualMonth(sessionsActualMonth.size())
+                .totalExecutedSessionsActualMonth(executedSessionActualMonth.size())
+                .totalNotExecutedSessionsActualMonth(notExecutedSessionActualMonth.size())
+                .build();
+    }
+
+    /*This is the method used on Monthly Avarage
+     Client page for ws stats on client-dashboard*/
+
     public Integer delete(Integer id) {
         workoutSessionRepository.deleteById(id);
         return id;
     }
 
+    /*This is the method used on
+     Upcoming Workout Sessions (5 days) on pt-dashboard */
     public List<WorkoutSessionResponseForCalendar> getSessionsForNextWeek(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
 
