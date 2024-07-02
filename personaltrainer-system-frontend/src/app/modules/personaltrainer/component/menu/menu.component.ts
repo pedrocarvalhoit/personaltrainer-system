@@ -12,10 +12,18 @@ import { UserService } from '../../../../services/user/user.service';
 export class MenuComponent implements OnInit {
 
   firstName: string = '';
+  userPhotoUrl: String = '';
 
   showEditOption: boolean = false;
 
   isMyClientsRoute: boolean = false;
+
+  //Dialog vars
+  visible: boolean = false;
+  currentClient: any;
+  clientPhoto: string = '';
+
+  selectedFile: File | null = null;
 
   constructor(private authService: AuthService, private userService: UserService, private router: Router){}
 
@@ -23,18 +31,16 @@ export class MenuComponent implements OnInit {
     this.router.events.subscribe(() => {
       this.isMyClientsRoute = this.router.url === '/personaltrainer/clients';
     });
-    const token = this.authService.getToken(); // Obtém o token JWT do serviço AuthService
-    // Verifica se o token está presente
+    const token = this.authService.getToken();
     if (token) {
-      // Adiciona o token ao cabeçalho da requisição
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`
       });
-      // Fazer a requisição passando os cabeçalhos como parte das opções
-      this.userService.getUserName(headers).subscribe(
+      this.userService.getUserDataForMenu(headers).subscribe(
         user => {
           console.log('User fetched:', user);
           this.firstName = user.firstName;
+          this.userPhotoUrl = user.photo;
         },
         error => {
           console.error('Failed to fetch user', error);
@@ -52,6 +58,39 @@ export class MenuComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.router.navigate(['login'])
+  }
+
+  updatePhoto(){
+    const token = this.authService.getToken();
+
+    if (token) {
+      const formData = new FormData();
+      formData.append('file', this.selectedFile as File);
+
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+
+      this.userService.updatePhoto(headers, formData).subscribe(
+        response => {
+          console.log('User photo update successfuly:', response);
+          window.location.reload();
+        },
+        error => {
+          console.error('Error on update User photo:', error);
+        }
+      );
+    } else {
+      console.log('Invalid form');
+    }
+  }
+
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
+
+  showDialog(){
+    this.visible = true;
   }
 
 }

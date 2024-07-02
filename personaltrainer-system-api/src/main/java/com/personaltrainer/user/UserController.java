@@ -2,9 +2,13 @@ package com.personaltrainer.user;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("users")
@@ -13,9 +17,9 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/get-user-name")
-    public ResponseEntity<UserNameResponse> getUserName(Authentication authentication){
-        return ResponseEntity.ok(userService.getUserName(authentication));
+    @GetMapping("/get-user-data-menu")
+    public ResponseEntity<UserDataMenuResponse> getUserDataForMenu(Authentication authentication){
+        return ResponseEntity.ok(userService.getUserDataForMenu(authentication));
     }
 
     @GetMapping("/get-user-data")
@@ -27,5 +31,11 @@ public class UserController {
     public ResponseEntity<Integer> editUser(@Valid @RequestBody EditUserDataRequest request,
                                             Authentication authentication){
         return ResponseEntity.ok(userService.editUserData(request, authentication));
+    }
+
+    @PatchMapping("/update-photo")
+    public ResponseEntity<Integer> updatePhoto(@RequestPart("file")MultipartFile file,
+                                               Authentication authentication) throws IOException {
+        return ResponseEntity.ok(userService.updatePhoto(authentication, file));
     }
 }

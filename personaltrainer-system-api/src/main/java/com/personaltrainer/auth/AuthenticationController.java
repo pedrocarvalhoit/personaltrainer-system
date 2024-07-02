@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("auth")
@@ -16,10 +19,11 @@ public class AuthenticationController {
 
     private final AuthenticationService service;
 
-    @PostMapping("/register")
+    @PostMapping(value = "/register", consumes = "multipart/form-data")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity<?> registerUser(@RequestBody @Valid RegistrationRequest request) throws MessagingException {
-        service.register(request);
+    public ResponseEntity<?> registerUser(@RequestPart("user") RegistrationRequest request,
+                                          @RequestPart("file") MultipartFile file) throws MessagingException, IOException {
+        service.register(request, file);
         return ResponseEntity.accepted().build();
     }
 

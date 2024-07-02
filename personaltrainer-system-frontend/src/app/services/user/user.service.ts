@@ -4,8 +4,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { ErrorHandlerService } from '../errohandler/error-handler.service';
 import { Observable } from 'rxjs';
 
-interface UserNameResponse {
+interface UserDataMenuResponse {
   firstName: string;
+  photo: string;
 }
 
 interface UserDataResponse {
@@ -29,8 +30,8 @@ export class UserService {
 
   constructor(private http: HttpClient, public jwtHelper: JwtHelperService, private errorHandlerService: ErrorHandlerService) { }
 
-  getUserName(headers: HttpHeaders): Observable<UserNameResponse> {
-    return this.http.get<UserNameResponse>('http://localhost:8088/api/v1/users/get-user-name', { headers });
+  getUserDataForMenu(headers: HttpHeaders): Observable<UserDataMenuResponse> {
+    return this.http.get<UserDataMenuResponse>('http://localhost:8088/api/v1/users/get-user-data-menu', { headers });
   }
 
   getUserData(headers: HttpHeaders): Observable<UserDataResponse> {
@@ -49,5 +50,9 @@ export class UserService {
       gender
     };
     return this.http.post<any>('http://localhost:8088/api/v1/users/edit', body, { headers });
+  }
+
+  updatePhoto(headers: HttpHeaders, formData: FormData): Observable<number> {
+    return this.http.patch<number>('http://localhost:8088/api/v1/users/update-photo', formData, { headers });
   }
 }

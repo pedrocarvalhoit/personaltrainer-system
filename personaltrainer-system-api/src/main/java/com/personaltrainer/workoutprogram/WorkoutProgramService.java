@@ -73,10 +73,6 @@ public class WorkoutProgramService {
         return workoutProgramRepository.save(workoutProgram).getId();
     }
 
-    public void save(WorkoutProgram program){
-        workoutProgramRepository.save(program);
-    }
-
     public Integer updateDate(Integer programId, UpdateProgramDateRequest request) {
         WorkoutProgram workoutProgram = workoutProgramRepository.findById(programId)
                 .orElseThrow(()-> new EntityNotFoundException("Program not found"));
@@ -95,7 +91,14 @@ public class WorkoutProgramService {
         return workoutProgramRepository.save(workoutProgram).getId();
     }
 
+
+
     public List<WorkoutProgram> findProgramByEndDateBefor(LocalDate date) {
         return workoutProgramRepository.findAllByEndDateBeforeAndEnabledTrue(date);
+    }
+
+    //save for scheduler
+    public void save(WorkoutProgram program){
+        workoutProgramRepository.save(program);
     }
 }

@@ -1,8 +1,13 @@
 package com.personaltrainer.user;
 
+import com.personaltrainer.AmazonS3Util;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
@@ -13,9 +18,9 @@ public class UserService {
 
     private final UserRepository repository;
 
-    public UserNameResponse getUserName(Authentication authentication) {
+    public UserDataMenuResponse getUserDataForMenu(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
-        return mapper.toUserNameResponse(user);
+        return mapper.toUserDataMenuResponse(user);
     }
 
     public UserDataResponse getUserData(Authentication authentication) {
@@ -31,4 +36,17 @@ public class UserService {
         return user.getId();
     }
 
+    public Integer updatePhoto(Authentication authentication, MultipartFile file) throws IOException {
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        User user = (User) authentication.getPrincipal();
+
+        user.setPhoto(fileName);
+        User savedUser = repository.save(user);
+
+        String uploadDir = "user-photos/" + savedUser.getId();
+        AmazonS3Util.removeFolder(uploadDir);
+        AmazonS3Util.uploadFile(uploadDir, fileName, file.getInputStream());
+
+        return user.getId();
+    }
 }

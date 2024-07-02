@@ -115,3 +115,64 @@
     display: inline-block;
   }
 }
+
+.user-photo {
+  position: relative;
+  display: inline-block;
+}
+
+.user-photo .image-wrapper {
+  position: relative;
+}
+
+.user-photo .image-wrapper img {
+  width: 50px; /* Ajuste conforme necessário */
+  height: 50px; /* Ajuste conforme necessário */
+  border-radius: 30%;
+  object-fit: cover;
+}
+
+.user h6 {
+  font-size: 1.0rem;
+}
+
+.user-photo .edit-icon {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.user-photo .image-wrapper:hover .edit-icon {
+  display: block;
+}
+
+.user-details {
+  flex-grow: 1; /* Permite que a seção de detalhes ocupe o espaço restante */
+  margin-left: 20px; /* Espaçamento adicional entre a foto e os detalhes */
+}
+
+/*Confirm Dialog */
+.p-confirm-dialog .p-dialog-header {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.p-confirm-dialog .p-dialog-content {
+  font-size: 1rem;
+}
+
+.p-confirm-dialog .p-dialog-footer .p-button {
+  background-color: #3498db;
+  border-color: #3498db;
+}
+
+.p-confirm-dialog .p-dialog-footer .p-button:hover {
+  background-color: #2980b9;
+}
+

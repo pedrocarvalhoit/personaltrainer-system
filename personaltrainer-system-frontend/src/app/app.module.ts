@@ -18,7 +18,6 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { RouterLink } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 registerLocaleData(en);
 

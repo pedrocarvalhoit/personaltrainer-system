@@ -1,123 +1,154 @@
-<body>
-  <div class="container-fluid card login-container">
-    <h3 class="text-center">Create an account</h3>
-    <hr />
-    <form (ngSubmit)="onSubmit()">
-      <div class="mb-3">
-        <label for="firstName" class="form-label">First Name</label>
-        <input
-          [(ngModel)]="firstName"
-          type="text"
-          class="form-control"
-          name="firstName"
-          id="firstname"
-          placeholder="Ex: Pedro"
-          required
-        />
-      </div>
+<div class="container-fluid card login-container">
+  <h3 class="text-center">Create an account</h3>
+  <hr />
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First Name</label>
+      <input
+        id="firstName"
+        formControlName="firstName"
+        class="form-control"
+        placeholder="Ex: Pedro"
+      />
+    </div>
+    <div
+      *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched"
+      class="error-message"
+    >
+      First Name can't be empty
+    </div>
 
-      <div class="mb-3">
-        <label for="lastName" class="form-label">Last Name</label>
-        <input
-          [(ngModel)]="lastName"
-          type="text"
-          class="form-control"
-          name="lastName"
-          id="lastname"
-          placeholder="Ex: Carvalho"
-          required
-        />
-      </div>
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Last Name</label>
+      <input
+        id="lastName"
+        formControlName="lastName"
+        class="form-control"
+        placeholder="Ex: Carvalho"
+      />
+    </div>
+    <div
+      *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched"
+      class="error-message"
+    >
+      Last Name can't be empty
+    </div>
 
-      <div class="mb-3">
-        <label for="login" class="form-label">Email address</label>
-        <input
-          [(ngModel)]="email"
-          type="email"
-          class="form-control"
-          name="login"
-          id="login"
-          placeholder="name@example.com"
-          required
-        />
-      </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        id="email"
+        formControlName="email"
+        class="form-control"
+        placeholder="name@example.com"
+      />
+    </div>
+    <div
+      *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched"
+      class="error-message"
+    >
+      Email can't be empty
+    </div>
 
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input
-          [(ngModel)]="password"
-          type="password"
-          class="form-control"
-          id="password"
-          name="password"
-          placeholder="min 8 car. (********)"
-          required
-        />
-      </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        id="password"
+        formControlName="password"
+        class="form-control"
+        type="password"
+      />
+    </div>
+    <div
+      *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched"
+      class="error-message"
+    >
+      Password can't be empty
+    </div>
 
-      <div class="mb-3">
-        <label for="confirmPassword" class="form-label">Confirm Password</label>
-        <input
-          [(ngModel)]="confirmPassword"
-          type="password"
-          class="form-control"
-          id="confirmPassword"
-          name="confirmPassword"
-          placeholder="Confirm your password"
-          required
-        />
-      </div>
+    <div class="mb-3">
+      <label for="confirmPassword" class="form-label">Confirm Password</label>
+      <input
+        id="confirmPassword"
+        formControlName="confirmPassword"
+        class="form-control"
+        type="password"
+        placeholder="Confirm your password"
+      />
+    </div>
+    <div
+      *ngIf="userForm.get('confirmPassword')?.invalid && userForm.get('confirmPassword')?.touched"
+      class="error-message"
+    >
+      Confirm Password can't be empty
+    </div>
 
-      <div class="mb-3">
-        <label for="login" class="form-label">Date of Birth</label>
-        <input
-          [(ngModel)]="dateOfBirth"
-          type="date"
-          class="form-control"
-          name="dateOfBirth"
-          id="dateOfBirth"
-          placeholder="yyyy/mm/dd"
-          required
-        />
-      </div>
+    <div *ngIf="userForm.hasError('passwordMismatch') && userForm.get('confirmPassword')?.touched" class="error-message">
+      Passwords do not match
+    </div>
 
-      <div class="mb-3">
-        <label for="login" class="form-label">Mobile</label>
-        <input
-          [(ngModel)]="mobile"
-          type="text"
-          class="form-control"
-          name="mobile"
-          id="mobile"
-          placeholder="+xx xxxxxxx"
-          required
-        />
-      </div>
+    <div class="mb-3">
+      <label for="dateOfBirth" class="form-label">Date of Birth</label>
+      <input
+        id="dateOfBirth"
+        formControlName="dateOfBirth"
+        type="date"
+        class="form-control"
+      />
+    </div>
+    <div
+      *ngIf="userForm.get('dateOfBirth')?.invalid && userForm.get('dateOfBirth')?.touched"
+      class="error-message"
+    >
+      Date of Birth can't be empty
+    </div>
 
-      <div class="mb-3">
-        <label for="login" class="form-label">Gender</label>
-        <input
-          [(ngModel)]="gender"
-          type="text"
-          class="form-control"
-          name="gender"
-          id="gender"
-          placeholder="Type: MALE or FEMALE"
-          required
-        />
-      </div>
+    <div class="mb-3">
+      <label for="mobile" class="form-label">Mobile</label>
+      <input
+        id="mobile"
+        formControlName="mobile"
+        class="form-control"
+        placeholder="+xx xxxxxxx"
+      />
+    </div>
+    <div
+      *ngIf="userForm.get('mobile')?.invalid && userForm.get('mobile')?.touched"
+      class="error-message"
+    >
+      Mobile can't be empty
+    </div>
 
-      <div class="d-flex justify-content-between mb-3">
-        <button type="submit" class="btn btn-primary">
-          <em class="fa-solid fa-user-plus">&nbsp;Create</em>
+    <div class="mb-3">
+      <label for="gender" class="form-label">Gender</label>
+      <input
+        id="gender"
+        formControlName="gender"
+        class="form-control"
+        placeholder="Type: MALE or FEMALE"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="profilePicture">Profile Picture</label>
+      <input
+        type="file"
+        id="profilePicture"
+        (change)="onFileSelected($event)"
+        class="form-control"
+      />
+    </div>
+
+    <div class="d-flex justify-content-between mb-3">
+      <button type="submit" class="btn btn-primary">
+        <em class="fa-solid fa-user-plus">&nbsp;Create</em>
+      </button>
+      <div>
+        Already have an account?
+        <button (click)="login()" type="button" class="btn btn-link">
+          <em class="fas">&nbsp;Login</em>
         </button>
-        <div>
-          Already have an account?
-          <button (click)="login()" type="button" class="btn btn-link">
-            <em class="fas">&nbsp;Login</em>
-          </button>
-        </div>
       </div>
-    </form>
-  </div>
-</body>
+    </div>
+  </form>
+</div>

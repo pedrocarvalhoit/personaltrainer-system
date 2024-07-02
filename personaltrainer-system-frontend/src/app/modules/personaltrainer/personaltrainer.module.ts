@@ -19,8 +19,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClientComponent } from './pages/client/client.component';
-import { WorkoutProgramsComponent } from './pages/workout-programs/workout-programs.component'; // Necessário para animações do PrimeNG
-
+import { WorkoutProgramsComponent } from './pages/workout-programs/workout-programs.component';
+import { CreateWorkoutProgramComponent } from './pages/createworkoutprogram/create-workout-program.component'; // Necessário para animações do PrimeNG
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { WorkoutProgramsComponent } from './pages/workout-programs/workout-progr
     WorkoutSessionComponent,
     CreateWorkoutsessionComponent,
     ClientComponent,
-    WorkoutProgramsComponent
+    WorkoutProgramsComponent,
+    CreateWorkoutProgramComponent,
   ],
   imports: [
     CommonModule,
@@ -46,6 +48,7 @@ import { WorkoutProgramsComponent } from './pages/workout-programs/workout-progr
     InputTextModule,
     DropdownModule,
     CalendarModule,
+    EditorModule,
   ]
 })
 export class PersonaltrainerModule { }

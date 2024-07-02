@@ -7,8 +7,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserNameResponse{
+public class UserDataMenuResponse {
 
     private String firstName;
+
+    private String photo;
 
 }

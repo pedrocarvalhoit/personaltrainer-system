@@ -3,6 +3,7 @@ package com.personaltrainer.workoutprogram;
 import java.time.LocalDate;
 
 public record WorkoutProgramCreateRequest(
+
         String title,
 
         LocalDate inicialDate,

@@ -10,9 +10,10 @@ public class UserMapper {
 
     private final PasswordEncoder passwordEncoder;
 
-    public UserNameResponse toUserNameResponse(User user) {
-        return UserNameResponse.builder()
+    public UserDataMenuResponse toUserDataMenuResponse(User user) {
+        return UserDataMenuResponse.builder()
                 .firstName(user.getFirstName())
+                .photo(user.getImagePath())
                 .build();
     }
 

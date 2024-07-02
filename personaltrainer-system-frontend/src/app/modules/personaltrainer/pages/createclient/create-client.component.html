@@ -2,8 +2,13 @@
 <div class="form-container">
   <h3>Client Registration</h3>
   <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
-    <label for="firstName" class="form-label">Name:</label>
-    <input id="firstName" formControlName="firstName" class="form-control" placeholder="Ex: Pedro" />
+    <label for="firstName" class="form-label">First Name:</label>
+    <input
+      id="firstName"
+      formControlName="firstName"
+      class="form-control"
+      placeholder="Ex: Pedro"
+    />
     <div
       *ngIf="
         clientForm.get('firstName')?.invalid &&
@@ -15,7 +20,12 @@
     </div>
 
     <label for="lastName" class="form-label">Lastname:</label>
-    <input id="lastName" formControlName="lastName" class="form-control" placeholder="Ex: Carvalho"/>
+    <input
+      id="lastName"
+      formControlName="lastName"
+      class="form-control"
+      placeholder="Ex: Carvalho"
+    />
     <div
       *ngIf="
         clientForm.get('lastName')?.invalid &&
@@ -27,7 +37,12 @@
     </div>
 
     <label for="email" class="form-label">Email:</label>
-    <input id="email" formControlName="email" class="form-control" placeholder="name@example.com"/>
+    <input
+      id="email"
+      formControlName="email"
+      class="form-control"
+      placeholder="name@example.com"
+    />
     <div
       *ngIf="
         clientForm.get('email')?.invalid && clientForm.get('email')?.touched
@@ -38,7 +53,12 @@
     </div>
 
     <label for="mobile" class="form-label">Mobile:</label>
-    <input id="mobile" formControlName="mobile" class="form-control" placeholder="+xx xxxxxxx"/>
+    <input
+      id="mobile"
+      formControlName="mobile"
+      class="form-control"
+      placeholder="+xx xxxxxxx"
+    />
     <div
       *ngIf="
         clientForm.get('mobile')?.invalid && clientForm.get('mobile')?.touched
@@ -49,7 +69,12 @@
     </div>
 
     <label for="gender" class="form-label">Gender:</label>
-    <input id="gender" formControlName="gender" class="form-control" placeholder="Type: MALE or FEMALE"/>
+    <input
+      id="gender"
+      formControlName="gender"
+      class="form-control"
+      placeholder="Type: MALE or FEMALE"
+    />
 
     <label for="dateOfBirth" class="form-label">Date of Birthday:</label>
     <input
@@ -70,7 +95,12 @@
 
     <div class="form-group">
       <label for="profilePicture">Profile Picture</label>
-      <input type="file" id="profilePicture" (change)="onFileSelected($event)" class="form-control" />
+      <input
+        type="file"
+        id="profilePicture"
+        (change)="onFileSelected($event)"
+        class="form-control"
+      />
     </div>
 
     <button type="submit" [disabled]="clientForm.invalid" class="btn-primary">

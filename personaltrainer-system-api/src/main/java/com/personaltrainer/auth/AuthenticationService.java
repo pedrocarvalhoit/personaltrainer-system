@@ -1,6 +1,7 @@
 package com.personaltrainer.auth;
 
 
+import com.personaltrainer.AmazonS3Util;
 import com.personaltrainer.email.EmailService;
 import com.personaltrainer.email.EmailTemplateName;
 import com.personaltrainer.role.RoleRepository;
@@ -17,7 +18,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -38,7 +42,8 @@ public class AuthenticationService {
     @Value("${mailing.frontend.activation-url}")
     private String activationUrl;
 
-    public void register(RegistrationRequest request) throws MessagingException {
+    public void register(RegistrationRequest request, MultipartFile file) throws MessagingException, IOException {
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         var userRole = roleRepository.findByName("USER")
                 // todo - better exception handling
                 .orElseThrow(() -> new IllegalStateException("Role USER was not initiated"));
@@ -49,12 +54,17 @@ public class AuthenticationService {
                 .dateOfBirth(request.getDateOfBirth())
                 .mobile(request.getMobile())
                 .gender(request.getGender())
+                .photo(fileName)
                 .password(passwordEncoder.encode(request.getPassword()))
                 .accountLocked(false)
                 .enabled(false)
                 .roles(List.of(userRole))
                 .build();
-        userRepository.save(user);
+
+        User savedUser = userRepository.save(user);
+        String uploadDir = "user-photos/" + savedUser.getId();
+        AmazonS3Util.uploadFile(uploadDir, fileName, file.getInputStream());
+
         sendValidationEmail(user);
     }
 

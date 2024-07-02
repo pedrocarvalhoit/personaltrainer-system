@@ -1,6 +1,8 @@
 package com.personaltrainer.workoutsession;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import lombok.NonNull;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

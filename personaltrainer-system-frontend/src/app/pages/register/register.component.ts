@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { passwordMatchValidator } from './validation';
 
 @Component({
   selector: 'app-register',
@@ -18,20 +20,70 @@ export class RegisterComponent {
   mobile: string = '';
   gender: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  userForm!: FormGroup;
+  selectedFile: File | null = null;
+
+  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.userForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
+      mobile: ['', Validators.required],
+      gender: [''],
+      dateOfBirth: ['', Validators.required]
+    }, { validators: passwordMatchValidator });
+  }
+
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
 
   onSubmit() {
-    if (this.password !== this.confirmPassword) {
-      alert("Password and Confirm Password should match.");
-      return;
-    }
+    if (this.userForm.valid ) {
+      const formData = new FormData();
+      formData.append('file', this.selectedFile as File);
 
-    this.authService.register(this.firstName, this.lastName, this.email, this.password,this.dateOfBirth,
-       this.mobile, this.gender).subscribe(response => {
-      this.router.navigate(['verify']);
-    }, error => {
-      console.error('Registration failed', error);
-    });
+      const userData = {
+          firstName: this.userForm.get('firstName')?.value,
+          lastName: this.userForm.get('lastName')?.value,
+          email: this.userForm.get('email')?.value,
+          password: this.userForm.get('password')?.value,
+          mobile: this.userForm.get('mobile')?.value,
+          gender: this.userForm.get('gender')?.value,
+          dateOfBirth: this.userForm.get('dateOfBirth')?.value,
+      };
+
+      formData.append('user', new Blob([JSON.stringify(userData)], {
+        type: 'application/json'
+      }));
+
+      this.authService.register(formData).subscribe(
+        response => {
+          console.log('User register successfuly, ID:', response);
+          this.showSuccessMessage();
+          setTimeout(() => {
+            this.router.navigate(['verify']);
+          }, 2000); // Redireciona após 2 segundos
+        },
+        error => {
+          console.error('Error on register new user:', error);
+        }
+      );
+    } else {
+      console.log('Invalid form');
+    }
+  }
+
+  showSuccessMessage(): void {
+    // Exibe a mensagem de sucesso
+    const successMessageElement = document.getElementById('success-message');
+    if (successMessageElement) {
+      successMessageElement.style.display = 'block';
+    }
   }
 
   login() {

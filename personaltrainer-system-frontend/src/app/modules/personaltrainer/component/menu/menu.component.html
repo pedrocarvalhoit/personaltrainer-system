@@ -32,10 +32,17 @@
         aria-label="Search">
         <button *ngIf="isMyClientsRoute" class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
 
-        <span>Welcome</span>
+        <div class="user-photo">
+          <a class="button-edit-photo" (click)="showDialog()">
+            <div class="image-wrapper mx-2">
+              <img [src]="userPhotoUrl ? userPhotoUrl : 'assets/images/logo2.png'" alt="User Photo" class="user-photo">
+              <span class="edit-icon"><i class="fas fa-pen"></i></span>
+            </div>
+          </a>
+        </div>
 
         <div class="name-container" (mouseenter)="showEditOption = true" (mouseleave)="showEditOption = false">
-          <span class="text-capitalize fw-bold">{{ firstName }}</span>
+          Welcome,<span class="text-capitalize fw-bold">{{ firstName }}</span>
           <button class="btn btn-primary btn-sm edit-button" *ngIf="showEditOption" (click)="editData()">Edit Data</button>
        </div>
 
@@ -44,3 +51,14 @@
     </div>
   </div>
 </nav>
+
+<p-dialog header="Edit Photo" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+  <div class="flex align-items-center gap-3 mb-5">
+    <label for="photo" class="font-semibold w-6rem">Photo</label>
+    <input type="file" id="photo" (change)="onFileSelected($event)" class="flex-auto" autocomplete="off" />
+  </div>
+  <div class="flex justify-content-end gap-2">
+    <p-button label="Cancel" severity="secondary" (click)="visible = false"></p-button>
+    <p-button label="Save" (click)="updatePhoto()"></p-button>
+  </div>
+</p-dialog>
