@@ -3,7 +3,7 @@ import { Client, ClientService } from '../../../../services/client/client.servic
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { HttpHeaders } from '@angular/common/http';
-import { WorkoutSessionClientMonthlySummaryResponse, WorkoutsessionService } from '../../../../services/workoutsession/workoutsession.service';
+import { WorkoutsessionService } from '../../../../services/workoutsession/workoutsession.service';
 
 @Component({
   selector: 'app-client',
@@ -15,9 +15,19 @@ export class ClientComponent implements OnInit{
   clientId!: number;
   client!: Client;
 
+  //Monthly Stats
   totalSessionsActualMonth: number = 0;
   totalExecutedSessionsActualMonth: number = 0;
   totalNotExecutedSessionsActualMonth: number = 0;
+  percentActualMonthExecuted: number = 0;
+  percentActualMonthNotExecuted: number = 0;
+
+  //All Time Stats
+  totalAllTimeSessions: number = 0;
+  totalAllTimeExecutedSessions: number = 0;
+  totalAllTimeNotExecutedSessions: number = 0;
+  percentAllTimeExecuted: number = 0;
+  percentAllTimeNotExecuted: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,18 +48,34 @@ export class ClientComponent implements OnInit{
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`
       });
-      // Fetch workout sessions count and top clients
-      this.workoutSessionService.getTotalMonthlySummary(headers, this.clientId).subscribe(
+      //Monthly stats
+      this.workoutSessionService.getMonthlyStatsSummary(headers, this.clientId).subscribe(
         summary => {
           console.log('Data fecthed', summary)
           this.totalSessionsActualMonth = summary.totalSessionsActualMonth;
           this.totalExecutedSessionsActualMonth = summary.totalExecutedSessionsActualMonth;
           this.totalNotExecutedSessionsActualMonth = summary.totalNotExecutedSessionsActualMonth;
+          this.percentActualMonthExecuted = summary.percentExecuted;
+          this.percentActualMonthNotExecuted = summary.percentNotExecuted
         },
         error => {
           console.error('Failed to fetch workout summary', error);
         }
       );
+    //All time stats
+    this.workoutSessionService.getAllTimeStatsSummary(headers, this.clientId).subscribe(
+      summary => {
+        console.log('Data fecthed', summary)
+        this.totalAllTimeSessions = summary.totalSessions;
+        this.totalAllTimeExecutedSessions = summary.totalExecutedSessions;
+        this.totalAllTimeNotExecutedSessions = summary.totalNotExecutedSessions;
+        this.percentAllTimeExecuted = summary.percentExecuted;
+        this.percentAllTimeNotExecuted = summary.percentNotExecuted
+      },
+      error => {
+        console.error('Failed to fetch workout summary', error);
+      }
+    );
     } else {
       console.error('Token not found');
     }

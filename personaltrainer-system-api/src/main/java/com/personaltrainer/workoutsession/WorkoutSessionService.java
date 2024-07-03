@@ -15,8 +15,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Service
@@ -99,11 +97,10 @@ public class WorkoutSessionService {
 
     /*This is the method used on Actual Month
      Client page for ws stats on client-dashboard*/
-    public WorkoutSessionClientMonthlySummaryResponse getSessionStats(Authentication authentication,
-                                                                      Integer clientId){
+    public WorkoutSessionClientActualMonthSummaryResponse getActualMonthSessionStats(Authentication authentication,
+                                                                                     Integer clientId){
         User user = (User) authentication.getPrincipal();
 
-        //Actual month session data
         List<WorkoutSession> sessionsActualMonth = workoutSessionRepository.findTotalMonthlySessionsByUserId(user.getId())
                 .stream()
                 .filter(workoutSession -> workoutSession.getClient().getId().equals(clientId))
@@ -119,17 +116,48 @@ public class WorkoutSessionService {
                 .filter(ws -> ws.getClient().getId().equals(clientId))
                 .toList();
 
-        long percentualExecuted
+        int totalSessions = sessionsActualMonth.size();
+        int executedSessions = executedSessionActualMonth.size();
+        int notExecutedSessions = notExecutedSessionActualMonth.size();
 
-        return WorkoutSessionClientMonthlySummaryResponse.builder()
+        double percentExecuted = totalSessions == 0 ? 0 : (double) executedSessions / totalSessions * 100;
+        double percentNotExecuted = totalSessions == 0 ? 0 : (double) notExecutedSessions / totalSessions * 100;
+
+        return WorkoutSessionClientActualMonthSummaryResponse.builder()
                 .totalSessionsActualMonth(sessionsActualMonth.size())
                 .totalExecutedSessionsActualMonth(executedSessionActualMonth.size())
                 .totalNotExecutedSessionsActualMonth(notExecutedSessionActualMonth.size())
+                .percentExecuted(percentExecuted)
+                .percentNotExecuted(percentNotExecuted)
                 .build();
     }
 
     /*This is the method used on Monthly Avarage
      Client page for ws stats on client-dashboard*/
+    public WorkoutSessionClientAllTimeSummaryResponse getAllTimeSessionStats(Integer clientId) {
+
+        List<WorkoutSession> sessionsList = workoutSessionRepository.findAllByClientId(clientId);
+        List<WorkoutSession> executedSessionsList = workoutSessionRepository.findAllByExecutedIsTrueAndClientId(clientId);
+        List<WorkoutSession> notExecutedSessionsList = workoutSessionRepository.findAllByExecutedIsFalseAndClientId(clientId);
+
+        int sessionsAmount = sessionsList.size();
+        int executedSessionAmount = executedSessionsList.size();
+        int notExecutedSessionAmount = notExecutedSessionsList.size();
+
+        double percentExecuted = sessionsAmount == 0 ? 0 : (double) executedSessionAmount / sessionsAmount * 100;
+        double percentNotExecuted = sessionsAmount == 0 ? 0 : (double) notExecutedSessionAmount / sessionsAmount * 100;
+
+        String formattedPExecuted = String.format(Locale.US, "%.2f", percentExecuted);
+        String formattedPNotExecuted = String.format(Locale.US,"%.2f", percentNotExecuted);
+
+        return WorkoutSessionClientAllTimeSummaryResponse.builder()
+                .totalSessions(sessionsAmount)
+                .totalExecutedSessions(executedSessionAmount)
+                .totalNotExecutedSessions(notExecutedSessionAmount)
+                .percentExecuted(Double.parseDouble(formattedPExecuted))
+                .percentNotExecuted(Double.parseDouble(formattedPNotExecuted))
+                .build();
+    }
 
     public Integer delete(Integer id) {
         workoutSessionRepository.deleteById(id);
@@ -173,4 +201,6 @@ public class WorkoutSessionService {
 
         return sessionId;
     }
+
+
 }

@@ -26,6 +26,28 @@ public class WorkoutSessionController {
         return ResponseEntity.ok(service.save(createWSRequest, clientId));
     }
 
+    //delete Workout Session
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Integer> deleteSession(@PathVariable Integer id){
+        return ResponseEntity.ok(service.delete(id));
+    }
+
+    //execute session
+    @PatchMapping("/execute/{sessionId}")
+    public ResponseEntity<Integer> executeSession(@PathVariable @Valid Integer sessionId, Authentication authentication){
+        return ResponseEntity.ok(service.execute(sessionId, authentication));
+    }
+
+    //update Efforts
+    @PatchMapping("/update-efforts/{sessionId}")
+    public ResponseEntity<Integer> updateEfforts(
+            Authentication authentication,
+            @PathVariable @Valid Integer sessionId,
+            @RequestBody WorkoutSessioUpdateEffortsRequest request
+    ){
+        return ResponseEntity.ok(service.updateEfforts(authentication, sessionId, request));
+    }
+
     //list by client
     @GetMapping("/all/{clientId}")
     public ResponseEntity<PageResponse<WorkoutSessionResponse>> listAllByClient(
@@ -54,33 +76,19 @@ public class WorkoutSessionController {
         return ResponseEntity.ok(service.getAllSessionsForCalendar(authentication));
     }
 
-    //get client session stats
+    //get client actual month session stats
     @GetMapping("get-workout-stats-actual-month/{clientId}")
-    public ResponseEntity<WorkoutSessionClientMonthlySummaryResponse> getSessionsForStat(Authentication authentication,
-                                                                                         @PathVariable Integer clientId){
-        return ResponseEntity.ok(service.getSessionStats(authentication, clientId));
+    public ResponseEntity<WorkoutSessionClientActualMonthSummaryResponse> getSessionsForAchtualMonthStat(Authentication authentication,
+                                                                                             @PathVariable Integer clientId){
+        return ResponseEntity.ok(service.getActualMonthSessionStats(authentication, clientId));
     }
 
-    //execute session
-    @PatchMapping("/execute/{sessionId}")
-    public ResponseEntity<Integer> executeSession(@PathVariable @Valid Integer sessionId, Authentication authentication){
-        return ResponseEntity.ok(service.execute(sessionId, authentication));
-    }
-
-    //update Efforts
-    @PatchMapping("/update-efforts/{sessionId}")
-    public ResponseEntity<Integer> updateEfforts(
-            Authentication authentication,
-            @PathVariable @Valid Integer sessionId,
-            @RequestBody WorkoutSessioUpdateEffortsRequest request
-            ){
-        return ResponseEntity.ok(service.updateEfforts(authentication, sessionId, request));
-    }
-
-    //delete Workout Session
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Integer> deleteSession(@PathVariable Integer id){
-        return ResponseEntity.ok(service.delete(id));
+    //get client all time session stats
+    @GetMapping("get-workout-stats-all-time/{clientId}")
+    public ResponseEntity<WorkoutSessionClientAllTimeSummaryResponse> getSessionsForAllTimeStats(
+            @PathVariable Integer clientId
+    ){
+        return ResponseEntity.ok(service.getAllTimeSessionStats(clientId));
     }
 
 }

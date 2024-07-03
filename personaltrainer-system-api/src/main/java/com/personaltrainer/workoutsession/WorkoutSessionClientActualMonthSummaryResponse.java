@@ -7,12 +7,13 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class WorkoutSessionClientMonthlySummaryResponse {
+/*This clas is used to see data from session for this actual month */
+public class WorkoutSessionClientActualMonthSummaryResponse {
     private Integer totalSessionsActualMonth;
     private Integer totalExecutedSessionsActualMonth;
     private Integer totalNotExecutedSessionsActualMonth;
 
-    private long percentualExecuted;
-    private long sessionsMonthlyPercentual;
+    private double percentExecuted;
+    private double percentNotExecuted;
 
 }

@@ -17,6 +17,12 @@ public interface WorkoutSessionRepository extends JpaRepository<WorkoutSession, 
 
     Page<WorkoutSession> findAllByClientId(Pageable pageable, Integer clientId);
 
+    List<WorkoutSession> findAllByClientId(Integer clientId);
+
+    List<WorkoutSession> findAllByExecutedIsTrueAndClientId(Integer clientId);
+
+    List<WorkoutSession> findAllByExecutedIsFalseAndClientId(Integer clientId);
+
     @Query("SELECT ws FROM WorkoutSession ws JOIN ws.client c WHERE c.personalTrainer.id = :userId " +
             "AND MONTH(ws.sessionDate) = MONTH(CURRENT_DATE()) " +
             "AND YEAR(ws.sessionDate) = YEAR(CURRENT_DATE()) ")
@@ -52,4 +58,5 @@ public interface WorkoutSessionRepository extends JpaRepository<WorkoutSession, 
     @Modifying
     @Query("DELETE from WorkoutSession ws WHERE ws.client.id = :clientId")
     void deleteAllByClientId(Integer clientId);
+
 }

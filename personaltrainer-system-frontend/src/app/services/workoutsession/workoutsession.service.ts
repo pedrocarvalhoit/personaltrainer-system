@@ -29,10 +29,20 @@ interface WorkoutSessionTotalSummaryResponse {
   bestThreeClientsNumOfSessions: number[];
 }
 
-export interface WorkoutSessionClientMonthlySummaryResponse {
+export interface WorkoutSessionClientActualMonthSummaryResponse {
   totalSessionsActualMonth: number;
   totalExecutedSessionsActualMonth: number;
   totalNotExecutedSessionsActualMonth: number;
+  percentExecuted: number;
+  percentNotExecuted: number;
+}
+
+export interface WorkoutSessionClientAllTimeSummaryResponse{
+  totalSessions: number;
+  totalExecutedSessions: number;
+  totalNotExecutedSessions: number;
+  percentExecuted: number;
+  percentNotExecuted: number;
 }
 
 @Injectable({
@@ -88,9 +98,14 @@ export class WorkoutsessionService {
   }
 
   //Client dashboard
-  getTotalMonthlySummary(headers: HttpHeaders, sessionId: number): Observable<WorkoutSessionClientMonthlySummaryResponse> {
-    return this.http.get<WorkoutSessionClientMonthlySummaryResponse>
+  getMonthlyStatsSummary(headers: HttpHeaders, sessionId: number): Observable<WorkoutSessionClientActualMonthSummaryResponse> {
+    return this.http.get<WorkoutSessionClientActualMonthSummaryResponse>
     (`http://localhost:8088/api/v1/workout-sessions/get-workout-stats-actual-month/${sessionId}`, { headers });
+  }
+
+  getAllTimeStatsSummary(headers: HttpHeaders, sessionId: number): Observable<WorkoutSessionClientAllTimeSummaryResponse> {
+    return this.http.get<WorkoutSessionClientAllTimeSummaryResponse>
+    (`http://localhost:8088/api/v1/workout-sessions/get-workout-stats-all-time/${sessionId}`, { headers });
   }
 
 }
