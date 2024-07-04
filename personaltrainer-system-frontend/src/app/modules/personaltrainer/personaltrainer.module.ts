@@ -17,11 +17,13 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ClientComponent } from './pages/client/client.component';
+import { ClientDashboardComponent } from './pages/clientdashboard/clientdashboard.component';
 import { WorkoutProgramsComponent } from './pages/workout-programs/workout-programs.component';
 import { CreateWorkoutProgramComponent } from './pages/createworkoutprogram/create-workout-program.component'; // Necessário para animações do PrimeNG
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { WorkoutsessionsstatsComponent } from './pages/clientdashboard/workoutsessionsstats/workoutsessionsstats.component';
+import { TrainingindicativestatsComponent } from './pages/clientdashboard/trainingindicativestats/trainingindicativestats.component';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -34,9 +36,11 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     EditClientComponent,
     WorkoutSessionComponent,
     CreateWorkoutsessionComponent,
-    ClientComponent,
+    ClientDashboardComponent,
     WorkoutProgramsComponent,
     CreateWorkoutProgramComponent,
+    WorkoutsessionsstatsComponent,
+    TrainingindicativestatsComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +53,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     DropdownModule,
     CalendarModule,
     EditorModule,
+    ChartModule
   ]
 })
 export class PersonaltrainerModule { }

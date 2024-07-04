@@ -54,6 +54,9 @@ public interface WorkoutSessionRepository extends JpaRepository<WorkoutSession, 
             "ORDER BY ws.sessionDate ASC, ws.sessionTime ASC") // Ascending sessionDate
     List<WorkoutSession> findSessionsByDate(@Param("userId") Integer userId);
 
+    @Query("SELECT ws FROM WorkoutSession ws WHERE ws.client.id = :clientId AND ws.sessionDate >= :startDate")
+    List<WorkoutSession> findByClientIdAndDateAfter(Integer clientId, LocalDate startDate);
+
     @Transactional
     @Modifying
     @Query("DELETE from WorkoutSession ws WHERE ws.client.id = :clientId")

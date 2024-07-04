@@ -4,6 +4,7 @@ import com.personaltrainer.common.PageResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -89,6 +90,12 @@ public class WorkoutSessionController {
             @PathVariable Integer clientId
     ){
         return ResponseEntity.ok(service.getAllTimeSessionStats(clientId));
+    }
+
+    //get client subjective
+    @GetMapping("get-workout-quality/{clientId}")
+    public ResponseEntity<List<WorkoutSessionQualityResponse>> getSessionsQualityAvarages(@PathVariable Integer clientId){
+        return ResponseEntity.ok(service.getSessionsQuality(clientId));
     }
 
 }

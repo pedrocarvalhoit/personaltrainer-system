@@ -133,7 +133,7 @@ export class ClientsComponent implements OnInit {
   }
 
   redirectClientPage(clientId: number): void {
-    this.router.navigate(['personaltrainer/client', clientId]);
+    this.router.navigate(['personaltrainer/client-dashboard', clientId]);
   }
 
   nextPage(): void {

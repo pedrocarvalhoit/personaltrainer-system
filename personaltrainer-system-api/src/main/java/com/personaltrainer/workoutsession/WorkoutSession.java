@@ -37,6 +37,7 @@ public class WorkoutSession {
 
     private Integer clientSubjectEffort;
     private Integer pTQualityEffortIndicative;
+
     private boolean executed;
 
     public void markAsExecuted() {

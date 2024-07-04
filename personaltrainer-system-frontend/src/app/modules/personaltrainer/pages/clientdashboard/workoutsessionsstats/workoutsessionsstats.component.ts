@@ -1,19 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { Client, ClientService } from '../../../../services/client/client.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { Client, ClientService } from '../../../../../services/client/client.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../../../services/auth/auth.service';
+import { AuthService } from '../../../../../services/auth/auth.service';
+import { WorkoutsessionService } from '../../../../../services/workoutsession/workoutsession.service';
 import { HttpHeaders } from '@angular/common/http';
-import { WorkoutsessionService } from '../../../../services/workoutsession/workoutsession.service';
 
 @Component({
-  selector: 'app-client',
-  templateUrl: './client.component.html',
-  styleUrl: './client.component.scss'
+  selector: 'app-workoutsessionsstats',
+  templateUrl: './workoutsessionsstats.component.html',
+  styleUrl: './workoutsessionsstats.component.scss'
 })
-export class ClientComponent implements OnInit{
+export class WorkoutsessionsstatsComponent implements OnInit{
 
-  clientId!: number;
-  client!: Client;
+  @Input() clientId!: number;
 
   //Monthly Stats
   totalSessionsActualMonth: number = 0;
@@ -38,16 +37,12 @@ export class ClientComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.clientId = params['id'];
-      this.loadClientDetails();
-    });
-
-    const token = this.authService.getToken();
-    if (token) {
-      const headers = new HttpHeaders({
-        'Authorization': `Bearer ${token}`
-      });
+    if (this.clientId && !isNaN(this.clientId)) {
+      const token = this.authService.getToken();
+      if (token) {
+        const headers = new HttpHeaders({
+          'Authorization': `Bearer ${token}`
+        });
       //Monthly stats
       this.workoutSessionService.getMonthlyStatsSummary(headers, this.clientId).subscribe(
         summary => {
@@ -80,23 +75,6 @@ export class ClientComponent implements OnInit{
       console.error('Token not found');
     }
   }
-
-  loadClientDetails(): void {
-    const token = this.authService.getToken();
-    if (token) {
-      const headers = new HttpHeaders({
-        Authorization: `Bearer ${token}`,
-      });
-      this.clientService.getClientById(headers, this.clientId).subscribe(
-        (client: Client) => {
-          this.client = client;
-        },
-        (error) => {
-          console.error('Failed to load client details:', error);
-        }
-      );
-    }
   }
-
 
 }

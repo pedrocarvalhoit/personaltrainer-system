@@ -15,7 +15,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.TextStyle;
+import java.time.temporal.TemporalAdjusters;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -62,7 +66,7 @@ public class WorkoutSessionService {
     }
 
     /*This is the method used
-    on the monthly workout summary */
+    on the monthly workout summary on pt-dashboard */
     public WorkoutSessionTotalSummaryResponse getToalSesssionsSummary(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
 
@@ -95,6 +99,20 @@ public class WorkoutSessionService {
                 .build();
     }
 
+    /*This is the method used on
+     Upcoming Workout Sessions (5 days) on pt-dashboard */
+    public List<WorkoutSessionResponseForCalendar> getSessionsForNextWeek(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+
+        LocalDate startDate = LocalDate.now();
+        LocalDate endDate = startDate.plusDays(5);
+        List<WorkoutSession> workoutSessions = workoutSessionRepository.findSessionsForNextWeek(startDate, endDate, user.getId());
+
+        return workoutSessions.stream()
+                .map(mapper :: toWorkoutSessionCalendarResponse)
+                .toList();
+    }
+
     /*This is the method used on Actual Month
      Client page for ws stats on client-dashboard*/
     public WorkoutSessionClientActualMonthSummaryResponse getActualMonthSessionStats(Authentication authentication,
@@ -123,12 +141,15 @@ public class WorkoutSessionService {
         double percentExecuted = totalSessions == 0 ? 0 : (double) executedSessions / totalSessions * 100;
         double percentNotExecuted = totalSessions == 0 ? 0 : (double) notExecutedSessions / totalSessions * 100;
 
+        String formattedPExecuted = String.format(Locale.US, "%.2f", percentExecuted);
+        String formattedPNotExecuted = String.format(Locale.US,"%.2f", percentNotExecuted);
+
         return WorkoutSessionClientActualMonthSummaryResponse.builder()
                 .totalSessionsActualMonth(sessionsActualMonth.size())
                 .totalExecutedSessionsActualMonth(executedSessionActualMonth.size())
                 .totalNotExecutedSessionsActualMonth(notExecutedSessionActualMonth.size())
-                .percentExecuted(percentExecuted)
-                .percentNotExecuted(percentNotExecuted)
+                .percentExecuted(Double.parseDouble(formattedPExecuted))
+                .percentNotExecuted(Double.parseDouble(formattedPNotExecuted))
                 .build();
     }
 
@@ -165,17 +186,42 @@ public class WorkoutSessionService {
     }
 
     /*This is the method used on
-     Upcoming Workout Sessions (5 days) on pt-dashboard */
-    public List<WorkoutSessionResponseForCalendar> getSessionsForNextWeek(Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
+     Sessions quality stats (6 months) on client-dashboard
+     CHATGP helped me on this
+     Here i am creating a map with month and avarage of sbjective efforts and ptQuality
+     Grouping by the months, create a map for each mont
+     Than return the creation of DTO with first map key and value, and second map value */
+    public List<WorkoutSessionQualityResponse> getSessionsQuality(Integer clientId) {
+        LocalDate sixMonthsAgo = LocalDate.now().minusMonths(6).with(TemporalAdjusters.firstDayOfMonth());
 
-        LocalDate startDate = LocalDate.now();
-        LocalDate endDate = startDate.plusDays(5);
-        List<WorkoutSession> workoutSessions = workoutSessionRepository.findSessionsForNextWeek(startDate, endDate, user.getId());
+        List<WorkoutSession> sessions = workoutSessionRepository.findByClientIdAndDateAfter(clientId, sixMonthsAgo);
 
-        return workoutSessions.stream()
-                .map(mapper :: toWorkoutSessionCalendarResponse)
-                .toList();
+        //Group the sessions by month and calculates subjetive avarage
+        Map<String, Double> subjectiveEffortStats = sessions.stream()
+                .filter(WorkoutSession::isExecuted)//step1: Filter executed sessions
+                .collect(Collectors.groupingBy(
+                        session -> session.getSessionDate().getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH),//step2: Group by month
+                        Collectors.averagingDouble(WorkoutSession::getClientSubjectEffort)//step3: Calculates avarage
+                ));
+
+        Map<String, Double> ptEffortQualityStats = sessions.stream()
+                .filter(WorkoutSession::isExecuted)
+                .collect(Collectors.groupingBy(
+                        session -> session.getSessionDate().getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH),
+                        Collectors.averagingDouble(WorkoutSession::getPTQualityEffortIndicative)
+                ));
+
+        //Comparator to sort in correct month order
+        Comparator<String> monthComparator = Comparator.comparingInt(month -> Month.valueOf(month.toUpperCase()).getValue());
+
+        return subjectiveEffortStats.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey(monthComparator))
+                .map(entry -> WorkoutSessionQualityResponse.builder()
+                        .month(entry.getKey())
+                        .clientSubjectEffortAvarage(entry.getValue())
+                        .ptQualityEffortAvarage(ptEffortQualityStats.get(entry.getKey()))
+                        .build())
+                .collect(Collectors.toList());
     }
 
     public List<WorkoutSessionResponseForCalendar> getAllSessionsForCalendar(Authentication authentication) {
@@ -201,6 +247,4 @@ public class WorkoutSessionService {
 
         return sessionId;
     }
-
-
 }

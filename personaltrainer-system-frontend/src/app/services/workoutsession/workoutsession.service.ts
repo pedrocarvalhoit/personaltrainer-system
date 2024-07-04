@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ErrorHandlerService } from '../errohandler/error-handler.service';
-import { Observable } from 'rxjs';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 
 export interface WorkoutSessionResponse {
   id: number;
@@ -43,6 +43,12 @@ export interface WorkoutSessionClientAllTimeSummaryResponse{
   totalNotExecutedSessions: number;
   percentExecuted: number;
   percentNotExecuted: number;
+}
+
+export interface WorkoutSessionQualityResponse {
+  month: string;
+  clientSubjectEffortAvarage: number;
+  ptQualityEffortAvarage: number;
 }
 
 @Injectable({
@@ -98,14 +104,25 @@ export class WorkoutsessionService {
   }
 
   //Client dashboard
-  getMonthlyStatsSummary(headers: HttpHeaders, sessionId: number): Observable<WorkoutSessionClientActualMonthSummaryResponse> {
+  getMonthlyStatsSummary(headers: HttpHeaders, clientId: number): Observable<WorkoutSessionClientActualMonthSummaryResponse> {
     return this.http.get<WorkoutSessionClientActualMonthSummaryResponse>
-    (`http://localhost:8088/api/v1/workout-sessions/get-workout-stats-actual-month/${sessionId}`, { headers });
+    (`http://localhost:8088/api/v1/workout-sessions/get-workout-stats-actual-month/${clientId}`, { headers });
   }
 
-  getAllTimeStatsSummary(headers: HttpHeaders, sessionId: number): Observable<WorkoutSessionClientAllTimeSummaryResponse> {
+  getAllTimeStatsSummary(headers: HttpHeaders, clientId: number): Observable<WorkoutSessionClientAllTimeSummaryResponse> {
     return this.http.get<WorkoutSessionClientAllTimeSummaryResponse>
-    (`http://localhost:8088/api/v1/workout-sessions/get-workout-stats-all-time/${sessionId}`, { headers });
+    (`http://localhost:8088/api/v1/workout-sessions/get-workout-stats-all-time/${clientId}`, { headers });
+  }
+
+  getSessionsQuality(headers: HttpHeaders, clientId: number): Observable<WorkoutSessionQualityResponse[]> {
+    return this.http.get<WorkoutSessionQualityResponse[]>(`http://localhost:8088/api/v1/workout-sessions/get-workout-quality/${clientId}`, { headers })
+      .pipe(
+        tap(response => console.log('Raw API Response:', response)),
+        catchError(error => {
+          console.error('Error fetching sessions quality:', error);
+          return throwError(error);
+        })
+      );
   }
 
 }

@@ -8,7 +8,7 @@ import { ClientsComponent } from './pages/clientslist/clients.component';
 import { EditClientComponent } from './pages/editclient/edit-client.component';
 import { WorkoutSessionComponent } from './pages/workoutsession/workout-session.component';
 import { CreateWorkoutsessionComponent } from './pages/createworkoutsession/create-workoutsession.component';
-import { ClientComponent } from './pages/client/client.component';
+import { ClientDashboardComponent } from './pages/clientdashboard/clientdashboard.component';
 import { WorkoutProgramsComponent } from './pages/workout-programs/workout-programs.component';
 import { CreateWorkoutProgramComponent } from './pages/createworkoutprogram/create-workout-program.component';
 
@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'edit', component: EditComponent, canActivate: [AuthGuard] },
   { path: 'create-client', component: CreateClientComponent, canActivate: [AuthGuard] },
   { path: 'clients', component: ClientsComponent, canActivate: [AuthGuard] },
-  { path: 'client/:id', component: ClientComponent, canActivate: [AuthGuard] },
+  { path: 'client-dashboard/:id', component: ClientDashboardComponent, canActivate: [AuthGuard] },
   { path: 'edit-client/:id', component: EditClientComponent, canActivate: [AuthGuard] },
   { path: 'workout-sessions', component: WorkoutSessionComponent, canActivate: [AuthGuard] },
   { path: 'workout-session/create', component: CreateWorkoutsessionComponent, canActivate: [AuthGuard] },
