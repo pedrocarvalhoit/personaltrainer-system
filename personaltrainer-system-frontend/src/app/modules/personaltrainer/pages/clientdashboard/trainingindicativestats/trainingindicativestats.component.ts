@@ -40,14 +40,14 @@ export class TrainingindicativestatsComponent implements OnInit, OnChanges {
       labels: [],
       datasets: [
         {
-          label: 'Escala Subjetiva de Esforço',
+          label: '',
           data: [],
           fill: false,
           borderColor: documentStyle.getPropertyValue('--blue-500'),
           tension: 0.4
         },
         {
-          label: 'Qualidade de Esforço',
+          label: '',
           data: [],
           fill: false,
           borderColor: documentStyle.getPropertyValue('--pink-500'),
@@ -115,14 +115,14 @@ export class TrainingindicativestatsComponent implements OnInit, OnChanges {
                 labels: labels,
                 datasets: [
                   {
-                    label: 'Escala Subjetiva de Esforço',
+                    label: 'Subjective Effort Scale',
                     data: subjectiveEffortData,
                     fill: false,
                     borderColor: getComputedStyle(document.documentElement).getPropertyValue('--blue-500'),
                     tension: 0.4
                   },
                   {
-                    label: 'Qualidade de Esforço',
+                    label: 'Training Session Effort Quality',
                     data: qualityEffortData,
                     fill: false,
                     borderColor: getComputedStyle(document.documentElement).getPropertyValue('--pink-500'),
