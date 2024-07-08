@@ -1,0 +1,24 @@
+<div class="card shadow-sm p-3 h-100">
+  <div class="workoutPrograms">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4 class="mb-0">{{ showDisabledPrograms ? 'Deactivated Programs' : 'Active Programs' }}</h4>
+      <button class="btn btn-primary btn-sm" (click)="toggleProgramList()">
+        {{ showDisabledPrograms ? 'Show Active Programs' : 'Show Deactivated Programs' }}
+      </button>
+    </div>
+  </div>
+  <ul class="list-group workout-programs-list">
+    <li class="list-group-item" *ngFor="let program of workoutPrograms">
+      <div class="d-flex align-items-center">
+        <div class="client-details ms-4">
+          <h6>
+            Title: <strong>{{program.title}}</strong>
+            &nbsp;<a href="javascript:void(0);" (click)="downloadPdf(program.id, program.title)">(dowload)</a>
+          </h6>
+          <p>Start Date: {{program.startDate}}</p>
+          <p>End Date: {{program.endDate}}</p>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

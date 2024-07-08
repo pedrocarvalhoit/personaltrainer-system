@@ -21,10 +21,6 @@ export class LoginComponent {
     }, error => {
       console.error('Login failed', error);
       this.errorMessage = 'Failed to login. Please check your credentials and try again.';
-      // Recarrega a página após 3 segundos
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
     });
   }
 

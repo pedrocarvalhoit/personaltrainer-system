@@ -24,6 +24,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { WorkoutsessionsstatsComponent } from './pages/clientdashboard/workoutsessionsstats/workoutsessionsstats.component';
 import { TrainingindicativestatsComponent } from './pages/clientdashboard/trainingindicativestats/trainingindicativestats.component';
 import { ChartModule } from 'primeng/chart';
+import { WorkoutprogramslistComponent } from './pages/clientdashboard/workoutprogramslist/workoutprogramslist.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ChartModule } from 'primeng/chart';
     CreateWorkoutProgramComponent,
     WorkoutsessionsstatsComponent,
     TrainingindicativestatsComponent,
+    WorkoutprogramslistComponent,
   ],
   imports: [
     CommonModule,

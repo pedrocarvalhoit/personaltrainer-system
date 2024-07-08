@@ -6,7 +6,9 @@ import com.personaltrainer.common.PageResponse;
 import com.personaltrainer.common.UserPermissionOverClientCheck;
 import com.personaltrainer.exception.OperationNotPermitedException;
 import com.personaltrainer.user.User;
+import com.personaltrainer.workoutprogram.exporter.WorkoutProgramPDFExporter;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -91,8 +94,6 @@ public class WorkoutProgramService {
         return workoutProgramRepository.save(workoutProgram).getId();
     }
 
-
-
     public List<WorkoutProgram> findProgramByEndDateBefor(LocalDate date) {
         return workoutProgramRepository.findAllByEndDateBeforeAndEnabledTrue(date);
     }
@@ -100,5 +101,12 @@ public class WorkoutProgramService {
     //save for scheduler
     public void save(WorkoutProgram program){
         workoutProgramRepository.save(program);
+    }
+
+    public Integer exportToPdf(HttpServletResponse response, Integer programId) throws IOException {
+        WorkoutProgram workoutProgram = workoutProgramRepository.findById(programId).get();
+        WorkoutProgramPDFExporter exporter = new WorkoutProgramPDFExporter();
+        exporter.export(workoutProgram, response, "workoutprogram");
+        return programId;
     }
 }

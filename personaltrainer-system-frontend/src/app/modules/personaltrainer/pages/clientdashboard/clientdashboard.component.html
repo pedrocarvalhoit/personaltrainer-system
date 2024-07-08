@@ -13,13 +13,7 @@
     </div>
 
     <div class="col-md-4 mb-4">
-      <div class="card shadow-sm p-3 h-100">
-        <h4 class="text-center mb-3">Workout Programs</h4>
-        <ul class="list-group">
-          <li class="list-group-item" *ngFor="let program of ''">
-          </li>
-        </ul>
-      </div>
+      <app-workoutprogramslist [clientId]="clientId"></app-workoutprogramslist>
     </div>
   </div>
 </div>

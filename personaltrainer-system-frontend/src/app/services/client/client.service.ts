@@ -61,11 +61,7 @@ export class ClientService {
     );
   }
 
-  getAllDisabledClients(
-    headers: HttpHeaders,
-    page: number = 0,
-    size: number = 50
-  ): Observable<PageResponse<Client>> {
+  getAllDisabledClients(headers: HttpHeaders,page: number = 0, size: number = 50): Observable<PageResponse<Client>> {
     return this.http.get<PageResponse<Client>>(
       'http://localhost:8088/api/v1/clients/all-disabled',
       { headers, params: { page: page.toString(), size: size.toString() } }
