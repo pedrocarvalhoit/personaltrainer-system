@@ -20,14 +20,15 @@ public class WorkoutProgramPDFExporter extends AbstractExporter {
     public void export(WorkoutProgram program, HttpServletResponse response, String moduleName) throws IOException {
         super.setResponseHeader(response, "application/pdf", ".pdf", moduleName);
 
+        String mainTitle = "Workout Program (" + program.getClient().getPersonalData().getFullName() + ")";
+
         PdfWriter writer = new PdfWriter(response.getOutputStream());
         PdfDocument pdfDocument = new PdfDocument(writer);
         Document document = new Document(pdfDocument);
 
-        document.add(new Paragraph("Workout Program").setBold().setFontSize(14).setTextAlignment(TextAlignment.CENTER));
+        document.add(new Paragraph(mainTitle).setBold().setFontSize(14).setTextAlignment(TextAlignment.CENTER));
 
-        document.add(new Paragraph("Title").setBold().setFontSize(12).setTextAlignment(TextAlignment.LEFT));
-        document.add(new Paragraph(program.getTitle()).setFontSize(12));
+        document.add(new Paragraph(program.getTitle()).setBold().setFontSize(12));
 
         document.add(new Paragraph("Start Date").setBold().setFontSize(12).setTextAlignment(TextAlignment.RIGHT));
         document.add(new Paragraph(String.valueOf(program.getStartDate())).setFontSize(12).setTextAlignment(TextAlignment.RIGHT));

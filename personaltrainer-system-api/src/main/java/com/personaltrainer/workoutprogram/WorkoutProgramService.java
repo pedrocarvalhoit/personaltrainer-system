@@ -7,6 +7,7 @@ import com.personaltrainer.common.UserPermissionOverClientCheck;
 import com.personaltrainer.exception.OperationNotPermitedException;
 import com.personaltrainer.user.User;
 import com.personaltrainer.workoutprogram.exporter.WorkoutProgramPDFExporter;
+import com.personaltrainer.workoutprogram.exporter.WorkoutProgramWordExporter;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -103,10 +104,17 @@ public class WorkoutProgramService {
         workoutProgramRepository.save(program);
     }
 
-    public Integer exportToPdf(HttpServletResponse response, Integer programId) throws IOException {
+    //PDF exporter
+    public void exportToPdf(HttpServletResponse response, Integer programId) throws IOException {
         WorkoutProgram workoutProgram = workoutProgramRepository.findById(programId).get();
         WorkoutProgramPDFExporter exporter = new WorkoutProgramPDFExporter();
         exporter.export(workoutProgram, response, "workoutprogram");
-        return programId;
     }
+
+    //word exporter
+//    public void exportToWord(HttpServletResponse response, Integer programId) throws IOException {
+//        WorkoutProgram workoutProgram = workoutProgramRepository.findById(programId).get();
+//        WorkoutProgramWordExporter exporter = new WorkoutProgramWordExporter();
+//        exporter.export(workoutProgram, response, "workoutprogram");
+//    }
 }

@@ -13,7 +13,8 @@
         <div class="client-details ms-4">
           <h6>
             Title: <strong>{{program.title}}</strong>
-            &nbsp;<a href="javascript:void(0);" (click)="downloadPdf(program.id, program.title)">(dowload)</a>
+            &nbsp;<a href="javascript:void(0);" (click)="downloadPdf(program.id, program.title)">(pdf)</a>
+            &nbsp;<a href="javascript:void(0);" (click)="downloadWord(program.id, program.title)">(word)</a>
           </h6>
           <p>Start Date: {{program.startDate}}</p>
           <p>End Date: {{program.endDate}}</p>

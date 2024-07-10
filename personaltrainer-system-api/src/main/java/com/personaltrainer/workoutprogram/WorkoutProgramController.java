@@ -65,9 +65,10 @@ public class WorkoutProgramController {
 
     //pdf dowload
     @GetMapping("export-pdf/{programId}")
-    public ResponseEntity<Integer> exportToPdf(HttpServletResponse response, @PathVariable Integer programId) throws IOException {
-        return ResponseEntity.ok(service.exportToPdf(response, programId));
+    public void exportToPdf(HttpServletResponse response, @PathVariable Integer programId) throws IOException {
+        service.exportToPdf(response, programId);
     }
+
 
     //disable by end date
     //Sheduler class

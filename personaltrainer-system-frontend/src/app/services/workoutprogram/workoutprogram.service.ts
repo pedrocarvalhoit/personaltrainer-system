@@ -68,5 +68,14 @@ export class WorkoutprogramService {
     );
   }
 
+  exportToWord(headers: HttpHeaders, programId: number): Observable<Blob> {
+    return this.http.get(`http://localhost:8088/api/v1/workout-programs/export-word/${programId}`, { headers, responseType: 'blob'}).pipe(
+      catchError((error: any) => {
+        console.error('Download PDF failed', error);
+        throw error;
+      })
+    );
+  }
+
 
 }
