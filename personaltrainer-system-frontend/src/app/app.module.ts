@@ -18,6 +18,10 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { RouterLink } from '@angular/router';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { PersonaltrainerModule } from './modules/personaltrainer/personaltrainer.module';
+
 
 registerLocaleData(en);
 
@@ -36,6 +40,8 @@ registerLocaleData(en);
     ReactiveFormsModule,
     CodeInputModule,
     HttpClientModule,
+    ToastModule,
+    PersonaltrainerModule,
     RouterLink,
     JwtModule.forRoot({ // Config JwtModule
       config: {
@@ -49,7 +55,7 @@ registerLocaleData(en);
       },
     }),
   ],
-  providers: [AuthService, AuthGuard, JwtHelperService, provideAnimationsAsync(), provideHttpClient()],
-  bootstrap: [AppComponent]
+  providers: [AuthService, AuthGuard,MessageService, JwtHelperService, provideAnimationsAsync(), provideHttpClient()],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

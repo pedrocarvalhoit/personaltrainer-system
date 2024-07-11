@@ -52,7 +52,7 @@ export class UserService {
     return this.http.post<any>('http://localhost:8088/api/v1/users/edit', body, { headers });
   }
 
-  updatePhoto(headers: HttpHeaders, formData: FormData): Observable<number> {
-    return this.http.patch<number>('http://localhost:8088/api/v1/users/update-photo', formData, { headers });
+  updatePhoto(headers: HttpHeaders, formData: FormData): Observable<string> {
+    return this.http.patch('http://localhost:8088/api/v1/users/update-photo', formData, { headers, responseType: 'text' });
   }
 }

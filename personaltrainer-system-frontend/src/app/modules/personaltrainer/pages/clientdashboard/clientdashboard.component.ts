@@ -4,6 +4,9 @@ import { Client, ClientService } from '../../../../services/client/client.servic
 import { AuthService } from '../../../../services/auth/auth.service';
 import { WorkoutsessionService } from '../../../../services/workoutsession/workoutsession.service';
 import { HttpHeaders } from '@angular/common/http';
+import { Message, MessageService } from 'primeng/api';
+import { RedirectmessageService } from '../../../../services/redirectmessages/redirectmessage.service';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-client',
@@ -19,7 +22,8 @@ export class ClientDashboardComponent implements OnInit {
     private route: ActivatedRoute,
     private clientService: ClientService,
     private authService: AuthService,
-    private workoutSessionService: WorkoutsessionService,
+    private redirectMessageService: RedirectmessageService,
+    private messageService: MessageService,
     private router: Router
   ) {}
 
@@ -32,6 +36,12 @@ export class ClientDashboardComponent implements OnInit {
         console.error('Invalid client ID');
       }
     });
+    //Messages
+    const messages = this.redirectMessageService.getMessages();
+    if (messages.length > 0) {
+      this.messageService.addAll(messages);
+      this.redirectMessageService.clearMessages();
+    }
   }
 
   loadClientDetails(): void {

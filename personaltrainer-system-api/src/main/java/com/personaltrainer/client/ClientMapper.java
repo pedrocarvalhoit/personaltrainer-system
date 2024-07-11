@@ -25,7 +25,7 @@ public class ClientMapper {
                 .fullName(client.getPersonalData().getFullName())
                 .email(client.getPersonalData().getEmail())
                 .mobile(client.getPersonalData().getMobile())
-                .photo(client.getPhotoImagePath())
+                .photo(client.getImagePath())
                 .dateOfBirthday(client.getPersonalData().getDateOfBirth())
                 .age(client.getPersonalData().getAge())
                 .gender(client.getPersonalData().getGender())

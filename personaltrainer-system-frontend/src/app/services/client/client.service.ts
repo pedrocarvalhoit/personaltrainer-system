@@ -46,8 +46,8 @@ export class ClientService {
     );
   }
 
-  updatePhoto(headers: HttpHeaders, formData: FormData, clientId: number): Observable<number> {
-    return this.http.patch<number>(`http://localhost:8088/api/v1/clients/update-photo/${clientId}`, formData, { headers });
+  updatePhoto(headers: HttpHeaders, formData: FormData, clientId: number): Observable<string> {
+    return this.http.patch(`http://localhost:8088/api/v1/clients/update-photo/${clientId}`, formData, { headers, responseType: 'text' });
   }
 
   getAllEnabledClients(

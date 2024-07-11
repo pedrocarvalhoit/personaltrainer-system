@@ -38,7 +38,7 @@ public class Client extends BaseEntity{
     private List<WorkoutSession> workoutSession;
 
     @Transient
-    public String getPhotoImagePath(){
+    public String getImagePath(){
         return Constants.S3_BASE_URL + "/client-photos/" + this.getId() + "/" + this.getPersonalData().getPhoto();
     }
 

@@ -3,6 +3,8 @@ import { ClientService, Client, PageResponse } from './../../../../services/clie
 import { AuthService } from './../../../../services/auth/auth.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { RedirectmessageService } from '../../../../services/redirectmessages/redirectmessage.service';
 
 @Component({
   selector: 'app-clients',
@@ -18,9 +20,9 @@ export class ClientsComponent implements OnInit {
 
   showDisabledClients = false;
 
-  //Dialog vars
+  // Dialog vars
   visible: boolean = false;
-  currentClient: any;
+  currentClient: Client | null = null;
   clientPhoto: string = '';
 
   selectedFile: File | null = null;
@@ -29,15 +31,21 @@ export class ClientsComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private clientService: ClientService,
+    private messageService: MessageService,
+    private redirectMessageService: RedirectmessageService
   ) {}
 
   ngOnInit(): void {
     this.loadClients();
+    const messages = this.redirectMessageService.getMessages();
+    if (messages.length > 0) {
+      this.messageService.addAll(messages);
+      this.redirectMessageService.clearMessages();
+    }
   }
 
-  showDialog(client: any){
+  showDialog(client: Client) {
     this.currentClient = client;
-    this.clientPhoto = client.photo;
     this.visible = true;
   }
 
@@ -45,10 +53,14 @@ export class ClientsComponent implements OnInit {
     this.selectedFile = event.target.files[0];
   }
 
-  updatePhoto(clientId: number){
-    const token = this.authService.getToken();
+  updatePhoto() {
+    if (!this.currentClient) {
+      console.error('No client selected');
+      return;
+    }
 
-    if (this.clientPhoto && token) {
+    const token = this.authService.getToken();
+    if (this.selectedFile && token) {
       const formData = new FormData();
       formData.append('file', this.selectedFile as File);
 
@@ -56,10 +68,16 @@ export class ClientsComponent implements OnInit {
         'Authorization': `Bearer ${token}`
       });
 
-      this.clientService.updatePhoto(headers, formData, clientId).subscribe(
+      this.clientService.updatePhoto(headers, formData, this.currentClient.id).subscribe(
         response => {
-          console.log('Client update successfuly:', response);
-          window.location.reload();
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Photo updated successfully' });
+          this.visible = false;
+
+          // Atualiza a foto do cliente na lista sem recarregar toda a lista
+          const clientIndex = this.clients.findIndex(client => client.id === this.currentClient!.id);
+          if (clientIndex !== -1) {
+            this.clients[clientIndex].photo = response;
+          }
         },
         error => {
           console.error('Error on update client photo:', error);
@@ -71,7 +89,6 @@ export class ClientsComponent implements OnInit {
   }
 
   showSuccessMessage(): void {
-    // Exibe a mensagem de sucesso
     const successMessageElement = document.getElementById('success-message');
     if (successMessageElement) {
       successMessageElement.style.display = 'block';
@@ -111,7 +128,6 @@ export class ClientsComponent implements OnInit {
       });
       this.clientService.changeStatus(headers, clientId).subscribe(
         response => {
-          console.log('Client status updated successfully:', response);
           window.location.reload();
         },
         error => {
@@ -147,6 +163,4 @@ export class ClientsComponent implements OnInit {
       this.loadClients(this.currentPage - 1);
     }
   }
-
 }
-

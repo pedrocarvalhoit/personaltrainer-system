@@ -6,6 +6,7 @@ import { Observable, catchError } from 'rxjs';
 
 export interface WorkoutProgram {
   id: number;
+  clientId: number;
   title: string;
   startDate: string;
   endDate: string;
@@ -30,6 +31,10 @@ export interface PageResponse<T> {
 export class WorkoutprogramService {
 
   constructor(private http: HttpClient, public jwtHelper: JwtHelperService, private errorHandlerService: ErrorHandlerService) { }
+
+  getProgramById(headers: HttpHeaders, programId: number): Observable<WorkoutProgram> {
+    return this.http.get<WorkoutProgram>(`http://localhost:8088/api/v1/workout-programs/${programId}`, { headers });
+  }
 
   save(headers: HttpHeaders, selectedClientid: number, title: string, inicialDate: string, endDate: string,
     trainingSessionContent: string, note: string, enabled: boolean) {
@@ -68,14 +73,17 @@ export class WorkoutprogramService {
     );
   }
 
-  exportToWord(headers: HttpHeaders, programId: number): Observable<Blob> {
-    return this.http.get(`http://localhost:8088/api/v1/workout-programs/export-word/${programId}`, { headers, responseType: 'blob'}).pipe(
-      catchError((error: any) => {
-        console.error('Download PDF failed', error);
-        throw error;
-      })
-    );
+  editData(headers: HttpHeaders, programId: number, title: string, startDate: string, endDate: string, trainingSessionContent: string,
+    note: string, enabled: boolean ){
+    const body = {
+      title,
+      startDate,
+      endDate,
+      trainingSessionContent,
+      note,
+      enabled
+    };
+    return this.http.patch<any>(`http://localhost:8088/api/v1/workout-programs/update/${programId}`, body, { headers });
   }
-
 
 }

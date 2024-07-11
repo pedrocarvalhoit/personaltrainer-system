@@ -3,6 +3,7 @@ import { UserService } from '../../../../services/user/user.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { HttpHeaders } from '@angular/common/http';
+import { RedirectmessageService } from '../../../../services/redirectmessages/redirectmessage.service';
 
 @Component({
   selector: 'app-edit',
@@ -19,7 +20,8 @@ export class EditComponent implements OnInit {
   mobile: string = '';
   gender: string = '';
 
-  constructor(private authService: AuthService ,private userService: UserService, private router: Router) {}
+  constructor(private authService: AuthService ,private userService: UserService,
+    private redirectMessageService: RedirectmessageService, private router: Router) {}
 
   //Show User Saved Data on fields
    ngOnInit(): void {
@@ -65,6 +67,7 @@ export class EditComponent implements OnInit {
 
       this.userService.editData(headers, this.firstName, this.lastName, this.email, this.password, this.dateOfBirth, this.mobile, this.gender)
         .subscribe(response => {
+          this.redirectMessageService.addMessage({ severity: 'success', summary: 'Success', detail: 'User Data Updated Successfully' });
           this.router.navigate(['personaltrainer/dashboard']);
         }, error => {
           console.error('Update failed', error);

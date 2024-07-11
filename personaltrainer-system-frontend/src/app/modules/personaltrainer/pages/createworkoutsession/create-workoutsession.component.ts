@@ -8,6 +8,7 @@ import {
 } from '../../../../services/client/client.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { RedirectmessageService } from '../../../../services/redirectmessages/redirectmessage.service';
 
 @Component({
   selector: 'app-create-workoutsession',
@@ -28,7 +29,8 @@ export class CreateWorkoutsessionComponent {
     private router: Router,
     private clientService: ClientService,
     private authService: AuthService,
-    private workoutSessionService: WorkoutsessionService
+    private workoutSessionService: WorkoutsessionService,
+    private redirectMessageService: RedirectmessageService
   ) {}
 
   ngOnInit(): void {
@@ -73,6 +75,7 @@ export class CreateWorkoutsessionComponent {
         this.clientSubjectEffort || 0, this.pTQualityEffortIndicative || 0, this.executed
       )
         .subscribe(response => {
+          this.redirectMessageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Workout Session Created Successfully' });
           this.router.navigate(['personaltrainer']);
         }, error => {
           console.error('Create failed', error);

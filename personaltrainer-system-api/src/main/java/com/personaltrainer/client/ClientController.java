@@ -30,7 +30,7 @@ public class ClientController {
 
     //update Photo
     @PatchMapping("/update-photo/{clientId}")
-    public ResponseEntity<Integer> updatePhoto(Authentication authentication,
+    public ResponseEntity<String> updatePhoto(Authentication authentication,
                                                @RequestPart ("file") MultipartFile file,
                                                @PathVariable Integer clientId) throws IOException {
         return ResponseEntity.ok(clientService.updatePhoto(authentication, clientId, file));

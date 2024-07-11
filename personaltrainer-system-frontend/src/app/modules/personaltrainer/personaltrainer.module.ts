@@ -25,6 +25,9 @@ import { WorkoutsessionsstatsComponent } from './pages/clientdashboard/workoutse
 import { TrainingindicativestatsComponent } from './pages/clientdashboard/trainingindicativestats/trainingindicativestats.component';
 import { ChartModule } from 'primeng/chart';
 import { WorkoutprogramslistComponent } from './pages/clientdashboard/workoutprogramslist/workoutprogramslist.component';
+import { EditworkoutprogramComponent } from './pages/editworkoutprogram/editworkoutprogram.component';
+import { ToastModule } from 'primeng/toast';
+import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,7 @@ import { WorkoutprogramslistComponent } from './pages/clientdashboard/workoutpro
     WorkoutsessionsstatsComponent,
     TrainingindicativestatsComponent,
     WorkoutprogramslistComponent,
+    EditworkoutprogramComponent,
   ],
   imports: [
     CommonModule,
@@ -55,7 +59,10 @@ import { WorkoutprogramslistComponent } from './pages/clientdashboard/workoutpro
     DropdownModule,
     CalendarModule,
     EditorModule,
-    ChartModule
+    ChartModule,
+    ToastModule,
+    MessagesModule
   ]
+
 })
 export class PersonaltrainerModule { }

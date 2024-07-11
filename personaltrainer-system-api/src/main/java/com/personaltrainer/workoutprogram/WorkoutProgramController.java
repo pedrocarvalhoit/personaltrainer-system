@@ -1,7 +1,6 @@
 package com.personaltrainer.workoutprogram;
 
 import com.personaltrainer.common.PageResponse;
-import com.personaltrainer.workoutprogram.exporter.WorkoutProgramPDFExporter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -19,6 +18,12 @@ import java.io.IOException;
 public class WorkoutProgramController {
 
     private final WorkoutProgramService service;
+
+    //get By ID
+    @GetMapping("/{programId}")
+    public ResponseEntity<WorkoutProgramResponse> getById(@PathVariable Integer programId){
+        return ResponseEntity.ok(service.findById(programId));
+    }
 
     //create program for client
     @PostMapping("/create/{clientId}")
@@ -49,12 +54,12 @@ public class WorkoutProgramController {
         return ResponseEntity.ok(service.listAllDisabledByClient(page, size, clientId));
     }
 
-    //update program date
-    @PatchMapping("/update-date/{programId}")
+    //update program data
+    @PatchMapping("/update/{programId}")
     public ResponseEntity<Integer> updateProgramDate(@PathVariable Integer programId,
-                                                     @RequestBody @Valid UpdateProgramDateRequest request){
+                                                     @RequestBody @Valid WorkoutProgramUpdateResquest request){
 
-        return ResponseEntity.ok(service.updateDate(programId, request));
+        return ResponseEntity.ok(service.update(programId, request));
     }
 
     //disable by manual

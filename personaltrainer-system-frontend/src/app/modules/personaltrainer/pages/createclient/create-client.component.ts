@@ -1,3 +1,4 @@
+import { RedirectmessageService } from './../../../../services/redirectmessages/redirectmessage.service';
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,7 +16,11 @@ export class CreateClientComponent {
   clientForm!: FormGroup;
   selectedFile: File | null = null;
 
-  constructor(private router: Router, private fb: FormBuilder, private clientService: ClientService, private authService: AuthService) {}
+  constructor(private router: Router,
+    private fb: FormBuilder,
+    private clientService: ClientService,
+    private redirectMessageService: RedirectmessageService,
+    private authService: AuthService) {}
 
   ngOnInit(): void {
     this.clientForm = this.fb.group({
@@ -60,11 +65,8 @@ export class CreateClientComponent {
 
       this.clientService.saveClient(headers, formData).subscribe(
         response => {
-          console.log('Cliente cadastrado com sucesso, ID:', response);
-          this.showSuccessMessage();
-          setTimeout(() => {
+          this.redirectMessageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Client created successfully' });
             this.router.navigate(['personaltrainer/clients']);
-          }, 2000); // Redireciona após 2 segundos
         },
         error => {
           console.error('Erro ao cadastrar cliente:', error);
@@ -75,12 +77,4 @@ export class CreateClientComponent {
     }
   }
 
-
-  showSuccessMessage(): void {
-    // Exibe a mensagem de sucesso
-    const successMessageElement = document.getElementById('success-message');
-    if (successMessageElement) {
-      successMessageElement.style.display = 'block';
-    }
-  }
 }

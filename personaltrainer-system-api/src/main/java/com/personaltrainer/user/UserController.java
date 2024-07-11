@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @PatchMapping("/update-photo")
-    public ResponseEntity<Integer> updatePhoto(@RequestPart("file")MultipartFile file,
+    public ResponseEntity<String> updatePhoto(@RequestPart("file")MultipartFile file,
                                                Authentication authentication) throws IOException {
         return ResponseEntity.ok(userService.updatePhoto(authentication, file));
     }

@@ -7,7 +7,6 @@ import com.personaltrainer.common.UserPermissionOverClientCheck;
 import com.personaltrainer.exception.OperationNotPermitedException;
 import com.personaltrainer.user.User;
 import com.personaltrainer.workoutprogram.exporter.WorkoutProgramPDFExporter;
-import com.personaltrainer.workoutprogram.exporter.WorkoutProgramWordExporter;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +31,11 @@ public class WorkoutProgramService {
     private final WorkoutProgramMapper mapper;
     private final UserPermissionOverClientCheck permission;
 
+    public WorkoutProgramResponse findById(Integer programId) {
+        WorkoutProgram program = workoutProgramRepository.findById(programId).get();
+        return mapper.toWorkoutProgramResponse(program);
+    }
+
     public Integer save(WorkoutProgramCreateRequest requestWorkoutProgram, Integer clientId, Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         Client client = clientRepository.findById(clientId).orElseThrow(()-> new RuntimeException("Client not found"));
@@ -44,6 +48,16 @@ public class WorkoutProgramService {
         workoutProgram.setClient(client);
 
         return workoutProgramRepository.save(workoutProgram).getId();
+    }
+
+    public Integer update(Integer programId, WorkoutProgramUpdateResquest request) {
+        WorkoutProgram workoutProgram = workoutProgramRepository.findById(programId)
+                .orElseThrow(()-> new EntityNotFoundException("Program not found"));
+
+        mapper.toUpdateProgram(workoutProgram, request);
+        workoutProgramRepository.save(workoutProgram);
+
+        return programId;
     }
 
     public PageResponse<WorkoutProgramResponse> listAllEnabledByClient(int page, int size, Integer clientId) {
@@ -77,16 +91,6 @@ public class WorkoutProgramService {
         return workoutProgramRepository.save(workoutProgram).getId();
     }
 
-    public Integer updateDate(Integer programId, UpdateProgramDateRequest request) {
-        WorkoutProgram workoutProgram = workoutProgramRepository.findById(programId)
-                .orElseThrow(()-> new EntityNotFoundException("Program not found"));
-
-        mapper.toUpdateProgram(workoutProgram, request);
-        workoutProgramRepository.save(workoutProgram);
-
-        return programId;
-    }
-
     public Integer updateStatus(Integer programId) {
         WorkoutProgram workoutProgram = workoutProgramRepository.findById(programId)
                 .orElseThrow(() -> new EntityNotFoundException("Program not found"));
@@ -110,6 +114,7 @@ public class WorkoutProgramService {
         WorkoutProgramPDFExporter exporter = new WorkoutProgramPDFExporter();
         exporter.export(workoutProgram, response, "workoutprogram");
     }
+
 
     //word exporter
 //    public void exportToWord(HttpServletResponse response, Integer programId) throws IOException {

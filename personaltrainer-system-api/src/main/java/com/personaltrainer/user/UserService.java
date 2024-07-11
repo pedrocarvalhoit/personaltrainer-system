@@ -36,7 +36,7 @@ public class UserService {
         return user.getId();
     }
 
-    public Integer updatePhoto(Authentication authentication, MultipartFile file) throws IOException {
+    public String updatePhoto(Authentication authentication, MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         User user = (User) authentication.getPrincipal();
 
@@ -47,6 +47,6 @@ public class UserService {
         AmazonS3Util.removeFolder(uploadDir);
         AmazonS3Util.uploadFile(uploadDir, fileName, file.getInputStream());
 
-        return user.getId();
+        return user.getImagePath();
     }
 }

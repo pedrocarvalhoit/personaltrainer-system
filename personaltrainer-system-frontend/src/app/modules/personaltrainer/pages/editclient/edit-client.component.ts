@@ -6,6 +6,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { HttpHeaders } from '@angular/common/http';
+import { RedirectmessageService } from '../../../../services/redirectmessages/redirectmessage.service';
 
 @Component({
   selector: 'app-edit-client',
@@ -20,6 +21,7 @@ export class EditClientComponent implements OnInit {
     private route: ActivatedRoute,
     private clientService: ClientService,
     private authService: AuthService,
+    private redirectMessageService: RedirectmessageService,
     private router: Router
   ) {}
 
@@ -57,6 +59,7 @@ export class EditClientComponent implements OnInit {
       this.clientService.editData(headers, this.client.id, this.client.firstName, this.client.lastName, this.client.email,
         this.client.dateOfBirth, this.client.mobile, this.client.gender)
         .subscribe(response => {
+          this.redirectMessageService.addMessage({ severity: 'success', summary: 'Success', detail: 'Client Data Updated Successfully' });
           this.router.navigate(['personaltrainer/clients']);
         }, error => {
           console.error('Update failed', error);

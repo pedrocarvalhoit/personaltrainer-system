@@ -1,18 +1,21 @@
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './../../../../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { UserService } from '../../../../services/user/user.service';
+import { MessageService } from 'primeng/api';
+import { RedirectmessageService } from '../../../../services/redirectmessages/redirectmessage.service';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrl: './menu.component.scss'
+  styleUrls: ['./menu.component.scss'],
+  providers: [MessageService]
 })
 export class MenuComponent implements OnInit {
 
   firstName: string = '';
-  userPhotoUrl: String = '';
+  userPhotoUrl: string = '';
 
   showEditOption: boolean = false;
 
@@ -20,17 +23,28 @@ export class MenuComponent implements OnInit {
 
   //Dialog vars
   visible: boolean = false;
-  currentClient: any;
-  clientPhoto: string = '';
 
   selectedFile: File | null = null;
 
-  constructor(private authService: AuthService, private userService: UserService, private router: Router){}
+  constructor(
+    private authService: AuthService,
+    private userService: UserService,
+    private redirectMessageService: RedirectmessageService,
+    private messageService: MessageService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.router.events.subscribe(() => {
-      this.isMyClientsRoute = this.router.url === '/personaltrainer/clients';
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.isMyClientsRoute = this.router.url === '/personaltrainer/clients';
+        const messages = this.redirectMessageService.getMessages();
+        if (messages.length > 0) {
+          this.messageService.addAll(messages);
+        }
+      }
     });
+
     const token = this.authService.getToken();
     if (token) {
       const headers = new HttpHeaders({
@@ -51,16 +65,16 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  editData(){
-    this.router.navigate(['/personaltrainer/edit'])
+  editData() {
+    this.router.navigate(['/personaltrainer/edit']);
   }
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['login'])
+    this.router.navigate(['login']);
   }
 
-  updatePhoto(){
+  updatePhoto() {
     const token = this.authService.getToken();
 
     if (token) {
@@ -73,8 +87,9 @@ export class MenuComponent implements OnInit {
 
       this.userService.updatePhoto(headers, formData).subscribe(
         response => {
-          console.log('User photo update successfuly:', response);
-          window.location.reload();
+          this.userPhotoUrl = response; // Atualize a URL da foto do usuário
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Photo updated successfully' });
+          this.visible = false; // Feche o diálogo após o sucesso
         },
         error => {
           console.error('Error on update User photo:', error);
@@ -89,7 +104,7 @@ export class MenuComponent implements OnInit {
     this.selectedFile = event.target.files[0];
   }
 
-  showDialog(){
+  showDialog() {
     this.visible = true;
   }
 

@@ -11,6 +11,7 @@ import { CreateWorkoutsessionComponent } from './pages/createworkoutsession/crea
 import { ClientDashboardComponent } from './pages/clientdashboard/clientdashboard.component';
 import { WorkoutProgramsComponent } from './pages/workout-programs/workout-programs.component';
 import { CreateWorkoutProgramComponent } from './pages/createworkoutprogram/create-workout-program.component';
+import { EditworkoutprogramComponent } from './pages/editworkoutprogram/editworkoutprogram.component';
 
 const routes: Routes = [
   { path: '', component: PtDashboardComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'workout-session/create', component: CreateWorkoutsessionComponent, canActivate: [AuthGuard] },
   { path: 'workout-programs', component: WorkoutProgramsComponent, canActivate: [AuthGuard] },
   { path: 'workout-program/create', component: CreateWorkoutProgramComponent, canActivate: [AuthGuard] },
+  { path: 'edit-workoutprogram/:id', component: EditworkoutprogramComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

@@ -19,6 +19,7 @@ public class WorkoutProgramMapper {
     public WorkoutProgramResponse toWorkoutProgramResponse(WorkoutProgram workoutProgram) {
         return WorkoutProgramResponse.builder()
                 .id(workoutProgram.getId())
+                .clientId(workoutProgram.getClient().getId())
                 .title(workoutProgram.getTitle())
                 .startDate(workoutProgram.getStartDate())
                 .endDate(workoutProgram.getEndDate())
@@ -28,12 +29,19 @@ public class WorkoutProgramMapper {
                 .build();
     }
 
-    public void toUpdateProgram(WorkoutProgram workoutProgram,UpdateProgramDateRequest request) {
-        if (request.startDate() != null){
-            workoutProgram.setStartDate(request.startDate());
-        }
-        if (request.endDate() != null){
-            workoutProgram.setEndDate(request.endDate());
-        }
+    public void toUpdateProgram(WorkoutProgram workoutProgram, WorkoutProgramUpdateResquest request) {
+        workoutProgram.setTitle(request.title());
+        workoutProgram.setStartDate(request.startDate());
+        workoutProgram.setEndDate(request.endDate());
+        workoutProgram.setTrainingSessionContent(request.trainingSessionContent());
+        workoutProgram.setNote(request.note());
+        workoutProgram.setEnabled(request.enabled());
+
+//        if (request.startDate() != null){
+//            workoutProgram.setStartDate(request.startDate());
+//        }
+//        if (request.endDate() != null){
+//            workoutProgram.setEndDate(request.endDate());
+//        }
     }
 }

@@ -13,6 +13,8 @@ public class WorkoutProgramResponse {
 
     private Integer id;
 
+    private Integer clientId;
+
     private String title;
 
     private LocalDate startDate;

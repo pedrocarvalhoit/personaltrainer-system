@@ -64,6 +64,10 @@ export class WorkoutprogramslistComponent implements OnInit {
     this.loadPrograms();
   }
 
+  editProgram(programId: number){
+    this.router.navigate(['personaltrainer/edit-workoutprogram', programId]);
+  }
+
   downloadPdf(programId: number, programTitle: string): void {
     const token = this.authService.getToken();
     if (token) {
@@ -88,27 +92,5 @@ export class WorkoutprogramslistComponent implements OnInit {
   }
   }
 
-  downloadWord(programId: number, programTitle: string): void {
-    const token = this.authService.getToken();
-    if (token) {
-      const headers = new HttpHeaders({
-        Authorization: `Bearer ${token}`,
-      });
-      this.workoutProgramService.exportToWord(headers, programId).subscribe(
-        response => {
-          const url = window.URL.createObjectURL(response);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = `${programTitle}.docx`;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-        },
-        error => {
-          console.error('Download failed', error);
-          alert('Failed to download Word document. Please check the program ID and try again.');
-        }
-      );
-    }
-  }
+
 }
