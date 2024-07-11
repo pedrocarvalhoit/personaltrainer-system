@@ -18,8 +18,12 @@ export class WorkoutSessionComponent {
   filteredSessions: any[] = [];
 
   //Dialog vars
+  workoutProgramName: string = '';
+  sessionDate: string = '';
+  sessionTime: string = '';
   clientSubjectEffort: number | undefined;
   pTQualityEffortIndicative: number | undefined;
+
   currentSession: any;
 
   visible: boolean = false;
@@ -36,6 +40,9 @@ export class WorkoutSessionComponent {
 
   showDialog(session: any){
     this.currentSession = session;
+    this.workoutProgramName = session.workoutProgramName;
+    this.sessionDate = session.sessionDate;
+    this.sessionTime = session.sessionTime;
     this.clientSubjectEffort = session.clientSubjectEffort;
     this.pTQualityEffortIndicative = session.ptqualityEffortIndicative;
     this.visible = true;
@@ -81,14 +88,17 @@ export class WorkoutSessionComponent {
     }
   }
 
-  updateEfforts(sessionId: number){
+  updateData(sessionId: number){
     const token = this.authService.getToken();
     if (token) {
       const headers = new HttpHeaders({
         Authorization: `Bearer ${token}`,
       });
 
-      this.workoutsessionService.updateEfforts(headers, sessionId, this.clientSubjectEffort || 0, this.pTQualityEffortIndicative || 0)
+      this.workoutsessionService.updateData(headers, sessionId, this.workoutProgramName ,this.sessionDate, this.sessionTime,
+        this.clientSubjectEffort || 0, this.pTQualityEffortIndicative || 0,
+
+      )
         .subscribe(response => {
           console.log('Session update successfully', response);
           window.location.reload();

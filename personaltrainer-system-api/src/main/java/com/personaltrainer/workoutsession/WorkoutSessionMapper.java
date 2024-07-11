@@ -37,10 +37,14 @@ public class WorkoutSessionMapper {
                 .clientSubjectEffort(workoutSession.getClientSubjectEffort())
                 .pTQualityEffortIndicative(workoutSession.getPTQualityEffortIndicative())
                 .executed(workoutSession.isExecuted())
+                .workoutProgramName(workoutSession.getWorkoutProgramName())
                 .build();
     }
 
-    public void toUpdateEffort(WorkoutSession workoutSession, WorkoutSessioUpdateEffortsRequest request) {
+    public void toUpdateData(WorkoutSession workoutSession, WorkoutSessioUpdateDataRequest request) {
+        workoutSession.setSessionDate(request.sessionDate());
+        workoutSession.setSessionTime(request.sessionTime());
+        workoutSession.setWorkoutProgramName(request.workoutProgramName());
         workoutSession.setClientSubjectEffort(request.clientSubjectEffort());
         workoutSession.setPTQualityEffortIndicative(request.pTQualityEffortIndicative());
     }

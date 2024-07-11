@@ -234,7 +234,7 @@ public class WorkoutSessionService {
                 .toList();
     }
 
-    public Integer updateEfforts(Authentication authentication, Integer sessionId, WorkoutSessioUpdateEffortsRequest request) {
+    public Integer updateData(Authentication authentication, Integer sessionId, WorkoutSessioUpdateDataRequest request) {
         User user = (User) authentication.getPrincipal();
         WorkoutSession workoutSession = workoutSessionRepository.findById(sessionId)
                 .orElseThrow(() -> new EntityNotFoundException("Session not found"));
@@ -242,7 +242,7 @@ public class WorkoutSessionService {
             throw new OperationNotPermitedException("This session don´t belong to you client");
         }
 
-        mapper.toUpdateEffort(workoutSession, request);
+        mapper.toUpdateData(workoutSession, request);
         workoutSessionRepository.save(workoutSession);
 
         return sessionId;

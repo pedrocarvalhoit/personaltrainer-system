@@ -4,7 +4,6 @@ import com.personaltrainer.common.PageResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -44,9 +43,9 @@ public class WorkoutSessionController {
     public ResponseEntity<Integer> updateEfforts(
             Authentication authentication,
             @PathVariable @Valid Integer sessionId,
-            @RequestBody WorkoutSessioUpdateEffortsRequest request
+            @RequestBody WorkoutSessioUpdateDataRequest request
     ){
-        return ResponseEntity.ok(service.updateEfforts(authentication, sessionId, request));
+        return ResponseEntity.ok(service.updateData(authentication, sessionId, request));
     }
 
     //list by client

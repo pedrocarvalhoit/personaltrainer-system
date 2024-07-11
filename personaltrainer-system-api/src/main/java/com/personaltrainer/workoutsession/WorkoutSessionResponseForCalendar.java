@@ -18,6 +18,7 @@ public class WorkoutSessionResponseForCalendar {
     private LocalTime sessionTime;
     private Integer clientSubjectEffort;
     private Integer pTQualityEffortIndicative;
+    private String workoutProgramName;
     private boolean executed;
 
 }

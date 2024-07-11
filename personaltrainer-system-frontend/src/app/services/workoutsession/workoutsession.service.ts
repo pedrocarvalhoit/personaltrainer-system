@@ -19,6 +19,7 @@ export interface WorkoutSessionResponseForCalendar {
   clientName: string;
   sessionDate: string;
   sessionTime: string;
+  workoutProgramName: string;
 }
 
 interface WorkoutSessionTotalSummaryResponse {
@@ -90,8 +91,12 @@ export class WorkoutsessionService {
     return this.http.post<any>(`http://localhost:8088/api/v1/workout-sessions/create/${selectedClientid}`, body , { headers });
   }
 
-  updateEfforts(headers: HttpHeaders, selectedClientid: number, clientSubjectEffort: number, pTQualityEffortIndicative: number) {
+  updateData(headers: HttpHeaders, selectedClientid: number, workoutProgramName: string, sessionDate: string ,
+    sessionTime: string , clientSubjectEffort: number, pTQualityEffortIndicative: number) {
       const body = {
+        workoutProgramName,
+        sessionDate,
+        sessionTime,
         selectedClientid,
         clientSubjectEffort,
         pTQualityEffortIndicative,
