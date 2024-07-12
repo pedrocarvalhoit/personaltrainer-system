@@ -131,7 +131,7 @@ export class WorkoutSessionComponent {
     }
   }
 
-  filterSessions() {
+  filterSessionsByDate() {
     if (this.selectedDate) {
       this.filteredSessions = this.sessions.filter(session =>
         session.sessionDate === this.selectedDate

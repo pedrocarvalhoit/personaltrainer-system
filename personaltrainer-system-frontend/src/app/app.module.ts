@@ -1,5 +1,5 @@
 import { CalendarModule } from 'primeng/calendar';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,7 +22,6 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { PersonaltrainerModule } from './modules/personaltrainer/personaltrainer.module';
 
-
 registerLocaleData(en);
 
 @NgModule({
@@ -31,7 +30,7 @@ registerLocaleData(en);
     LoginComponent,
     RegisterComponent,
     VerifyAccountComponent,
-    ProtectedComponent
+    ProtectedComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +42,8 @@ registerLocaleData(en);
     ToastModule,
     PersonaltrainerModule,
     RouterLink,
-    JwtModule.forRoot({ // Config JwtModule
+    JwtModule.forRoot({
+      // Config JwtModule
       config: {
         tokenGetter: () => localStorage.getItem('jwt_token'),
         allowedDomains: [
@@ -55,7 +55,14 @@ registerLocaleData(en);
       },
     }),
   ],
-  providers: [AuthService, AuthGuard,MessageService, JwtHelperService, provideAnimationsAsync(), provideHttpClient()],
+  providers: [
+    AuthService,
+    AuthGuard,
+    MessageService,
+    JwtHelperService,
+    provideAnimationsAsync(),
+    provideHttpClient(),
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
