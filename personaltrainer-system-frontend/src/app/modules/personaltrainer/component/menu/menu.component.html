@@ -43,8 +43,10 @@
           </a>
         </div>
 
+        <div>Welcome,</div>
+
         <div class="name-container" (mouseenter)="showEditOption = true" (mouseleave)="showEditOption = false">
-          Welcome,<span class="text-capitalize fw-bold">{{ firstName }}</span>
+          <span class="text-capitalize fw-bold">{{ firstName }}</span>
           <button class="btn btn-primary btn-sm edit-button" *ngIf="showEditOption" (click)="editData()">Edit Data</button>
        </div>
 
@@ -64,3 +66,4 @@
     <p-button label="Save" (click)="updatePhoto()"></p-button>
   </div>
 </p-dialog>
+
