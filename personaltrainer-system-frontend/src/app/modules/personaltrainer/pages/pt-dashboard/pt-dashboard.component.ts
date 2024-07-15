@@ -6,7 +6,7 @@ import {
   WorkoutSessionResponseForCalendar,
   WorkoutsessionService,
 } from '../../../../services/workoutsession/workoutsession.service';
-import { CreateWorkoutsessionComponent } from '../createworkoutsession/create-workoutsession.component';
+import { CreateWorkoutsessionComponent } from '../create-workout-session/create-workoutsession.component';
 import { RedirectmessageService } from '../../../../services/redirectmessages/redirectmessage.service';
 import { MessageService } from 'primeng/api';
 

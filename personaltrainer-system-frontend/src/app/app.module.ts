@@ -11,7 +11,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './services/auth/auth.guard';
-import { ProtectedComponent } from './pages/protected/protected.component';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { CodeInputModule } from 'angular-code-input';
 import { registerLocaleData } from '@angular/common';
@@ -21,6 +20,7 @@ import { RouterLink } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { PersonaltrainerModule } from './modules/personaltrainer/personaltrainer.module';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
 
 registerLocaleData(en);
 
@@ -30,7 +30,7 @@ registerLocaleData(en);
     LoginComponent,
     RegisterComponent,
     VerifyAccountComponent,
-    ProtectedComponent,
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,

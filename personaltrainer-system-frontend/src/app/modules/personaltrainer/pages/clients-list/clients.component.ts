@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientService, Client, PageResponse } from './../../../../services/client/client.service';
-import { AuthService } from './../../../../services/auth/auth.service';
+import { ClientService, Client, PageResponse } from '../../../../services/client/client.service';
+import { AuthService } from '../../../../services/auth/auth.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';

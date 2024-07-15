@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PtDashboardComponent } from './pages/ptdashboard/pt-dashboard.component';
-import { EditComponent } from './pages/editdata/edit.component';
+import { PtDashboardComponent } from './pages/pt-dashboard/pt-dashboard.component';
+import { EditComponent } from './pages/edit-data/edit.component';
 import { AuthGuard } from '../../services/auth/auth.guard';
-import { CreateClientComponent } from './pages/createclient/create-client.component';
-import { ClientsComponent } from './pages/clientslist/clients.component';
-import { EditClientComponent } from './pages/editclient/edit-client.component';
-import { WorkoutSessionComponent } from './pages/workoutsession/workout-session.component';
-import { CreateWorkoutsessionComponent } from './pages/createworkoutsession/create-workoutsession.component';
+import { CreateClientComponent } from './pages/create-client/create-client.component';
+import { ClientsComponent } from './pages/clients-list/clients.component';
+import { EditClientComponent } from './pages/edit-client/edit-client.component';
+import { WorkoutSessionComponent } from './pages/workout-session/workout-session.component';
+import { CreateWorkoutsessionComponent } from './pages/create-workout-session/create-workoutsession.component';
 import { ClientDashboardComponent } from './pages/clientdashboard/clientdashboard.component';
 import { WorkoutProgramsComponent } from './pages/workout-programs/workout-programs.component';
-import { CreateWorkoutProgramComponent } from './pages/createworkoutprogram/create-workout-program.component';
-import { EditworkoutprogramComponent } from './pages/editworkoutprogram/editworkoutprogram.component';
+import { CreateWorkoutProgramComponent } from './pages/create-workout-program/create-workout-program.component';
+import { EditworkoutprogramComponent } from './pages/edit-workout-program/editworkoutprogram.component';
 
 const routes: Routes = [
   { path: '', component: PtDashboardComponent },
