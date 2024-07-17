@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { WorkoutsessionService } from '../../../../services/workoutsession/workoutsession.service';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { HttpHeaders } from '@angular/common/http';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+
 
 @Component({
   selector: 'app-workout-session',
@@ -31,6 +36,8 @@ export class WorkoutSessionComponent {
   constructor(
     private workoutsessionService: WorkoutsessionService,
     private authService: AuthService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -111,24 +118,37 @@ export class WorkoutSessionComponent {
     }
   }
 
-  deleteSession(sessionId: number){
-    const token = this.authService.getToken();
-    if (token) {
-      const headers = new HttpHeaders({
-        Authorization: `Bearer ${token}`,
-      });
+  deleteSession(event: Event, sessionId: number) {
+    this.confirmationService.confirm({
+        target: event.target as EventTarget,
+        message: 'Do you want to delete this session?',
+        icon: 'pi pi-info-circle',
+        acceptButtonStyleClass: 'p-button-danger p-button-sm',
+        accept: () => {
+          const token = this.authService.getToken();
+          if (token) {
+            const headers = new HttpHeaders({
+              Authorization: `Bearer ${token}`,
+            });
 
-      this.workoutsessionService.deleteSession(headers, sessionId)
-        .subscribe(response => {
-          console.log('Session deleted successfully', response);
-          window.location.reload();
-        }, error => {
-          console.error('Delete failed', error);
-          console.log('Error details:', error); // Log detalhado do erro
-        });
-    } else {
-      console.error('Token not found');
-    }
+            this.workoutsessionService.deleteSession(headers, sessionId)
+              .subscribe(response => {
+                console.log('Session deleted successfully', response);
+                window.location.reload();
+              }, error => {
+                console.error('Delete failed', error);
+                console.log('Error details:', error); // Log detalhado do erro
+              });
+          } else {
+            console.error('Token not found');
+          }
+            this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Session deleted', life: 3000 });
+        },
+        reject: () => {
+            this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+            window.location.reload();
+          }
+    });
   }
 
   filterSessionsByDate() {

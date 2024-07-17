@@ -10,7 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateClientComponent } from './pages/create-client/create-client.component';
 import { ClientsComponent } from './pages/clients-list/clients.component';
 import { EditClientComponent } from './pages/edit-client/edit-client.component';
-import { WorkoutSessionComponent } from './pages/workout-session/workout-session.component';
+import { WorkoutSessionComponent } from './pages/workout-sessions-list/workout-session.component';
 import { CreateWorkoutsessionComponent } from './pages/create-workout-session/create-workoutsession.component';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -28,6 +28,7 @@ import { WorkoutprogramslistComponent } from './pages/clientdashboard/workout-pr
 import { EditworkoutprogramComponent } from './pages/edit-workout-program/editworkoutprogram.component';
 import { ToastModule } from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { MessagesModule } from 'primeng/messages';
     EditorModule,
     ChartModule,
     ToastModule,
-    MessagesModule
+    MessagesModule,
+    ConfirmPopupModule
   ]
 
 })

@@ -2,7 +2,6 @@
 
 body {
   background-color: #ffffff;
-  /* Background branco */
   font-family: 'Arial', sans-serif;
 }
 
@@ -16,13 +15,11 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   border: 1.5px solid #bdc3c7;
-  /* Borda mais grossa */
 }
 
 .card h4 {
   color: #2c3e50;
   font-size: 1rem;
-  /* Tamanho de fonte reduzido */
   font-weight: bold;
 }
 
@@ -33,7 +30,6 @@ body {
 .card p {
   color: #34495e;
   font-size: 0.9rem;
-  /* Tamanho de fonte reduzido */
 }
 
 .delete-button-text {
@@ -46,7 +42,8 @@ body {
   padding-right: 20px;
 }
 
-.session-actions button {
+.session-actions button,
+.session-actions p-button {
   font-size: 14px;
   padding: 5px 10px;
   margin: 5px;
@@ -88,7 +85,6 @@ body {
 
 .btn {
   font-size: 1rem;
-  /* Tamanho de fonte reduzido */
   padding: 10px 20px;
   border-radius: 10px;
   margin: 0 10px;
@@ -97,33 +93,36 @@ body {
 .btn-primary {
   background-color: #3498db;
   border-color: #3498db;
-
-  &:hover{
-    background-color: #2980b9;
-  }
 }
 
+.btn-primary:hover {
+  background-color: #2980b9;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  border-color: #e74c3c;
+}
+
+.btn-danger:hover {
+  background-color: #c0392b;
+}
 
 .row.mb-5 {
   margin-bottom: 5rem;
-  /* Espaçamento adicional para o footer */
 }
 
 .session-list {
   max-height: 500px;
-  /* Defina a altura máxima desejada */
   overflow-y: auto;
-  /* Adiciona uma barra de rolagem vertical quando necessário */
 }
 
 .activated-true {
   color: #5aa266 !important;
-  /* Verde para habilitado */
   font-weight: bold;
 }
 
 .activated-false {
   color: #e74c3c !important;
-  /* Vermelho para desabilitado */
   font-weight: bold;
 }

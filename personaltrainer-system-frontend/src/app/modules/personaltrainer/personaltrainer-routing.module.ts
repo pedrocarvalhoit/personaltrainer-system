@@ -6,7 +6,7 @@ import { AuthGuard } from '../../services/auth/auth.guard';
 import { CreateClientComponent } from './pages/create-client/create-client.component';
 import { ClientsComponent } from './pages/clients-list/clients.component';
 import { EditClientComponent } from './pages/edit-client/edit-client.component';
-import { WorkoutSessionComponent } from './pages/workout-session/workout-session.component';
+import { WorkoutSessionComponent } from './pages/workout-sessions-list/workout-session.component';
 import { CreateWorkoutsessionComponent } from './pages/create-workout-session/create-workoutsession.component';
 import { ClientDashboardComponent } from './pages/clientdashboard/clientdashboard.component';
 import { WorkoutProgramsComponent } from './pages/workout-programs/workout-programs.component';

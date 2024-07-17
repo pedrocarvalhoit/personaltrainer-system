@@ -18,7 +18,9 @@ import en from '@angular/common/locales/en';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { RouterLink } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { PersonaltrainerModule } from './modules/personaltrainer/personaltrainer.module';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 
@@ -59,6 +61,7 @@ registerLocaleData(en);
     AuthService,
     AuthGuard,
     MessageService,
+    ConfirmationService,
     JwtHelperService,
     provideAnimationsAsync(),
     provideHttpClient(),

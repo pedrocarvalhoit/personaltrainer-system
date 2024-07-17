@@ -146,12 +146,17 @@
                 >
                   Execute Session
                 </button>
-                <button
-                  class="btn btn-danger btn-sm"
-                  (click)="deleteSession(session.id)"
-                >
-                  <span class="delete-button-text">Delete Session</span>
-                </button>
+
+                <p-toast></p-toast>
+                <p-confirmPopup></p-confirmPopup>
+                <p-button
+                  (click)="deleteSession($event, session.id)"
+                  label="Delete Session"
+                  severity="danger"
+                  [styleClass]="'btn btn-danger btn-sm'"
+                  [outlined]="true"
+                ></p-button>
+
               </div>
             </div>
           </li>
