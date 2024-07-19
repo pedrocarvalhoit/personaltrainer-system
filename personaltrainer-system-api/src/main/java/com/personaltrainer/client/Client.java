@@ -3,6 +3,7 @@ package com.personaltrainer.client;
 import com.personaltrainer.Constants;
 import com.personaltrainer.common.BaseEntity;
 import com.personaltrainer.personaldata.PersonalData;
+import com.personaltrainer.physicaltest.coopertest.CooperTest;
 import com.personaltrainer.user.User;
 import com.personaltrainer.workoutprogram.WorkoutProgram;
 import com.personaltrainer.workoutsession.WorkoutSession;
@@ -36,6 +37,9 @@ public class Client extends BaseEntity{
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<WorkoutSession> workoutSession;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<CooperTest> cooperTest;
 
     @Transient
     public String getImagePath(){

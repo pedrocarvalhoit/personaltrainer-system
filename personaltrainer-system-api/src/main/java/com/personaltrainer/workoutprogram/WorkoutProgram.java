@@ -31,7 +31,6 @@ public class WorkoutProgram {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    @Lob
     private String trainingSessionContent;
 
     private String note;
