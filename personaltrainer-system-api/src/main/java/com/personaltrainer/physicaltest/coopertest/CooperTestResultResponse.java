@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CooperTestResponse {
+public class CooperTestResultResponse {
 
     private String result;
 
-    public CooperTestResponse(CooperTest test) {
+    public CooperTestResultResponse(CooperTest test) {
         this.result = test.getVo2MaxResult();
     }
 }

@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "cooper_test")
 @Data
@@ -32,7 +30,11 @@ public class CooperTest extends BaseEntity {
 
     public CooperTest (CooperTestRequest request){
         this.distance = request.distance();
-        this.vo2Max = (0.0268 * request.distance()) - 11.3;
+        this.vo2Max = calculateVo2Max(request.distance());
+    }
+
+    private double calculateVo2Max(Double distance) {
+        return (0.0268 * distance) - 11.3;
     }
 
     @Transient

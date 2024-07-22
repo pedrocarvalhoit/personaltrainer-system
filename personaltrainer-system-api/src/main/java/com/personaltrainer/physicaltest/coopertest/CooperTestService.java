@@ -1,6 +1,5 @@
 package com.personaltrainer.physicaltest.coopertest;
 
-import com.personaltrainer.client.Client;
 import com.personaltrainer.client.ClientRepository;
 import com.personaltrainer.common.UserPermissionOverClientCheck;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +28,7 @@ public class CooperTestService {
         return cooperTest.getId();
     }
 
-    public CooperTestResponse getVo2Max(Integer testId){
+    public CooperTestResultResponse getVo2Max(Integer testId){
         CooperTest cooperTest = repository.findById(testId).get();
 
         return mapper.toResponse(cooperTest);

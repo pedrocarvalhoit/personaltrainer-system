@@ -21,7 +21,7 @@ public class CooperTestController {
     }
 
     @GetMapping("vo2-result/{testId}")
-    public ResponseEntity<CooperTestResponse> getResult(@PathVariable Integer testId){
+    public ResponseEntity<CooperTestResultResponse> getResult(@PathVariable Integer testId){
         return ResponseEntity.ok(service.getVo2Max(testId));
     }
 

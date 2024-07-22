@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class CooperTestMapper {
 
-    public CooperTestResponse toResponse(CooperTest cooperTest) {
-        return new CooperTestResponse(cooperTest);
+    public CooperTestResultResponse toResponse(CooperTest cooperTest) {
+        return new CooperTestResultResponse(cooperTest);
     }
 
 }
