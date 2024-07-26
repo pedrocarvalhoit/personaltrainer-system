@@ -25,4 +25,9 @@ public class CooperTestController {
         return ResponseEntity.ok(service.getVo2Max(testId));
     }
 
+    @GetMapping("/description")
+    public ResponseEntity<CooperTestDescriptionResponse> getDescription(){
+        return ResponseEntity.ok(service.getDescription());
+    }
+
 }

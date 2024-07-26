@@ -5,9 +5,9 @@ import { HttpHeaders } from '@angular/common/http';
 import {
   WorkoutSessionResponseForCalendar,
   WorkoutsessionService,
-} from '../../../../services/workoutsession/workoutsession.service';
+} from '../../../../services/workout-session/workoutsession.service';
 import { CreateWorkoutsessionComponent } from '../create-workout-session/create-workoutsession.component';
-import { RedirectmessageService } from '../../../../services/redirectmessages/redirectmessage.service';
+import { RedirectmessageService } from '../../../../services/redirect-messages/redirectmessage.service';
 import { MessageService } from 'primeng/api';
 
 @Component({

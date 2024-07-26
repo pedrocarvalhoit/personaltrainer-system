@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { WorkoutSessionQualityResponse, WorkoutsessionService } from '../../../../../services/workoutsession/workoutsession.service';
-import { AuthService } from '../../../../../services/auth/auth.service';
+import { WorkoutSessionQualityResponse, WorkoutsessionService } from '../../../../../../services/workout-session/workoutsession.service';
+import { AuthService } from '../../../../../../services/auth/auth.service';
 import { HttpHeaders } from '@angular/common/http';
 
 @Component({

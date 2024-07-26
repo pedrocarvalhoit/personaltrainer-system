@@ -65,20 +65,47 @@
     </div>
   </div>
   <!-- Action Buttons -->
-  <div class="row mt-4 mb-5">
-    <div class="col-12">
-      <div class="card shadow-sm p-3">
-        <div class="d-flex justify-content-around">
-          <button class="btn btn-primary" (click)="navigateTo('personaltrainer/create-client')">
+  <div class="row mt-4">
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm p-3 h-100 d-flex justify-content-center">
+        <div class="d-flex flex-column align-items-center w-100">
+          <button class="btn btn-primary w-75 mb-2" (click)="navigateTo('personaltrainer/create-client')">
             <i class="fas fa-user-plus"></i> Register Client
           </button>
-
-          <button class="btn btn-primary" (click)="navigateTo('personaltrainer/workout-session/create')">
+          <button class="btn btn-primary w-75 mb-2" (click)="navigateTo('personaltrainer/workout-session/create')">
             <i class="fas fa-calendar-plus"></i> Create Workout Session
           </button>
-
-          <button class="btn btn-primary" (click)="navigateTo('personaltrainer/workout-program/create')">
+          <button class="btn btn-primary w-75 mb-2" (click)="navigateTo('personaltrainer/workout-program/create')">
             <i class="fas fa-clipboard-list"></i> Create Workout Program
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm p-3 h-100 d-flex justify-content-center">
+        <div class="d-flex flex-column align-items-center w-100">
+          <button class="btn btn-primary w-75 mb-2" (click)="navigateTo('personaltrainer/create-initial-assessment')">
+            <i class="fas fa-plus"></i>&nbsp;Initial Assessment
+          </button>
+          <button class="btn btn-primary w-75 mb-2" (click)="navigateTo('personaltrainer/create-perimetry-assessment')">
+            <i class="fas fa-plus"></i>&nbsp;Perimetry Assessment
+          </button>
+          <button class="btn btn-primary w-75 mb-2" (click)="navigateTo('personaltrainer/create-body-composition-assessment')">
+            <i class="fas fa-plus"></i>&nbsp;Body Composition Assessment
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm p-3 h-100 d-flex justify-content-center">
+        <div class="d-flex flex-column align-items-center w-100">
+          <button class="btn btn-primary w-75 mb-2" (click)="navigateTo('personaltrainer/create-cooper-test')">
+            <i class="fas fa-plus"></i>&nbsp;Cooper Test
+          </button>
+          <button class="btn btn-primary w-75 mb-2" (click)="navigateTo('personaltrainer/create-strength-test')">
+            <i class="fas fa-plus"></i>&nbsp;Strength Test
           </button>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { Component, Output } from '@angular/core';
-import { WorkoutsessionService } from '../../../../services/workoutsession/workoutsession.service';
+import { WorkoutsessionService } from '../../../../services/workout-session/workoutsession.service';
 import { AuthService } from '../../../../services/auth/auth.service';
 import {
   Client,
@@ -8,7 +8,7 @@ import {
 } from '../../../../services/client/client.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { RedirectmessageService } from '../../../../services/redirectmessages/redirectmessage.service';
+import { RedirectmessageService } from '../../../../services/redirect-messages/redirectmessage.service';
 
 @Component({
   selector: 'app-create-workoutsession',

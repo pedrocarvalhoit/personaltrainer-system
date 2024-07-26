@@ -33,4 +33,10 @@ public class CooperTestService {
 
         return mapper.toResponse(cooperTest);
     }
+
+    public CooperTestDescriptionResponse getDescription() {
+        return CooperTestDescriptionResponse.builder()
+                .description(CooperTest.DESCRIPTION)
+                .build();
+    }
 }

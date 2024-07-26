@@ -4,7 +4,7 @@ import { AuthService } from '../../../../services/auth/auth.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { RedirectmessageService } from '../../../../services/redirectmessages/redirectmessage.service';
+import { RedirectmessageService } from '../../../../services/redirect-messages/redirectmessage.service';
 
 @Component({
   selector: 'app-clients',

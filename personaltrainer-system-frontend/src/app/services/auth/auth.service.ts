@@ -1,4 +1,4 @@
-import { ErrorHandlerService } from './../errohandler/error-handler.service';
+import { ErrorHandlerService } from '../error-handler/error-handler.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';

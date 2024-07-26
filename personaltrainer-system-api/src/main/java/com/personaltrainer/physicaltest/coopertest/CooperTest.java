@@ -18,8 +18,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public class CooperTest extends BaseEntity {
 
-    private static final String DESCRIPTION = "Start on the treadmill with no incline, or flat solo ate the street," +
-            "and do your best in 12 minuts. Register the total distance.";
+    public static final String DESCRIPTION = "Start on the treadmill with no incline, or flat solo ate the street," +
+            " and do your best in 12 minuts. Register the total distance.";
 
     private Double distance;
     private Double vo2Max;
@@ -30,17 +30,7 @@ public class CooperTest extends BaseEntity {
 
     public CooperTest (CooperTestRequest request){
         this.distance = request.distance();
-        this.vo2Max = calculateVo2Max(request.distance());
-    }
-
-    private double calculateVo2Max(Double distance) {
-        return (0.0268 * distance) - 11.3;
-    }
-
-    @Transient
-    public String getVo2MaxResult(){
-        String result = this.vo2Max.toString() + " ml / kg / min";
-        return result;
+        this.vo2Max = CooperTestUtil.calculateVo2Max(request.distance());
     }
 
 }

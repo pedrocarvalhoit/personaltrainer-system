@@ -12,6 +12,7 @@ import { ClientDashboardComponent } from './pages/clientdashboard/clientdashboar
 import { WorkoutProgramsComponent } from './pages/workout-programs/workout-programs.component';
 import { CreateWorkoutProgramComponent } from './pages/create-workout-program/create-workout-program.component';
 import { EditworkoutprogramComponent } from './pages/edit-workout-program/editworkoutprogram.component';
+import { CreateCooperTestComponent } from './pages/create-cooper-test/create-cooper-test.component';
 
 const routes: Routes = [
   { path: '', component: PtDashboardComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'workout-programs', component: WorkoutProgramsComponent, canActivate: [AuthGuard] },
   { path: 'workout-program/create', component: CreateWorkoutProgramComponent, canActivate: [AuthGuard] },
   { path: 'edit-workoutprogram/:id', component: EditworkoutprogramComponent, canActivate: [AuthGuard] },
+  { path: 'create-cooper-test', component: CreateCooperTestComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

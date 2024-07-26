@@ -6,7 +6,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { HttpHeaders } from '@angular/common/http';
-import { RedirectmessageService } from '../../../../services/redirectmessages/redirectmessage.service';
+import { RedirectmessageService } from '../../../../services/redirect-messages/redirectmessage.service';
 
 @Component({
   selector: 'app-edit-client',

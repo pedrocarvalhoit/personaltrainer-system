@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { WorkoutsessionService } from '../../../../services/workoutsession/workoutsession.service';
+import { WorkoutsessionService } from '../../../../services/workout-session/workoutsession.service';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { HttpHeaders } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';

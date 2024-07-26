@@ -21,14 +21,16 @@ import { ClientDashboardComponent } from './pages/clientdashboard/clientdashboar
 import { WorkoutProgramsComponent } from './pages/workout-programs/workout-programs.component';
 import { CreateWorkoutProgramComponent } from './pages/create-workout-program/create-workout-program.component'; // Necessário para animações do PrimeNG
 import { EditorModule } from '@tinymce/tinymce-angular';
-import { WorkoutsessionsstatsComponent } from './pages/clientdashboard/workout-sessions-stats/workoutsessionsstats.component';
-import { TrainingindicativestatsComponent } from './pages/clientdashboard/training-indicative-stats/trainingindicativestats.component';
+import { WorkoutsessionsstatsComponent } from './pages/clientdashboard/sessions-and-programs/workout-sessions-stats/workoutsessionsstats.component';
+import { TrainingindicativestatsComponent } from './pages/clientdashboard/sessions-and-programs/training-indicative-stats/trainingindicativestats.component';
 import { ChartModule } from 'primeng/chart';
-import { WorkoutprogramslistComponent } from './pages/clientdashboard/workout-programs-list/workoutprogramslist.component';
 import { EditworkoutprogramComponent } from './pages/edit-workout-program/editworkoutprogram.component';
 import { ToastModule } from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { CooperTestComponent } from './pages/clientdashboard/physical-tests/cooper-test/cooper-test.component';
+import { WorkoutprogramslistComponent } from './pages/clientdashboard/sessions-and-programs/workout-programs-list/workoutprogramslist.component';
+import { CreateCooperTestComponent } from './pages/create-cooper-test/create-cooper-test.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
     TrainingindicativestatsComponent,
     WorkoutprogramslistComponent,
     EditworkoutprogramComponent,
+    CooperTestComponent,
+    CreateCooperTestComponent,
   ],
   imports: [
     CommonModule,

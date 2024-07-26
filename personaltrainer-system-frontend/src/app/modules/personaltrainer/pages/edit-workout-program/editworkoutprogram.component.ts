@@ -1,6 +1,6 @@
-import { RedirectmessageService } from './../../../../services/redirectmessages/redirectmessage.service';
+import { RedirectmessageService } from '../../../../services/redirect-messages/redirectmessage.service';
 import { Component, OnInit } from '@angular/core';
-import { WorkoutProgram, WorkoutprogramService } from '../../../../services/workoutprogram/workoutprogram.service';
+import { WorkoutProgram, WorkoutprogramService } from '../../../../services/workout-program/workoutprogram.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { HttpHeaders } from '@angular/common/http';

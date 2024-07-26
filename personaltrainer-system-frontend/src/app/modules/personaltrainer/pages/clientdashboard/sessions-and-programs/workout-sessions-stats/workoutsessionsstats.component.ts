@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Client, ClientService } from '../../../../../services/client/client.service';
+import { Client, ClientService } from '../../../../../../services/client/client.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../../../../services/auth/auth.service';
-import { WorkoutsessionService } from '../../../../../services/workoutsession/workoutsession.service';
+import { AuthService } from '../../../../../../services/auth/auth.service';
+import { WorkoutsessionService } from '../../../../../../services/workout-session/workoutsession.service';
 import { HttpHeaders } from '@angular/common/http';
 
 @Component({

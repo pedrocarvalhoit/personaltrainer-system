@@ -1,4 +1,4 @@
-import { WorkoutprogramService } from './../../../../services/workoutprogram/workoutprogram.service';
+import { WorkoutprogramService } from '../../../../services/workout-program/workoutprogram.service';
 import { Component } from '@angular/core';
 import { AuthService } from '../../../../services/auth/auth.service';
 import {
@@ -8,8 +8,7 @@ import {
 } from '../../../../services/client/client.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { RedirectmessageService } from '../../../../services/redirectmessages/redirectmessage.service';
-import { MessageService } from 'primeng/api';
+import { RedirectmessageService } from '../../../../services/redirect-messages/redirectmessage.service';
 
 @Component({
   selector: 'app-create-workout-program',

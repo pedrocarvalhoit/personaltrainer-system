@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { WorkoutProgram, WorkoutprogramService } from '../../../../../services/workoutprogram/workoutprogram.service';
-import { AuthService } from '../../../../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
-import { PageResponse } from '../../../../../services/client/client.service';
+import { PageResponse } from '../../../../../../services/client/client.service';
+import { AuthService } from '../../../../../../services/auth/auth.service';
+import { WorkoutProgram, WorkoutprogramService } from '../../../../../../services/workout-program/workoutprogram.service';
 
 @Component({
   selector: 'app-workoutprogramslist',

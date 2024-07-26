@@ -1,17 +1,15 @@
 package com.personaltrainer.physicaltest.coopertest;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CooperTestResultResponse {
+@Builder
+public class CooperTestDescriptionResponse {
 
-    private Double result;
-
-    public CooperTestResultResponse(CooperTest test) {
-        this.result = test.getVo2Max();
-    }
+    private String description;
 }

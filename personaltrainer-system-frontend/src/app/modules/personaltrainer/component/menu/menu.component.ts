@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { UserService } from '../../../../services/user/user.service';
 import { MessageService } from 'primeng/api';
-import { RedirectmessageService } from '../../../../services/redirectmessages/redirectmessage.service';
+import { RedirectmessageService } from '../../../../services/redirect-messages/redirectmessage.service';
 
 @Component({
   selector: 'app-menu',
