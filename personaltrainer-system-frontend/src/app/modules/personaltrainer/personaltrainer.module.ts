@@ -28,9 +28,10 @@ import { EditworkoutprogramComponent } from './pages/edit-workout-program/editwo
 import { ToastModule } from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
-import { CooperTestComponent } from './pages/clientdashboard/physical-tests/cooper-test/cooper-test.component';
+import { CooperTestComponent } from './pages/clientdashboard/physical-tests/cooper-classification/cooper-test.component';
 import { WorkoutprogramslistComponent } from './pages/clientdashboard/sessions-and-programs/workout-programs-list/workoutprogramslist.component';
 import { CreateCooperTestComponent } from './pages/create-cooper-test/create-cooper-test.component';
+import { CooperHistoricComponent } from './pages/clientdashboard/physical-tests/cooper-historic/cooper-historic.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { CreateCooperTestComponent } from './pages/create-cooper-test/create-coo
     EditworkoutprogramComponent,
     CooperTestComponent,
     CreateCooperTestComponent,
+    CooperHistoricComponent,
   ],
   imports: [
     CommonModule,

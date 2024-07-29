@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Client, ClientService } from '../../../../services/client/client.service';
 import { AuthService } from '../../../../services/auth/auth.service';
-import { WorkoutsessionService } from '../../../../services/workout-session/workoutsession.service';
 import { HttpHeaders } from '@angular/common/http';
-import { Message, MessageService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { RedirectmessageService } from '../../../../services/redirect-messages/redirectmessage.service';
-import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-client',
@@ -23,9 +21,7 @@ export class ClientDashboardComponent implements OnInit {
     private clientService: ClientService,
     private authService: AuthService,
     private redirectMessageService: RedirectmessageService,
-    private messageService: MessageService,
-    private router: Router
-  ) {}
+    private messageService: MessageService  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {

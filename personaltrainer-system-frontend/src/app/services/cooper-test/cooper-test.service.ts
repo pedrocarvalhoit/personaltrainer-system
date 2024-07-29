@@ -2,10 +2,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ErrorHandlerService } from '../error-handler/error-handler.service';
-import { Observable } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 
   export interface CooperTestDescription {
     description: string;
+  }
+
+  export interface CooperTestHistoricResponse {
+    month: string,
+    result: number;
   }
 
 @Injectable({
@@ -24,6 +29,17 @@ export class CooperTestService {
 
   getTestDescription(headers: HttpHeaders): Observable<CooperTestDescription> {
     return this.http.get<CooperTestDescription>('http://localhost:8088/api/v1/cooper-test/description', { headers });
+  }
+
+  getCooperTestHistoric(headers: HttpHeaders, clientId: number): Observable<CooperTestHistoricResponse[]> {
+    return this.http.get<CooperTestHistoricResponse[]>(`http://localhost:8088/api/v1/cooper-test/historic/${clientId}`, { headers })
+      .pipe(
+        tap(response => console.log('Raw API Response:', response)),
+        catchError(error => {
+          console.error('Error fetching sessions quality:', error);
+          return throwError(error);
+        })
+      );
   }
 
 }

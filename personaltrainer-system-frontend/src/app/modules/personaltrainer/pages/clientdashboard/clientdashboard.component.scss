@@ -1,13 +1,6 @@
 body {
-  background-color: #ffffff;
+  background-color: #ffffff; /* Background branco */
   font-family: 'Arial', sans-serif;
-}
-
-.client-name {
-  color: #2c3e50;
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-top: 20px;
 }
 
 .dashboard-container {
@@ -19,12 +12,12 @@ body {
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  border: 1.5px solid #bdc3c7;
+  border: 1.5px solid #bdc3c7; /* Borda mais grossa */
 }
 
 .card h4 {
   color: #2c3e50;
-  font-size: 1rem;
+  font-size: 1rem; /* Tamanho de fonte reduzido */
   font-weight: bold;
 }
 
@@ -34,7 +27,13 @@ body {
 
 .card p {
   color: #34495e;
-  font-size: 0.9rem;
+  font-size: 0.9rem; /* Tamanho de fonte reduzido */
+}
+
+.upcoming-sessions h5 {
+  color: #2c3e50;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
 }
 
 .list-group-item {
@@ -55,11 +54,74 @@ body {
   margin-bottom: 5px;
 }
 
+.list-group-item .btn {
+  background-color: #3498db;
+  border-color: #3498db;
+}
+
+.list-group-item .btn:hover {
+  background-color: #2980b9;
+}
+
+.podium {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  margin-top: 20px;
+}
+
+.podium-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
+  background: #ecf0f1;
+  border-radius: 10px;
+  width: 100px; /* Aumenta a largura */
+  height: 130px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Elegância adicional */
+}
+
+.podium-step i {
+  font-size: 1.5rem; /* Ícones menores */
+  position: absolute;
+  top: 10px; /* Move ícones mais para cima */
+}
+
+.podium-step p {
+  font-size: 1rem; /* Texto menor */
+  margin-top: auto; /* Empurra o texto para baixo */
+}
+
+.podium-first {
+  background: #ffd21c; /* Cor mais suave */
+}
+
+.podium-first p {
+  margin-top: 5px; /* Move o texto para cima */
+}
+
+.podium-second {
+  background: #d6dbdf; /* Cor mais suave */
+  height: 110px;
+}
+
+.podium-third {
+  background: #ffb74a; /* Cor mais suave */
+  height: 90px;
+}
+
+.podium-third p {
+  margin-top: 15px; /* Move o texto para baixo */
+}
+
 .btn {
-  font-size: 1rem;
+  font-size: 1rem; /* Tamanho de fonte reduzido */
   padding: 10px 20px;
   border-radius: 10px;
-  margin: 0 10px;
+  margin: 10px 0; /* Adiciona margem acima e abaixo dos botões */
 }
 
 .btn-primary {
@@ -72,42 +134,15 @@ body {
 }
 
 .row.mb-5 {
-  margin-bottom: 5rem;
+  margin-bottom: 5rem; /* Espaçamento adicional para o footer */
 }
 
-.session-stats {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-bottom: 20px;
+.row.mt-4 {
+  margin-top: 2rem; /* Ajusta o espaçamento superior entre as seções */
 }
 
-.stat-item {
-  text-align: center;
-  border-radius: 10px;
-  padding: 10px;
-  width: 100px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.session-list {
+  max-height: 300px; /* Defina a altura máxima desejada */
+  overflow-y: auto; /* Adiciona uma barra de rolagem vertical quando necessário */
 }
 
-.stat-item h6 {
-  margin: 0;
-  font-size: 0.9rem;
-}
-
-.stat-item p {
-  margin: 5px 0 0;
-  font-size: 0.9rem;
-}
-
-.yellow {
-  background-color: #ffeb99;
-}
-
-.green {
-  background-color: #d4edda;
-}
-
-.red {
-  background-color: #f8d7da;
-}
