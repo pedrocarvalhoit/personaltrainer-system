@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("cooper-test")
@@ -28,6 +30,11 @@ public class CooperTestController {
     @GetMapping("/description")
     public ResponseEntity<CooperTestDescriptionResponse> getDescription(){
         return ResponseEntity.ok(service.getDescription());
+    }
+
+    @GetMapping("historic/{clientId}")
+    public ResponseEntity<List<CooperTestHistoricResponse>> getHistoricResults(@PathVariable Integer clientId){
+        return ResponseEntity.ok(service.getHistoricResults(clientId));
     }
 
 }

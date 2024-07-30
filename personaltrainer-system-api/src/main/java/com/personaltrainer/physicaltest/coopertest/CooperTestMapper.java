@@ -9,4 +9,8 @@ public class CooperTestMapper {
         return new CooperTestResultResponse(cooperTest);
     }
 
+    public CooperTestHistoricResponse toHistoricResponse(CooperTest cooperTest){
+        return new CooperTestHistoricResponse(cooperTest);
+    }
+
 }
