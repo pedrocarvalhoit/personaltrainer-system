@@ -12,6 +12,10 @@ import { catchError, Observable, tap, throwError } from 'rxjs';
     result: number;
   }
 
+  export interface CooperTestClassificationResponse{
+    classification: string;
+  }
+
   export interface CooperTestHistoricResponse {
     month: string,
     result: number;
@@ -33,6 +37,10 @@ export class CooperTestService {
 
   getLastResultByClient(headers: HttpHeaders, selectedClientid: number,): Observable<CooperTestResultResponse> {
     return this.http.get<CooperTestResultResponse>(`http://localhost:8088/api/v1/cooper-test/vo2-last-result/${selectedClientid}`, { headers });
+  }
+
+  getClassification(headers: HttpHeaders, selectedClientid: number,): Observable<CooperTestClassificationResponse> {
+    return this.http.get<CooperTestClassificationResponse>(`http://localhost:8088/api/v1/cooper-test/vo2-classification/${selectedClientid}`, { headers });
   }
 
   getTestDescription(headers: HttpHeaders): Observable<CooperTestDescription> {

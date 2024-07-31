@@ -22,11 +22,6 @@ public class CooperTestController {
         return ResponseEntity.ok(service.create(clientId, authentication, request));
     }
 
-    @GetMapping("/vo2-result/{testId}")
-    public ResponseEntity<CooperTestResultResponse> getResult(@PathVariable Integer testId){
-        return ResponseEntity.ok(service.getVo2Max(testId));
-    }
-
     @GetMapping("/vo2-last-result/{clientId}")
     public ResponseEntity<CooperTestResultResponse> getLastResult(@PathVariable Integer clientId){
         return ResponseEntity.ok(service.getLastVo2Max(clientId));

@@ -37,13 +37,6 @@ public class CooperTestService {
         return cooperTest.getId();
     }
 
-    //Returns the result by testId
-    public CooperTestResultResponse getVo2Max(Integer testId){
-        CooperTest cooperTest = repository.findById(testId).get();
-
-        return mapper.toResultResponse(cooperTest);
-    }
-
     //Returns the last Vo2Max of client
     public CooperTestResultResponse getLastVo2Max(Integer clientId) {
         CooperTest test = getLastResultByClientid(clientId);

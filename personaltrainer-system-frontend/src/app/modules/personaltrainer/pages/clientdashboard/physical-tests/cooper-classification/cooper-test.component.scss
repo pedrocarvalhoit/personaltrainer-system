@@ -21,86 +21,43 @@ body {
   font-weight: bold;
 }
 
-.card h6 {
-  font-size: 1.0rem;
-}
-
-.card p {
-  color: #34495e;
-  font-size: 0.9rem;
-}
-
-.list-group-item {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  padding: 15px;
-}
-
-.list-group-item h6 {
-  color: #34495e;
-  margin-bottom: 5px;
-}
-
-.list-group-item p {
-  color: #7f8c8d;
-  margin-bottom: 5px;
-}
-
-.btn {
-  font-size: 1rem;
-  padding: 10px 20px;
-  border-radius: 10px;
-  margin: 0 10px;
-}
-
-.btn-primary {
-  background-color: #3498db;
-  border-color: #3498db;
-}
-
-.btn-primary:hover {
-  background-color: #2980b9;
-}
-
-.row.mb-5 {
-  margin-bottom: 5rem;
-}
-
-.session-stats {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.stat-item {
+.classification-box {
+  display: inline-block;
+  padding: 15px 30px;
+  border-radius: 5px;
+  margin-top: 20px;
+  font-weight: bold;
   text-align: center;
-  border-radius: 10px;
-  padding: 10px;
-  width: 100px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: auto;
 }
 
-.stat-item h6 {
-  margin: 0;
-  font-size: 0.9rem;
-}
-
-.stat-item p {
-  margin: 5px 0 0;
-  font-size: 0.9rem;
-}
-
-.yellow {
-  background-color: #ffeb99;
-}
-
-.green {
-  background-color: #d4edda;
-}
-
-.red {
+/* Color classes for different classifications */
+.classification-box.very-weak {
   background-color: #f8d7da;
+  color: #721c24;
+}
+
+.classification-box.weak {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.classification-box.regular {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.classification-box.good {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.classification-box.excellent {
+  background-color: #c3e6cb;
+  color: #0a952a;
+}
+
+.classification-box.undefined {
+  background-color: #ececec;
+  color: #6c757d;
 }
