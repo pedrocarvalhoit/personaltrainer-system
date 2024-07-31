@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CooperTestRepository extends JpaRepository<CooperTest, Integer> {
@@ -15,5 +16,10 @@ public interface CooperTestRepository extends JpaRepository<CooperTest, Integer>
             "ORDER BY ct.createdAt ASC")
     List<CooperTest> findTwelveMonthsHistory(@Param("clientId") Integer clientId,
                                              Pageable pageable);
+
+    @Query("SELECT ct FROM CooperTest ct WHERE ct.client.id = :clientId " +
+            "ORDER BY ct.createdAt DESC")
+    List<CooperTest> findResultByClientid(@Param("clientId") Integer clientId,
+                                              Pageable pageable);
 }
 

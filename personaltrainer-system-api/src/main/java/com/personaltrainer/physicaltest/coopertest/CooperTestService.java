@@ -21,6 +21,7 @@ public class CooperTestService {
     private final CooperTestMapper mapper;
     private final UserPermissionOverClientCheck permission;
 
+    //Returns the Vo2Max from the last 12 months
     public Integer create(Integer clientId, Authentication authentication, CooperTestRequest request) {
         permission.checkPermitionWithId(clientId, authentication);
 
@@ -35,9 +36,18 @@ public class CooperTestService {
     public CooperTestResultResponse getVo2Max(Integer testId){
         CooperTest cooperTest = repository.findById(testId).get();
 
-        return mapper.toResponse(cooperTest);
+        return mapper.toResultResponse(cooperTest);
     }
 
+    //Returns the last Vo2Max of client
+    public CooperTestResultResponse getLastVo2Max(Integer clientId) {
+        Pageable pageable = PageRequest.of(0, 1);
+        List<CooperTest> testList = repository.findResultByClientid(clientId, pageable);
+
+        return mapper.toResultResponse(testList.get(0));
+    }
+
+    //Resturns Test Description
     public CooperTestDescriptionResponse getDescription() {
         return CooperTestDescriptionResponse.builder()
                 .description(CooperTest.DESCRIPTION)
@@ -45,14 +55,14 @@ public class CooperTestService {
     }
 
     //Returns the historic result for lasts 12 months, ordered by date
-    public List<CooperTestHistoricResponse> getHistoricResults(Integer clientId) {
+    public List<CooperTestHistoryResponse> getHistoryResults(Integer clientId) {
         Pageable pageable = PageRequest.of(0, 12);
         List<CooperTest> testsList = repository.findTwelveMonthsHistory(clientId, pageable);
 
-        List<CooperTestHistoricResponse> responseList = testsList.stream()
-                .map(mapper :: toHistoricResponse)
+        return testsList.stream()
+                .map(mapper ::toHistoryResponse)
                 .toList();
-
-        return responseList;
     }
+
+
 }

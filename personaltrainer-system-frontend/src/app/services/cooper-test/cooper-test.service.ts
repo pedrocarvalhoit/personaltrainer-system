@@ -8,6 +8,10 @@ import { catchError, Observable, tap, throwError } from 'rxjs';
     description: string;
   }
 
+  export interface CooperTestResultResponse {
+    result: number;
+  }
+
   export interface CooperTestHistoricResponse {
     month: string,
     result: number;
@@ -27,12 +31,16 @@ export class CooperTestService {
     return this.http.post<any>(`http://localhost:8088/api/v1/cooper-test/create/${selectedClientid}`, body , { headers });
   }
 
+  getLastResultByClient(headers: HttpHeaders, selectedClientid: number,): Observable<CooperTestResultResponse> {
+    return this.http.get<CooperTestResultResponse>(`http://localhost:8088/api/v1/cooper-test/vo2-last-result/${selectedClientid}`, { headers });
+  }
+
   getTestDescription(headers: HttpHeaders): Observable<CooperTestDescription> {
     return this.http.get<CooperTestDescription>('http://localhost:8088/api/v1/cooper-test/description', { headers });
   }
 
   getCooperTestHistoric(headers: HttpHeaders, clientId: number): Observable<CooperTestHistoricResponse[]> {
-    return this.http.get<CooperTestHistoricResponse[]>(`http://localhost:8088/api/v1/cooper-test/historic/${clientId}`, { headers })
+    return this.http.get<CooperTestHistoricResponse[]>(`http://localhost:8088/api/v1/cooper-test/twelve-months-history/${clientId}`, { headers })
       .pipe(
         tap(response => console.log('Raw API Response:', response)),
         catchError(error => {
