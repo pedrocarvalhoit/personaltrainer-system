@@ -3,7 +3,6 @@ package com.personaltrainer.client;
 import com.personaltrainer.AmazonS3Util;
 import com.personaltrainer.common.PageResponse;
 import com.personaltrainer.common.UserPermissionOverClientCheck;
-import com.personaltrainer.file.FileStorageService;
 import com.personaltrainer.user.User;
 import com.personaltrainer.workoutsession.WorkoutSessionRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -32,7 +31,6 @@ public class ClientService {
     private final WorkoutSessionRepository workoutSessionRepository;
     private final ClientMapper clientMapper;
     private final UserPermissionOverClientCheck permition;
-    private final FileStorageService fileStorageService;
 
 
     public Integer save(ClientSaveRequest request, Authentication connectedUser, MultipartFile file) throws IOException {
@@ -42,6 +40,7 @@ public class ClientService {
         Client client = clientMapper.toClient(request);
         client.setPersonalTrainer(user);
         client.getPersonalData().setPhoto(fileName);
+
         Client savedClient = clientRepository.save(client);
 
         String uploadDir = "client-photos/" + savedClient.getId();

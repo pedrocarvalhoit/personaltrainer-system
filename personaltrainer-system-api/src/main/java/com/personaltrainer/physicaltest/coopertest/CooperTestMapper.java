@@ -13,4 +13,7 @@ public class CooperTestMapper {
         return new CooperTestHistoryResponse(cooperTest);
     }
 
+    public CooperTestClassificationResponse toClassificationResponse(CooperTestClassification classification) {
+        return new CooperTestClassificationResponse(classification.name());
+    }
 }

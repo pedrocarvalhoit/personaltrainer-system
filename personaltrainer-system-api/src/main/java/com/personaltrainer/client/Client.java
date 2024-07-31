@@ -4,6 +4,7 @@ import com.personaltrainer.Constants;
 import com.personaltrainer.common.BaseEntity;
 import com.personaltrainer.personaldata.PersonalData;
 import com.personaltrainer.physicaltest.coopertest.CooperTest;
+import com.personaltrainer.physicaltest.coopertest.CooperTestClassification;
 import com.personaltrainer.physicaltest.strength.StrengthTest;
 import com.personaltrainer.user.User;
 import com.personaltrainer.workoutprogram.WorkoutProgram;
@@ -41,6 +42,9 @@ public class Client extends BaseEntity{
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CooperTest> cooperTest;
+
+    @Enumerated(EnumType.STRING)
+    private CooperTestClassification cooperTestClassification;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<StrengthTest> strengthTest;

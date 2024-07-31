@@ -32,6 +32,11 @@ public class CooperTestController {
         return ResponseEntity.ok(service.getLastVo2Max(clientId));
     }
 
+    @GetMapping("/vo2-classification/{clientId}")
+    public ResponseEntity<CooperTestClassificationResponse> getClassification(@PathVariable Integer clientId, Authentication authentication){
+        return ResponseEntity.ok(service.getClassification(clientId, authentication));
+    }
+
     @GetMapping("/description")
     public ResponseEntity<CooperTestDescriptionResponse> getDescription(){
         return ResponseEntity.ok(service.getDescription());
