@@ -1,6 +1,8 @@
-package com.personaltrainer.physicaltest.strength;
+package com.personaltrainer.physicaltest.strengthtest;
 
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class StrengthTestMapper {
@@ -13,4 +15,9 @@ public class StrengthTestMapper {
         return new StrengthTestResultResponse(test);
     }
 
+    public ExercisesResponse toExerciseResponse(List<String> exercises) {
+        return ExercisesResponse.builder()
+                .exercises(exercises)
+                .build();
+    }
 }

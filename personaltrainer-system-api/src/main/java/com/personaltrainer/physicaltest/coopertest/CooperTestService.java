@@ -3,6 +3,7 @@ package com.personaltrainer.physicaltest.coopertest;
 import com.personaltrainer.client.Client;
 import com.personaltrainer.client.ClientRepository;
 import com.personaltrainer.common.UserPermissionOverClientCheck;
+import com.personaltrainer.physicaltest.TestDescriptionResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -45,8 +46,8 @@ public class CooperTestService {
     }
 
     //Resturns Test Description
-    public CooperTestDescriptionResponse getDescription() {
-        return CooperTestDescriptionResponse.builder()
+    public TestDescriptionResponse getDescription() {
+        return TestDescriptionResponse.builder()
                 .description(CooperTest.DESCRIPTION)
                 .build();
     }

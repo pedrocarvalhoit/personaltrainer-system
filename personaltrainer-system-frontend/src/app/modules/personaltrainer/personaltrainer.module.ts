@@ -33,6 +33,7 @@ import { WorkoutprogramslistComponent } from './pages/clientdashboard/sessions-a
 import { CreateCooperTestComponent } from './pages/create-cooper-test/create-cooper-test.component';
 import { CooperHistoricComponent } from './pages/clientdashboard/physical-tests/cooper-historic/cooper-historic.component';
 import { CooperResultComponent } from './pages/clientdashboard/physical-tests/cooper-result/cooper-result.component';
+import { CreateStrengthTestComponent } from './pages/create-strength-test/create-strength-test.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { CooperResultComponent } from './pages/clientdashboard/physical-tests/co
     CreateCooperTestComponent,
     CooperHistoricComponent,
     CooperResultComponent,
+    CreateStrengthTestComponent,
   ],
   imports: [
     CommonModule,

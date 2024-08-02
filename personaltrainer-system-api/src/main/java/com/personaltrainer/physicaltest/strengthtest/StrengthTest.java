@@ -1,4 +1,4 @@
-package com.personaltrainer.physicaltest.strength;
+package com.personaltrainer.physicaltest.strengthtest;
 
 import com.personaltrainer.client.Client;
 import com.personaltrainer.common.BaseEntity;
@@ -19,8 +19,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public class StrengthTest extends BaseEntity {
 
-    private static final String DESCRIPTION = "For a reliable test, do a good specific warm up, and then start." +
-            "Perform the chosen exercise for 10 MAX repetitions and register de total load (with the barbell).";
+    public static final String DESCRIPTION = "For a reliable test, do a good specific warm up, and then start." +
+            "Perform the selected exercise for 10 MAX repetitions and register de total load (with the barbell).";
 
     @NotNull
     private Double maxLoad;
@@ -38,11 +38,8 @@ public class StrengthTest extends BaseEntity {
     public StrengthTest(StrengthTestRequest request) {
         this.maxLoad = request.maxLoad();
         this.exercise = request.exercise();
-        this.max1Rm = setMax1Rm(request.maxLoad());
     }
 
-    public Double setMax1Rm(Double maxLoad){
-        return (0.033 * 10 * maxLoad) + maxLoad;
-    }
+
 
 }

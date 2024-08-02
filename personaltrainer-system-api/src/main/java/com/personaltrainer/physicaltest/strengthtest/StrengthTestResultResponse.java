@@ -1,4 +1,4 @@
-package com.personaltrainer.physicaltest.strength;
+package com.personaltrainer.physicaltest.strengthtest;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

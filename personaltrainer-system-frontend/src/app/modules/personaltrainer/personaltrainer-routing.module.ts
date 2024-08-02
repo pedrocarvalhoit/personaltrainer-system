@@ -13,6 +13,7 @@ import { WorkoutProgramsComponent } from './pages/workout-programs/workout-progr
 import { CreateWorkoutProgramComponent } from './pages/create-workout-program/create-workout-program.component';
 import { EditworkoutprogramComponent } from './pages/edit-workout-program/editworkoutprogram.component';
 import { CreateCooperTestComponent } from './pages/create-cooper-test/create-cooper-test.component';
+import { CreateStrengthTestComponent } from './pages/create-strength-test/create-strength-test.component';
 
 const routes: Routes = [
   { path: '', component: PtDashboardComponent },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'workout-program/create', component: CreateWorkoutProgramComponent, canActivate: [AuthGuard] },
   { path: 'edit-workoutprogram/:id', component: EditworkoutprogramComponent, canActivate: [AuthGuard] },
   { path: 'create-cooper-test', component: CreateCooperTestComponent, canActivate: [AuthGuard] },
+  { path: 'create-strength-test', component: CreateStrengthTestComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

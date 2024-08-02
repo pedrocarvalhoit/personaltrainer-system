@@ -1,5 +1,6 @@
-package com.personaltrainer.physicaltest.strength;
+package com.personaltrainer.physicaltest.strengthtest;
 
+import com.personaltrainer.physicaltest.TestDescriptionResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,19 @@ public class SetrengthTestController {
     }
 
     @GetMapping("/rm-result/{testId}")
-    public ResponseEntity<StrengthTestResultResponse> result(@PathVariable Integer testId){
+    public ResponseEntity<StrengthTestResultResponse> getResult(@PathVariable Integer testId){
         return ResponseEntity.ok(service.getResult(testId));
     }
+
+    @GetMapping("/description")
+    public ResponseEntity<TestDescriptionResponse> getDescription(){
+        return ResponseEntity.ok(service.getDescription());
+    }
+
+    @GetMapping("/exercises")
+    public ResponseEntity<ExercisesResponse> getExercises(){
+        return ResponseEntity.ok(service.getAllExercieses());
+    }
+
 
 }

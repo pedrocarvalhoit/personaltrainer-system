@@ -5,7 +5,7 @@ import com.personaltrainer.common.BaseEntity;
 import com.personaltrainer.personaldata.PersonalData;
 import com.personaltrainer.physicaltest.coopertest.CooperTest;
 import com.personaltrainer.physicaltest.coopertest.CooperTestClassification;
-import com.personaltrainer.physicaltest.strength.StrengthTest;
+import com.personaltrainer.physicaltest.strengthtest.StrengthTest;
 import com.personaltrainer.user.User;
 import com.personaltrainer.workoutprogram.WorkoutProgram;
 import com.personaltrainer.workoutsession.WorkoutSession;

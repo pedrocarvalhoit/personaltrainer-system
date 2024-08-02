@@ -96,7 +96,7 @@ export class CreateCooperTestComponent {
           this.description = response.description;
         },
         (error) => {
-          console.error('Failed to test description:', error);
+          console.error('Failed to load description:', error);
         }
       );
     }

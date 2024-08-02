@@ -1,4 +1,4 @@
-package com.personaltrainer.physicaltest.coopertest;
+package com.personaltrainer.physicaltest;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CooperTestDescriptionResponse {
-
+public class TestDescriptionResponse {
     private String description;
 }

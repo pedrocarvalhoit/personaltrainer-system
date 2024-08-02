@@ -1,5 +1,6 @@
 package com.personaltrainer.physicaltest.coopertest;
 
+import com.personaltrainer.physicaltest.TestDescriptionResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public class CooperTestController {
     }
 
     @GetMapping("/description")
-    public ResponseEntity<CooperTestDescriptionResponse> getDescription(){
+    public ResponseEntity<TestDescriptionResponse> getDescription(){
         return ResponseEntity.ok(service.getDescription());
     }
 

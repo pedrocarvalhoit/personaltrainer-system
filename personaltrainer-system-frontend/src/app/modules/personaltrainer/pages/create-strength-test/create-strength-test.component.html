@@ -1,0 +1,48 @@
+<app-menu></app-menu>
+
+  <div class="container-fluid card login-container">
+    <h3 class="text-center">Create a Strength Test</h3>
+    <hr />
+    <form (ngSubmit)="onSubmit()">
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Instructions: </label>&nbsp;
+        <span class="description-text">{{description}}</span>
+      </div>
+
+      <div class="mb-3">
+        <label for="client" class="form-label">Select Client:</label>
+        <select [(ngModel)]="selectedClient" name="client" id="client" class="form-control">
+          <option *ngFor="let client of clients" [ngValue]="client">{{ client.fullName }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="exercise" class="form-label">Select Exercise:</label>
+        <select [(ngModel)]="selectedExercise" name="exercise" id="exercise" class="form-control">
+          <option *ngFor="let exercise of exercises" [ngValue]="exercise">{{ exercise }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="distance" class="form-label">Total Load Achieved:</label>
+        <input
+          [(ngModel)]="maxLoad"
+          type="number"
+          class="form-control"
+          name="distance"
+          id="distance"
+          placeholder="Ex: 35.5"
+          required
+        />
+      </div>
+
+      <div class="d-flex justify-content-between mb-3">
+        <button type="submit" class="btn btn-primary">
+          <em class="fa-solid">&nbsp;Create</em>
+        </button>
+      </div>
+    </form>
+  </div>
+
+<app-footer></app-footer>
