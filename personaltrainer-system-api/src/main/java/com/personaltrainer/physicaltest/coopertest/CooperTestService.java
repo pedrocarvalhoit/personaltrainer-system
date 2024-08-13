@@ -2,7 +2,7 @@ package com.personaltrainer.physicaltest.coopertest;
 
 import com.personaltrainer.client.Client;
 import com.personaltrainer.client.ClientRepository;
-import com.personaltrainer.common.UserPermissionOverClientCheck;
+import com.personaltrainer.common.PermissionUtil;
 import com.personaltrainer.physicaltest.TestDescriptionResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +22,7 @@ public class CooperTestService {
     private final CooperTestRepository repository;
     private final ClientRepository clientRepository;
     private final CooperTestMapper mapper;
-    private final UserPermissionOverClientCheck permission;
+    private final PermissionUtil permission;
 
     private static final Logger LOGGER = Logger.getLogger(CooperTestService.class.getName());
 
@@ -91,4 +91,11 @@ public class CooperTestService {
                 .toList();
     }
 
+    public Integer delete(Integer testId, Authentication authentication) {
+        CooperTest cooperTest = repository.findById(testId).get();
+        permission.checkCooperTestPermission(cooperTest, authentication);
+
+        repository.delete(cooperTest);
+        return testId;
+    }
 }

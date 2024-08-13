@@ -3,7 +3,7 @@ package com.personaltrainer.workoutprogram;
 import com.personaltrainer.client.Client;
 import com.personaltrainer.client.ClientRepository;
 import com.personaltrainer.common.PageResponse;
-import com.personaltrainer.common.UserPermissionOverClientCheck;
+import com.personaltrainer.common.PermissionUtil;
 import com.personaltrainer.exception.OperationNotPermitedException;
 import com.personaltrainer.user.User;
 import com.personaltrainer.workoutprogram.exporter.WorkoutProgramPDFExporter;
@@ -29,7 +29,7 @@ public class WorkoutProgramService {
     private final WorkoutProgramRepository workoutProgramRepository;
     private final ClientRepository clientRepository;
     private final WorkoutProgramMapper mapper;
-    private final UserPermissionOverClientCheck permission;
+    private final PermissionUtil permission;
 
     public WorkoutProgramResponse findById(Integer programId) {
         WorkoutProgram program = workoutProgramRepository.findById(programId).get();

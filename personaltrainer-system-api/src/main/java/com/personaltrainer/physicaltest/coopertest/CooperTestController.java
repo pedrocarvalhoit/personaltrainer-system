@@ -43,4 +43,10 @@ public class CooperTestController {
         return ResponseEntity.ok(service.getHistoryResults(clientId));
     }
 
+    @DeleteMapping("/delete/{testId}")
+    public ResponseEntity<Integer> deleteTest(@PathVariable Integer testId,
+                                              Authentication authentication){
+        return ResponseEntity.ok(service.delete(testId, authentication));
+    }
+
 }

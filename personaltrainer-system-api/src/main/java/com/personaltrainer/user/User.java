@@ -43,7 +43,7 @@ public class User implements UserDetails, Principal{
     @Column(length = 128, nullable = false, unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "personalTrainer", cascade = CascadeType.ALL, orphanRemoval = false)
+    @OneToMany(mappedBy = "personalTrainer", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = false)
     private List<Client> clients;
 
     @Column(nullable = true)

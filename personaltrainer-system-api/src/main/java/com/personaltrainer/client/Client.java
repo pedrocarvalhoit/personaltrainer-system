@@ -17,6 +17,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "clients")
@@ -54,4 +55,16 @@ public class Client extends BaseEntity{
         return Constants.S3_BASE_URL + "/client-photos/" + this.getId() + "/" + this.getPersonalData().getPhoto();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return Objects.equals(this.getId(), client.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 }

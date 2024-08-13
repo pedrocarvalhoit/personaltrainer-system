@@ -2,7 +2,7 @@ package com.personaltrainer.client;
 
 import com.personaltrainer.AmazonS3Util;
 import com.personaltrainer.common.PageResponse;
-import com.personaltrainer.common.UserPermissionOverClientCheck;
+import com.personaltrainer.common.PermissionUtil;
 import com.personaltrainer.user.User;
 import com.personaltrainer.workoutsession.WorkoutSessionRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -30,7 +30,7 @@ public class ClientService {
     private final ClientRepository clientRepository;
     private final WorkoutSessionRepository workoutSessionRepository;
     private final ClientMapper clientMapper;
-    private final UserPermissionOverClientCheck permition;
+    private final PermissionUtil permition;
 
 
     public Integer save(ClientSaveRequest request, Authentication connectedUser, MultipartFile file) throws IOException {
