@@ -1,0 +1,31 @@
+body {
+  background-color: #ffffff;
+  font-family: 'Arial', sans-serif;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px; /* Aumenta o padding */
+  border: 1.5px solid #bdc3c7;
+  width: 120%; /* Define a largura do card */
+  height: 500px; /* Define a altura do card */
+  max-width: 600px; /* Define a largura máxima */
+  margin: 0 auto; /* Centraliza o card horizontalmente */
+}
+
+.card h4 {
+  color: #2c3e50;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.card h6 {
+  font-size: 1.0rem;
+}
+
+.card p {
+  color: #34495e;
+  font-size: 0.9rem;
+}

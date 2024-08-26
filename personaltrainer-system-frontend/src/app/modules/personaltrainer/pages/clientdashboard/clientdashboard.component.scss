@@ -30,11 +30,6 @@ body {
   font-size: 0.9rem; /* Tamanho de fonte reduzido */
 }
 
-.upcoming-sessions h5 {
-  color: #2c3e50;
-  font-size: 1.1rem;
-  margin-bottom: 15px;
-}
 
 .list-group-item {
   background-color: #f9f9f9;
@@ -61,60 +56,6 @@ body {
 
 .list-group-item .btn:hover {
   background-color: #2980b9;
-}
-
-.podium {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
-  margin-top: 20px;
-}
-
-.podium-step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 10px;
-  background: #ecf0f1;
-  border-radius: 10px;
-  width: 100px; /* Aumenta a largura */
-  height: 130px;
-  position: relative;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Elegância adicional */
-}
-
-.podium-step i {
-  font-size: 1.5rem; /* Ícones menores */
-  position: absolute;
-  top: 10px; /* Move ícones mais para cima */
-}
-
-.podium-step p {
-  font-size: 1rem; /* Texto menor */
-  margin-top: auto; /* Empurra o texto para baixo */
-}
-
-.podium-first {
-  background: #ffd21c; /* Cor mais suave */
-}
-
-.podium-first p {
-  margin-top: 5px; /* Move o texto para cima */
-}
-
-.podium-second {
-  background: #d6dbdf; /* Cor mais suave */
-  height: 110px;
-}
-
-.podium-third {
-  background: #ffb74a; /* Cor mais suave */
-  height: 90px;
-}
-
-.podium-third p {
-  margin-top: 15px; /* Move o texto para baixo */
 }
 
 .btn {
