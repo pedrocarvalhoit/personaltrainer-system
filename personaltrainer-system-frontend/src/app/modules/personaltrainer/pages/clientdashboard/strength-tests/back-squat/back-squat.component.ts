@@ -109,7 +109,7 @@ export class BackSquatComponent {
 
               response.forEach((stat: ExerciseStatsResponse) => {
                 labels.push(stat.month);
-                avarageMaxLoadData.push(stat.avarageMaxLoad);
+                avarageMaxLoadData.push(stat.maxLoadAvarage);
                 maxLoadData.push(stat.maxLoad);
                 max1RmData.push(stat.max1Rm);
               });
@@ -125,17 +125,19 @@ export class BackSquatComponent {
                     tension: 0.4
                   },
                   {
+                    type: 'bar',
                     label: 'Max Load',
                     data: maxLoadData,
                     fill: false,
-                    borderColor: getComputedStyle(document.documentElement).getPropertyValue('--pink-500'),
+                    backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--green-500'),
                     tension: 0.4
                   },
                   {
+                    type: 'bar',
                     label: 'Max 1 Rm',
                     data: max1RmData,
                     fill: false,
-                    borderColor: getComputedStyle(document.documentElement).getPropertyValue('--pink-500'),
+                    backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--orange-500'),
                     tension: 0.4
                   }
                 ]

@@ -21,7 +21,7 @@ export enum Exercise {
 
 export interface ExerciseStatsResponse {
   month: string;
-  avarageMaxLoad: number;
+  maxLoadAvarage: number;
   maxLoad: number;
   max1Rm: number;
 }
