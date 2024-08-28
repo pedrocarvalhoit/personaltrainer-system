@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable } from 'rxjs';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { ErrorHandlerService } from '../error-handler/error-handler.service';
 
 export interface TestDescriptionResponse {
@@ -17,6 +17,13 @@ export enum Exercise {
   BENCH_PRESS = 'BENCH_PRESS',
   DEADLIFT = 'DEADLIFT',
   SEATED_LOW_ROW = 'SEATED_LOW_ROW',
+}
+
+export interface ExerciseStatsResponse {
+  month: string;
+  avarageMaxLoad: number;
+  maxLoad: number;
+  max1Rm: number;
 }
 
 @Injectable({
@@ -41,6 +48,17 @@ export class StrengthTestService {
 
   getTestExercises(headers: HttpHeaders): Observable<ExercisesResponse> {
     return this.http.get<ExercisesResponse>('http://localhost:8088/api/v1/strength-test/exercises', { headers });
+  }
+
+  getBackSquatStats(headers: HttpHeaders, clientId: number): Observable<ExerciseStatsResponse[]> {
+    return this.http.get<ExerciseStatsResponse[]>(`http://localhost:8088/api/v1/strength-test/get-back-squat-stats/${clientId}`, { headers })
+      .pipe(
+        tap(response => console.log('Raw API Response:', response)),
+        catchError(error => {
+          console.error('Error fetching sessions quality:', error);
+          return throwError(error);
+        })
+      );
   }
 
 

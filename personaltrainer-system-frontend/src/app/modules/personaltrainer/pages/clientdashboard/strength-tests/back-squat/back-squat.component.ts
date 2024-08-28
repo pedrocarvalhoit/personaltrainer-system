@@ -1,5 +1,8 @@
+import { ExerciseStatsResponse, StrengthTestService } from './../../../../../../services/strength-test/strength-test.service';
 import { Component, Input } from '@angular/core';
 import { ChartModule } from 'primeng/chart';
+import { AuthService } from '../../../../../../services/auth/auth.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-back-squat',
@@ -12,37 +15,46 @@ export class BackSquatComponent {
   data: any;
   options: any;
 
+  constructor(
+    private strengthTestService: StrengthTestService,
+    private authService: AuthService
+  ) { }
+
   ngOnInit() {
+    this.initializeChartOptions();
+    this.loadStrengthStats();
+  }
+
+  initializeChartOptions(): void{
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--text-color');
     const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
     const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
     this.data = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: [],
         datasets: [
             {
-                type: 'line',
-                label: 'Dataset 1',
+                label: '',
                 borderColor: documentStyle.getPropertyValue('--blue-500'),
                 borderWidth: 2,
                 fill: false,
                 tension: 0.4,
-                data: [50, 25, 12, 48, 56, 76, 42]
+                data: []
             },
             {
                 type: 'bar',
-                label: 'Dataset 2',
+                label: '',
                 backgroundColor: documentStyle.getPropertyValue('--green-500'),
-                data: [21, 84, 24, 75, 37, 65, 34],
+                data: [],
                 borderColor: 'white',
                 borderWidth: 2
             },
             {
                 type: 'bar',
-                label: 'Dataset 3',
+                label: '',
                 backgroundColor: documentStyle.getPropertyValue('--orange-500'),
-                data: [41, 52, 24, 74, 23, 21, 32]
+                data: []
             }
         ]
     };
@@ -77,6 +89,73 @@ export class BackSquatComponent {
         }
     };
 }
+
+  loadStrengthStats(){
+    if (this.clientId && !isNaN(this.clientId)) {
+      console.log('Client ID:', this.clientId); // Verificar se o clientId é válido
+      const token = this.authService.getToken();
+      if (token) {
+        const headers = new HttpHeaders({
+          Authorization: `Bearer ${token}`,
+        });
+        this.strengthTestService.getBackSquatStats(headers, this.clientId).subscribe(
+          (response: ExerciseStatsResponse[]) => {
+            console.log('API Response:', response);
+            if (Array.isArray(response)) {
+              const labels: string[] = [];
+              const avarageMaxLoadData: number[] = [];
+              const maxLoadData: number[] = [];
+              const max1RmData: number[] = [];
+
+              response.forEach((stat: ExerciseStatsResponse) => {
+                labels.push(stat.month);
+                avarageMaxLoadData.push(stat.avarageMaxLoad);
+                maxLoadData.push(stat.maxLoad);
+                max1RmData.push(stat.max1Rm);
+              });
+
+              this.data = {
+                labels: labels,
+                datasets: [
+                  {
+                    label: 'Avarage Max Load',
+                    data: avarageMaxLoadData,
+                    fill: false,
+                    borderColor: getComputedStyle(document.documentElement).getPropertyValue('--blue-500'),
+                    tension: 0.4
+                  },
+                  {
+                    label: 'Max Load',
+                    data: maxLoadData,
+                    fill: false,
+                    borderColor: getComputedStyle(document.documentElement).getPropertyValue('--pink-500'),
+                    tension: 0.4
+                  },
+                  {
+                    label: 'Max 1 Rm',
+                    data: max1RmData,
+                    fill: false,
+                    borderColor: getComputedStyle(document.documentElement).getPropertyValue('--pink-500'),
+                    tension: 0.4
+                  }
+                ]
+              };
+            } else {
+              console.error('Response is not an array', response);
+            }
+          },
+          error => {
+            console.error('Failed to fetch training stats', error);
+          }
+        );
+      }
+    } else {
+      console.error('Invalid clientId:', this.clientId);
+    }
+  }
+
 }
+
+
 
 

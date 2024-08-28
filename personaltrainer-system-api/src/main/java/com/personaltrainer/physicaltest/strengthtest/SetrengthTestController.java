@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("strength-test")
 @RequiredArgsConstructor
@@ -34,5 +36,9 @@ public class SetrengthTestController {
         return ResponseEntity.ok(service.getAllExercieses());
     }
 
+    @GetMapping("/get-back-squat-stats/{clientId}")
+    public ResponseEntity<List<ExerciseStatsResponse>>getBackSquatStats(@PathVariable Integer clientId){
+        return ResponseEntity.ok(service.getBackSquatStats(clientId));
+    }
 
 }
