@@ -25,13 +25,13 @@
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="sessions-and-programs" role="tabpanel" aria-labelledby="sessions-and-programs-tab">
           <div class="row mt-4">
-            <div class="col-md-4 mb-4">
+            <div class="col-md-6 mb-4">
               <app-workoutsessionsstats [clientId]="clientId"></app-workoutsessionsstats>
             </div>
-            <div class="col-md-4 mb-4">
+            <div class="col-md-6 mb-4">
               <app-trainingindicativestats [clientId]="clientId"></app-trainingindicativestats>
             </div>
-            <div class="col-md-4 mb-4">
+            <div class="col-md-6 mb-4">
               <app-workoutprogramslist [clientId]="clientId"></app-workoutprogramslist>
             </div>
           </div>
@@ -40,13 +40,13 @@
         <!-- Cooper Test -->
         <div class="tab-pane fade" id="cooper-tests" role="tabpanel" aria-labelledby="cooper-tests-tab">
           <div class="row mt-4">
-            <div class="col-md-4 mb-4">
+            <div class="col-md-6 mb-4">
               <app-cooper-result [clientId]="clientId"></app-cooper-result>
             </div>
-            <div class="col-md-4 mb-4">
+            <div class="col-md-6 mb-4">
               <app-cooper-test [clientId]="clientId"></app-cooper-test>
             </div>
-            <div class="col-md-4 mb-4">
+            <div class="col-md-6 mb-4">
               <app-cooper-historic [clientId]="clientId"></app-cooper-historic>
             </div>
           </div>
@@ -54,9 +54,12 @@
 
         <!-- Strength Test -->
         <div class="tab-pane fade" id="strength-tests" role="tabpanel" aria-labelledby="strength-tests-tab">
-          <div class="row mt-4">
-            <div class="col-md-4 mb-4">
+          <div class="row mt-4 ">
+            <div class="col-md-6 mb-4">
               <app-back-squat [clientId]="clientId"></app-back-squat>
+            </div>
+            <div class="col-md-6 mb-4">
+              <app-deadlift [clientId]="clientId"></app-deadlift>
             </div>
           </div>
         </div>

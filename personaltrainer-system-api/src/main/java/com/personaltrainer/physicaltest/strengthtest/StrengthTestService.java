@@ -61,6 +61,12 @@ public class StrengthTestService {
         return getExerciseStats(clientId, exercise);
     }
 
+    public List<ExerciseStatsResponse> getDeadliftStats(Integer clientId) {
+        Exercise exercise = Exercise.DEADLIFT;
+        return getExerciseStats(clientId, exercise);
+    }
+
+    //Get stats for exercises
     private List<ExerciseStatsResponse> getExerciseStats(Integer clientId, Exercise exercise) {
         LocalDateTime twelveMonthsAgo = LocalDateTime.now().minusMonths(12).with(TemporalAdjusters.firstDayOfMonth());
 

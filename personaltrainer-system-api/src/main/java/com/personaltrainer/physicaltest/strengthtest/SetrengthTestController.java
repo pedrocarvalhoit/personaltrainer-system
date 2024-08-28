@@ -41,4 +41,9 @@ public class SetrengthTestController {
         return ResponseEntity.ok(service.getBackSquatStats(clientId));
     }
 
+    @GetMapping("/get-deadlift-stats/{clientId}")
+    public ResponseEntity<List<ExerciseStatsResponse>>getDeadliftStats(@PathVariable Integer clientId){
+        return ResponseEntity.ok(service.getDeadliftStats(clientId));
+    }
+
 }

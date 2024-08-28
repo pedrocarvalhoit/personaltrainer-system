@@ -61,5 +61,16 @@ export class StrengthTestService {
       );
   }
 
+  getDeadliftStats(headers: HttpHeaders, clientId: number): Observable<ExerciseStatsResponse[]> {
+    return this.http.get<ExerciseStatsResponse[]>(`http://localhost:8088/api/v1/strength-test/get-deadlift-stats/${clientId}`, { headers })
+      .pipe(
+        tap(response => console.log('Raw API Response:', response)),
+        catchError(error => {
+          console.error('Error fetching sessions quality:', error);
+          return throwError(error);
+        })
+      );
+  }
+
 
 }
