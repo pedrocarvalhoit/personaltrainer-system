@@ -36,6 +36,8 @@ import { CooperResultComponent } from './pages/clientdashboard/physical-tests/co
 import { CreateStrengthTestComponent } from './pages/create-strength-test/create-strength-test.component';
 import { BackSquatComponent } from './pages/clientdashboard/strength-tests/back-squat/back-squat.component';
 import { DeadliftComponent } from './pages/clientdashboard/strength-tests/deadlift/deadlift.component';
+import { SeatedLowRowComponent } from './pages/clientdashboard/strength-tests/seated-low-row/seated-low-row.component';
+import { BenchPressComponent } from './pages/clientdashboard/strength-tests/bench-press/bench-press.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { DeadliftComponent } from './pages/clientdashboard/strength-tests/deadli
     CreateStrengthTestComponent,
     BackSquatComponent,
     DeadliftComponent,
+    SeatedLowRowComponent,
+    BenchPressComponent,
   ],
   imports: [
     CommonModule,

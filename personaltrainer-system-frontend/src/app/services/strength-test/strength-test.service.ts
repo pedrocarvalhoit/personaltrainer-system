@@ -72,5 +72,27 @@ export class StrengthTestService {
       );
   }
 
+  getSeatedLowRowStats(headers: HttpHeaders, clientId: number): Observable<ExerciseStatsResponse[]> {
+    return this.http.get<ExerciseStatsResponse[]>(`http://localhost:8088/api/v1/strength-test/get-seated-low-row-stats/${clientId}`, { headers })
+      .pipe(
+        tap(response => console.log('Raw API Response:', response)),
+        catchError(error => {
+          console.error('Error fetching sessions quality:', error);
+          return throwError(error);
+        })
+      );
+  }
+
+  getBenchPressStats(headers: HttpHeaders, clientId: number): Observable<ExerciseStatsResponse[]> {
+    return this.http.get<ExerciseStatsResponse[]>(`http://localhost:8088/api/v1/strength-test/get-bench-press-stats/${clientId}`, { headers })
+      .pipe(
+        tap(response => console.log('Raw API Response:', response)),
+        catchError(error => {
+          console.error('Error fetching sessions quality:', error);
+          return throwError(error);
+        })
+      );
+  }
+
 
 }

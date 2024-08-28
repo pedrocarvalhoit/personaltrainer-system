@@ -46,4 +46,14 @@ public class SetrengthTestController {
         return ResponseEntity.ok(service.getDeadliftStats(clientId));
     }
 
+    @GetMapping("/get-bench-press-stats/{clientId}")
+    public ResponseEntity<List<ExerciseStatsResponse>>getBenchPressStats(@PathVariable Integer clientId){
+        return ResponseEntity.ok(service.getBenchPressStats(clientId));
+    }
+
+    @GetMapping("/get-seated-low-row-stats/{clientId}")
+    public ResponseEntity<List<ExerciseStatsResponse>>getSeatedLowRowStats(@PathVariable Integer clientId){
+        return ResponseEntity.ok(service.getSeatedLowRowStats(clientId));
+    }
+
 }
