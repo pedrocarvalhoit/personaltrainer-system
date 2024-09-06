@@ -30,4 +30,5 @@ public class BaseEntity {
     private LocalDateTime createdAt;
 
     private boolean enabled;
+
 }

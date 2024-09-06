@@ -1,0 +1,75 @@
+<app-menu></app-menu>
+
+  <div class="container-fluid card login-container">
+    <h3 class="text-center">Create a Inicial Assessment</h3>
+    <hr />
+    <form (ngSubmit)="onSubmit()">
+
+      <div class="mb-3">
+        <label for="client" class="form-label">Select Client:</label>
+        <select [(ngModel)]="selectedClient" name="client" id="client" class="form-control">
+          <option *ngFor="let client of clients" [ngValue]="client">{{ client.fullName }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="restingHeartRate" class="form-label">Resting Heart Rate:</label>
+        <input
+          [(ngModel)]="restingHeartRate"
+          type="number"
+          class="form-control"
+          name="restingHeartRate"
+          id="restingHeartRate"
+          placeholder="Ex: 65"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="maxHeartRate" class="form-label">Max Heart Rate: </label>
+        <input
+          [(ngModel)]="maxHeartRate"
+          type="number"
+          class="form-control"
+          name="maxHeartRate"
+          id="maxHeartRate"
+          placeholder="Ex: 185"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="sistolicBloodPressure" class="form-label">Sistolic Blood Pressure: </label>
+        <input
+          [(ngModel)]="sistolicBloodPressure"
+          type="number"
+          class="form-control"
+          name="sistolicBloodPressure"
+          id="sistolicBloodPressure"
+          placeholder="Ex: 125"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="diastolicBloodPressure" class="form-label">Diastolic Blood Pressure: </label>
+        <input
+          [(ngModel)]="diastolicBloodPressure"
+          type="number"
+          class="form-control"
+          name="diastolicBloodPressure"
+          id="diastolicBloodPressure"
+          placeholder="Ex: 78"
+          required
+        />
+      </div>
+
+      <div class="d-flex justify-content-between mb-3">
+        <button type="submit" class="btn btn-primary">
+          <em class="fa-solid">&nbsp;Create</em>
+        </button>
+      </div>
+    </form>
+  </div>
+
+<app-footer></app-footer>

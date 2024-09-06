@@ -2,6 +2,7 @@ package com.personaltrainer.client;
 
 import com.personaltrainer.Constants;
 import com.personaltrainer.common.BaseEntity;
+import com.personaltrainer.inicialassessment.InicialAssessment;
 import com.personaltrainer.personaldata.PersonalData;
 import com.personaltrainer.physicaltest.coopertest.CooperTest;
 import com.personaltrainer.physicaltest.coopertest.CooperTestClassification;
@@ -49,6 +50,9 @@ public class Client extends BaseEntity{
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<StrengthTest> strengthTest;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<InicialAssessment> inicialAssessments;
 
     @Transient
     public String getImagePath(){

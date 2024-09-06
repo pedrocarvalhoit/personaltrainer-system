@@ -38,6 +38,7 @@ import { BackSquatComponent } from './pages/clientdashboard/strength-tests/back-
 import { DeadliftComponent } from './pages/clientdashboard/strength-tests/deadlift/deadlift.component';
 import { SeatedLowRowComponent } from './pages/clientdashboard/strength-tests/seated-low-row/seated-low-row.component';
 import { BenchPressComponent } from './pages/clientdashboard/strength-tests/bench-press/bench-press.component';
+import { CreateInitialAssessmentComponent } from './pages/create-initial-assessment/create-initial-assessment.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { BenchPressComponent } from './pages/clientdashboard/strength-tests/benc
     DeadliftComponent,
     SeatedLowRowComponent,
     BenchPressComponent,
+    CreateInitialAssessmentComponent,
   ],
   imports: [
     CommonModule,
