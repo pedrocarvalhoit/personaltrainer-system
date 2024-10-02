@@ -10,7 +10,10 @@
       <!-- Tabs navigation -->
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="sessions-and-programs-tab" data-bs-toggle="tab" data-bs-target="#sessions-and-programs" type="button" role="tab" aria-controls="sessions-and-programs" aria-selected="true">Sessions and Programs</button>
+          <button class="nav-link active" id="inicial-assessment-tab" data-bs-toggle="tab" data-bs-target="#inicial-assessment" type="button" role="tab" aria-controls="inicial-assessment" aria-selected="true">Inicial Assessment</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="sessions-and-programs-tab" data-bs-toggle="tab" data-bs-target="#sessions-and-programs" type="button" role="tab" aria-controls="sessions-and-programs" aria-selected="true">Sessions and Programs</button>
         </li>
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="cooper-tests-tab" data-bs-toggle="tab" data-bs-target="#cooper-tests" type="button" role="tab" aria-controls="cooper-tests" aria-selected="false">Cooper Tests</button>
@@ -23,7 +26,16 @@
       <!-- Tabs content -->
        <!-- Workout Session -->
       <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="sessions-and-programs" role="tabpanel" aria-labelledby="sessions-and-programs-tab">
+
+        <div class="tab-pane fade show active" id="inicial-assessment" role="tabpanel" aria-labelledby="inicial-assessment-tab">
+          <div class="row mt-4">
+            <div class="col-md-4 mb-4">
+              test
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="sessions-and-programs" role="tabpanel" aria-labelledby="sessions-and-programs-tab">
           <div class="row mt-4">
             <div class="col-md-4 mb-4">
               <app-workoutsessionsstats [clientId]="clientId"></app-workoutsessionsstats>

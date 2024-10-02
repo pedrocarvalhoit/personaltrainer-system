@@ -67,7 +67,7 @@ public class ClientController {
         return ResponseEntity.ok(clientService.deleteClientAndSessions(clientId, connectedUser));
     }
 
-    //update PersonalData (Email and Mobile)
+    //update PersonalData
     @PatchMapping("/update/{clientId}")
     public ResponseEntity<Integer> updatePersonalData(@PathVariable Integer clientId,
                                                       Authentication authentication,

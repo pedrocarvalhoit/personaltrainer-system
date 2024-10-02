@@ -14,6 +14,6 @@ public record PersonalDataUpdateRequest(
 
         String gender,
 
-        LocalDate dateOfBirthday
+        LocalDate dateOfBirth
 ) {
 }

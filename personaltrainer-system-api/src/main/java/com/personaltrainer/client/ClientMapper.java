@@ -26,7 +26,7 @@ public class ClientMapper {
                 .email(client.getPersonalData().getEmail())
                 .mobile(client.getPersonalData().getMobile())
                 .photo(client.getImagePath())
-                .dateOfBirthday(client.getPersonalData().getDateOfBirth())
+                .dateOfBirth(client.getPersonalData().getDateOfBirth())
                 .age(client.getPersonalData().getAge())
                 .gender(client.getPersonalData().getGender())
                 .enabled(client.isEnabled())
@@ -47,8 +47,8 @@ public class ClientMapper {
         if (personalDataUpdateRequest.mobile() != null && !personalDataUpdateRequest.mobile().trim().isEmpty()) {
             client.getPersonalData().setMobile(personalDataUpdateRequest.mobile());
         }
-        if (personalDataUpdateRequest.dateOfBirthday() != null && !personalDataUpdateRequest.firstName().trim().isEmpty()){
-            client.getPersonalData().setFirstName(personalDataUpdateRequest.firstName());
+        if (personalDataUpdateRequest.dateOfBirth() != null){
+            client.getPersonalData().setDateOfBirth(personalDataUpdateRequest.dateOfBirth());
         }
         if (personalDataUpdateRequest.gender() != null && !personalDataUpdateRequest.gender().trim().isEmpty()){
             client.getPersonalData().setGender(personalDataUpdateRequest.gender());
