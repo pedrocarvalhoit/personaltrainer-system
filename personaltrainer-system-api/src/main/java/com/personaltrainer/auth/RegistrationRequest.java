@@ -42,4 +42,5 @@ public class RegistrationRequest {
     @NotEmpty(message = "Gender is mandatory")
     @NotBlank(message = "Gender is mandatory")
     private String gender;
+
 }
