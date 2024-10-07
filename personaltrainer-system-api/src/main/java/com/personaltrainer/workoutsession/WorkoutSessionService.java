@@ -58,7 +58,7 @@ public class WorkoutSessionService {
                 .orElseThrow(()->new EntityNotFoundException("Workout session not found"));
 
         if (!Objects.equals(workoutSession.getClient().getPersonalTrainer().getId(), user.getId())) {
-            throw new OperationNotPermitedException("This session don´t belong to your client");
+            throw new OperationNotPermitedException();
         }
 
         workoutSession.markAsExecuted();
@@ -239,7 +239,7 @@ public class WorkoutSessionService {
         WorkoutSession workoutSession = workoutSessionRepository.findById(sessionId)
                 .orElseThrow(() -> new EntityNotFoundException("Session not found"));
         if (!Objects.equals(workoutSession.getClient().getPersonalTrainer().getId(), user.getId())){
-            throw new OperationNotPermitedException("This session don´t belong to you client");
+            throw new OperationNotPermitedException();
         }
 
         mapper.toUpdateData(workoutSession, request);

@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { HttpHeaders } from '@angular/common/http';
 import { RedirectmessageService } from '../../../../services/redirect-messages/redirectmessage.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-edit-client',

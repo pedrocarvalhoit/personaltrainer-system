@@ -22,7 +22,7 @@ public class PermissionUtil {
     public void checkPermition(Client client, Authentication authentication){
         User user = (User) authentication.getPrincipal();
         if (!Objects.equals(client.getPersonalTrainer().getId(), user.getId())){
-            throw new OperationNotPermitedException("This client is not on your list of clients");
+            throw new OperationNotPermitedException();
         }
     }
 
@@ -30,7 +30,7 @@ public class PermissionUtil {
         Client client = repository.findById(clientId).get();
         User user = (User) authentication.getPrincipal();
         if (!Objects.equals(client.getPersonalTrainer().getId(), user.getId())){
-            throw new OperationNotPermitedException("This client is not on your list of clients");
+            throw new OperationNotPermitedException();
         }
     }
 
@@ -38,7 +38,7 @@ public class PermissionUtil {
         User user = (User) authentication.getPrincipal();
 
         if(!user.getClients().contains(cooperTest.getClient())){
-            throw new OperationNotPermitedException("This client is not on your list of clients");
+            throw new OperationNotPermitedException();
         }
     }
 

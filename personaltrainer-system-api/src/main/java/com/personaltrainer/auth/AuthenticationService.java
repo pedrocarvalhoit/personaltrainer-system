@@ -45,7 +45,6 @@ public class AuthenticationService {
     public void register(RegistrationRequest request, MultipartFile file) throws MessagingException, IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         var userRole = roleRepository.findByName("USER")
-                // todo - better exception handling
                 .orElseThrow(() -> new IllegalStateException("Role USER was not initiated"));
         var user = User.builder()
                 .firstName(request.getFirstName())

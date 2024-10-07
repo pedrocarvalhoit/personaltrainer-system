@@ -41,7 +41,7 @@ public class WorkoutProgramService {
         Client client = clientRepository.findById(clientId).orElseThrow(()-> new RuntimeException("Client not found"));
 
         if (!Objects.equals(client.getPersonalTrainer().getId(), user.getId())){
-            throw new OperationNotPermitedException("This client is not on your list of clients");
+            throw new OperationNotPermitedException();
         }
 
         WorkoutProgram workoutProgram = mapper.toWorkoutProgram(requestWorkoutProgram);

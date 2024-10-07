@@ -23,6 +23,8 @@ export class RegisterComponent {
   userForm!: FormGroup;
   selectedFile: File | null = null;
 
+  errorMessage: string = '';
+
   constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {}
 
   ngOnInit(): void {
@@ -71,6 +73,7 @@ export class RegisterComponent {
         },
         error => {
           console.error('Error on register new user:', error);
+          this.errorMessage = 'Failed to login. Please check your credentials and try again.';
         }
       );
     } else {

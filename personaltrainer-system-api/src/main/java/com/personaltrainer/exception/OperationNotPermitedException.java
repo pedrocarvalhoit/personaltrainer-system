@@ -2,7 +2,7 @@ package com.personaltrainer.exception;
 
 public class OperationNotPermitedException extends RuntimeException {
 
-    public OperationNotPermitedException(String msg) {
-        super(msg);
+    public OperationNotPermitedException() {
+        super("This client is not on your list of clients");
     }
 }
