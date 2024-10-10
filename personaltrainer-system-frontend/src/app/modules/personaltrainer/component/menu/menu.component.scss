@@ -1,5 +1,6 @@
 .navbar {
-  background: linear-gradient(135deg, #4485ff 0%, #7aabff 25%, #81dfff 50%, #d2ffdf 75%, #d8ffe4 100%);
+  //background: linear-gradient(135deg, #4485ff 0%, #7aabff 25%, #81dfff 50%, #d2ffdf 75%, #d8ffe4 100%);
+  background: linear-gradient(135deg, #4485ff 0%, #7aabff 25%, #81dfff 50%, #e4e4e4 75%, #e1e2e2 100%);
   padding: 1rem;
 
   .navbar-brand {
@@ -13,7 +14,7 @@
   }
 
   .active-link {
-    color: #d8ffe4!important;
+    color: #e4e5e5!important;
     border-radius: 5px;
   }
 
