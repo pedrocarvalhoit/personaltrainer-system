@@ -65,26 +65,26 @@ public class WorkoutSessionController {
     }
 
     //get weckly next sessions
-    @GetMapping("get-upcoming-sessions")
+    @GetMapping("/get-upcoming-sessions")
     public ResponseEntity<List<WorkoutSessionResponseForCalendar>> getSessionsForNextWeek(Authentication authentication){
         return ResponseEntity.ok(service.getSessionsForNextWeek(authentication));
     }
 
     //get all sessions for calendar
-    @GetMapping("get-workout-calendar")
+    @GetMapping("/get-workout-calendar")
     public ResponseEntity<List<WorkoutSessionResponseForCalendar>> getSessionsForCalendar(Authentication authentication){
         return ResponseEntity.ok(service.getAllSessionsForCalendar(authentication));
     }
 
     //get client actual month session stats
-    @GetMapping("get-workout-stats-actual-month/{clientId}")
+    @GetMapping("/get-workout-stats-actual-month/{clientId}")
     public ResponseEntity<WorkoutSessionClientActualMonthSummaryResponse> getSessionsForAchtualMonthStat(Authentication authentication,
                                                                                              @PathVariable Integer clientId){
         return ResponseEntity.ok(service.getActualMonthSessionStats(authentication, clientId));
     }
 
     //get client all time session stats
-    @GetMapping("get-workout-stats-all-time/{clientId}")
+    @GetMapping("/get-workout-stats-all-time/{clientId}")
     public ResponseEntity<WorkoutSessionClientAllTimeSummaryResponse> getSessionsForAllTimeStats(
             @PathVariable Integer clientId
     ){
@@ -92,7 +92,7 @@ public class WorkoutSessionController {
     }
 
     //get client subjective
-    @GetMapping("get-workout-quality/{clientId}")
+    @GetMapping("/get-workout-quality/{clientId}")
     public ResponseEntity<List<WorkoutSessionQualityResponse>> getSessionsQualityAvarages(@PathVariable Integer clientId){
         return ResponseEntity.ok(service.getSessionsQuality(clientId));
     }
