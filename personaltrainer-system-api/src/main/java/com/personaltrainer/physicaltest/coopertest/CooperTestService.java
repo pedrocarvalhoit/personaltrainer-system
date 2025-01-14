@@ -26,7 +26,6 @@ public class CooperTestService {
 
     private static final Logger LOGGER = Logger.getLogger(CooperTestService.class.getName());
 
-    //Returns the Vo2Max from the last 12 months
     public Integer create(Integer clientId, Authentication authentication, CooperTestRequest request) {
         permission.checkPermitionWithId(clientId, authentication);
 
