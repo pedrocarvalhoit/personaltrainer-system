@@ -44,7 +44,7 @@ public class ClientService {
         Client savedClient = clientRepository.save(client);
 
         String uploadDir = "client-photos/" + savedClient.getId();
-        AmazonS3Util.uploadFile(uploadDir, fileName, file.getInputStream());
+        //AmazonS3Util.uploadFile(uploadDir, fileName, file.getInputStream());
 
         return savedClient.getId();
     }
